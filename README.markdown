@@ -2,11 +2,18 @@
 Theses论文管理系统的前端，基于Ember.js实现。
 中山大学南方学院09级电软系毕业设计。
 
-##Setup
+##Build
+
+项目的js文件使用AMD进行依赖管理，由于js文件众多，在正式部署时需要进行编译，编译的步骤为：
 
 1. 安装Nodejs
 2. 使用r.js编译工具[进行编译](http://requirejs.org/docs/optimization.html#wholeproject)
-3. 通过Nginx、Apache等HTTP服务器运行
+
+在开发调试时，可以免去编译步骤以提高开发效率
+
+
+##Deploy
+项目中全部为静态文件，可以直接部署到Nginx、Apache等HTTP服务器运行
 
 ##Todo
 * <del>里程碑时间管理</del>
