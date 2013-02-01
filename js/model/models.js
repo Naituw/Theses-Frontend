@@ -1,0 +1,1 @@
+define(['model/model','model/api','model/account','model/account_manager']);

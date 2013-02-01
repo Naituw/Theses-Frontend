@@ -1,0 +1,1 @@
+define(['managers/application_manager','managers/majors_manager','managers/validator'],function(){});

@@ -1,0 +1,65 @@
+
+                    <form novalidate="" autocomplete="on" class="update-profile"> 
+                        <div class="yield">
+                            <fieldset>
+                                {{view Theses.UsernameField valueBinding="username"}}
+                                {{view Theses.TextField title="全名" placeholder="Fullname" validateDelegate="validateFullname" valueBinding="fullname"}}
+                                <div class="control-group">
+                                    <div class="control-label">
+                                        <label>性别：</label>
+                                    </div>
+                                    <div class="controls">
+                                        {{view Theses.Select 
+                                            contentBinding="Theses.Genders"
+                                            optionValuePath="content.value"
+                                            optionLabelPath="content.name"
+                                            valueBinding="selectedGender"}}
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <div class="control-label">
+                                        <label>类型：</label>
+                                    </div>
+                                    <div class="controls">
+                                        {{view Theses.Select
+                                            contentBinding="levels"
+                                            optionValuePath="content.level"
+                                            optionLabelPath="content.name"
+                                            valueBinding="selectedUserType"}}
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <div class="control-label">
+                                        <label>学系：</label>
+                                    </div>
+                                    <div class="controls">
+                                        {{view Theses.Select
+                                            contentBinding="Theses.majorsManager.departmentsForUserCreation"
+                                            optionValuePath="content.deptid"
+                                            optionLabelPath="content.name"
+                                            valueBinding="selectedDepartment"}}
+                                    </div>
+                                </div>
+                                {{#if needSelectMajor}}
+                                <div class="control-group">
+                                    <div class="control-label">
+                                        <label>专业：</label>
+                                    </div>
+                                    <div class="controls">
+                                        {{view Theses.Select
+                                            contentBinding="majors"
+                                            optionValuePath="content.majorid"
+                                            optionLabelPath="content.name"
+                                            valueBinding="selectedMajor"}}
+                                    </div>
+                                </div>
+                                {{/if}}
+                                {{view Theses.TextField title="邮箱" placeholder="Email" validateDelegate="validateEmail" required=false valueBinding="email"}}
+                            </fieldset>
+                        </div> 
+                        <footer> 
+                            <button type="submit" class="blue submit" {{action submit target="view" href=true}}>
+                                <span>提交</span>
+                            </button> 
+                        </footer> 
+                    </form>
