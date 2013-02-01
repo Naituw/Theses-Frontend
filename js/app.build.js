@@ -1,7 +1,7 @@
 ({
     appDir: "../",
     baseUrl: "js",
-    dir: "../../../theses-app-build",
+    dir: "../../theses-app-build",
     //optimize: "none",
     paths: {
 	    "jquery": "vendor/jquery-1.7.2.min",
