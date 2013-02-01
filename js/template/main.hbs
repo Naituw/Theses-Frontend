@@ -1,0 +1,35 @@
+<div id="panel-overlay" class="overlay unactive" style="display:none">
+    <div class="cover">
+        <div class="yield">
+            {{outlet panel}}
+        </div> 
+    </div>
+</div>
+
+
+<header id="main-header">
+    <div id="header">
+        <h1><a href="#">Theses 论文管理</a></h1>	
+        <div id="breadcrumb">
+            <a href="#" title="Go to Home" class="tip-bottom">主页</a>
+            {{#each navItems}}
+                <a href="#" {{bindAttr class="current"}} {{action navItemPressed this href=true}}>
+                    {{title}}
+                </a>
+            {{/each}}
+        </div>
+        {{outlet navbar}}	
+    </div>
+</header>
+<section id="main-content">
+    {{outlet sidebar}}      
+    <div id="content">
+        <div id="content-container" class="container-fluid">
+            {{outlet content}}
+        </div>
+    </div>
+     <div id="sidebar-copyright" class="desktop">
+        Design, Dev by <a href="http://weibo.com/naituw">@Naituw</a> , <a href="http://weibo.com/jiayoushuishou">@bo潮</a><br/>
+        Copyright NFSYSU
+    </div>
+</section>

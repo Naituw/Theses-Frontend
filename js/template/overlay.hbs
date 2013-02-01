@@ -1,0 +1,95 @@
+            <header> 
+                <section class="custom"> 
+                    <div class="info"> 
+                        <h1>用户资料</h1> 
+                        <h2>更新你的账户信息</h2> 
+                    </div> 
+                </section> 
+                <nav> 
+                    <a class="close">Close</a>  
+                </nav> 
+            </header>
+            <form novalidate="" autocomplete="on" method="post"> 
+                <div class="yield">
+                    <div class="payment">
+                        <article> 
+                            <div class="message"></div> 
+                            <div class="number"> 
+                                <label for="paymentNumber">Card number</label> 
+                                <input type="text" id="paymentNumber" placeholder="●●●● ●●●● ●●●● ●●●●" data-placeholder="Card number" x-autocompletetype="cc-number" required="" data-numeric=""> 
+                                <div class="placeholder"></div> 
+                                <div class="type"></div> 
+                            </div> 
+                            <div class="expiry"> 
+                                <label for="paymentExpiry">Expires</label> 
+                                <input type="text" id="paymentExpiry" placeholder="MM / YY" x-autocompletetype="cc-exp" maxlength="9" pattern="\d*" data-numeric="" required=""> 
+                            </div> 
+                            <div class="name"> 
+                                <label for="paymentName">Name on card</label> 
+                                <input type="text" id="paymentName" data-placeholder="Name on card" x-autocompletetype="name" autocapitalize="words" autocorrect="off" spellcheck="off" required=""> 
+                            </div> 
+                            <div class="cvc"> 
+                                <label for="paymentCVC">Card code</label> 
+                                <input type="text" id="paymentCVC" placeholder="CVC" x-autocompletetype="cc-csc" maxlength="4" pattern="\d*" autocomplete="off" data-numeric="" required=""> 
+                            </div> 
+                        </article> 
+                        <div class="preloaded-images"></div> 
+                    </div>
+                    <div class="address international">
+                        <article> 
+                            <label for="line_1">Billing address</label> 
+                            <fieldset> 
+                                <div class="line_1"> 
+                                    <input name="line_1" id="line_1" type="text" placeholder="Street" x-autocompletetype="address-line1" required=""> 
+                                </div> 
+                                <!-- <div class="line_2"> <input name="line_2" type="text" placeholder="Apartment, suit, floor, etc" x-autocompletetype="address-line2" required> </div> --> 
+                                <div class="hbox"> 
+                                    <div class="city"> 
+                                        <input name="city" type="text" placeholder="City" x-autocompletetype="city" required=""> 
+                                    </div> 
+                                    <div class="state us"> 
+                                        <div class="select" data-placeholder="State"> 
+                                            <span>State</span> 
+                                            <select name="state" placeholder="State" x-autocomplete="state" required=""> 
+                                                <option value="">State:</option> 
+                                                <option value="AL">AL</option> 
+                                                <option value="AK">AK</option> 
+                                            </select> 
+                                        </div> 
+                                    </div> 
+                                    <div class="province international"> 
+                                        <input name="province" type="text" placeholder="Province" x-autocompletetype="province"> 
+                                    </div> 
+                                </div> 
+                                <div class="hbox"> 
+                                    <div class="zip us"> 
+                                        <input name="zip" type="text" placeholder="Zip" x-autocompletetype="postal-code" required=""> 
+                                    </div> 
+                                    <div class="postalcode international"> 
+                                        <input name="postalcode" type="text" placeholder="Postal code" x-autocompletetype="postal-code" required=""> 
+                                    </div> 
+                                    <div class="country"> 
+                                        <div class="select changed" data-placeholder="Country"> 
+                                            <span>China</span> 
+                                            <select name="country" placeholder="Country" x-autocomplete="country" required=""> 
+                                                <option value="">Country:</option> 
+                                                <option value="AF">Afghanistan</option> 
+                                                <option value="AL">Albania</option> 
+                                                <option value="ZW">Zimbabwe</option> 
+                                            </select> 
+                                        </div> 
+                                    </div> 
+                                </div> 
+                            </fieldset> 
+                        </article> 
+                    </div>
+                </div> 
+                <footer> 
+                    <button type="submit" class="blue submit">
+                        <span>Pay $5.00</span>
+                    </button> 
+                </footer> 
+            </form> 
+            <div class="success"> 
+                <div class="check"></div> 
+            </div> 

@@ -1,0 +1,36 @@
+
+                    <form novalidate="" autocomplete="on" class="update-profile"> 
+                        <div class="yield" style="padding-top:20px">
+                            <fieldset class='reset-password'>
+                                <div class="control-group">
+                                    <div class="control-label">
+                                        <label>当前密码：</label>
+                                    </div>
+                                    <div class="controls">
+                                        <input type="password" name='old-password'>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <div class="control-label">
+                                        <label>新密码：</label>
+                                    </div>
+                                    <div class="controls">
+                                        <input type="password" name='password'>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <div class="control-label">
+                                        <label>确认新密码：</label>
+                                    </div>
+                                    <div class="controls">
+                                        <input type="password" name='re-password'>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div> 
+                        <footer> 
+                            <button type="submit" class="blue submit" {{action submit target="view" href=true}}>
+                                <span>提交</span>
+                            </button> 
+                        </footer> 
+                    </form>
