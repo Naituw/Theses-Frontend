@@ -154,5 +154,84 @@ define(['app','text!template/m/users.hbs','views/views'],function(app,tpl){
 	 		}
 	 		return false;
 	 	}.property('Theses.accountManager.currentAccount.user.level','Theses.accountManager.currentAccount.user.departmentInfo'),
+
+
+
+	 /*
+	  * Teachers
+	  */
+	  	selectedTeacherIndex: -1,
+	  	setSelectedTeacherIndex: function(index){
+	  		if (this._loadingTeachers) return;
+	  		this.set('selectedTeacherIndex', index);
+	  		this.set('_currentTeacherPage', 1);
+	  		this.refreshTeachers();
+	  	},
+	  	showAllTeachers: function(){
+	  		this.setSelectedTeacherIndex(0);
+	  	},
+	  	showSeniorTeachers: function(){
+	  		this.setSelectedTeacherIndex(1);
+	  	},
+	  	showNormalTeachers: function(){
+	  		this.setSelectedTeacherIndex(2);
+	  	},
+	  	showingAllTeachers: function(){
+	  		return this.selectedTeacherIndex == 0;
+	  	}.property('selectedTeacherIndex'),
+	  	showingSeniorTeachers: function(){
+	  		return this.selectedTeacherIndex == 1;
+	  	}.property('selectedTeacherIndex'),
+	  	showingNormalTeachers: function(){
+	  		return this.selectedTeacherIndex == 2;
+	  	}.property('selectedTeacherIndex'),
+	  	showingTeachers: function(){
+	  		return this.selectedTeacherIndex >= 0;
+	  	}.property('selectedTeacherIndex'),
+
+	 	teachers: Em.A(),
+	 	_loadingTeachers: false,
+	 	_currentTeacherPage: 1,
+	 	hasMoreTeachers: function(){
+	 		return this.get('teachers').get('length') > 0;
+	 	}.property('teachers.length'),
+	 	hasTeachers: function(){
+	 		return this.teachers.get('length');
+	 	}.property('teachers.length'),
+	 	loadingTeachers: function(){
+	 		return this._loadingTeachers;
+	 	}.property('_loadingTeachers'),
+	  	refreshTeachers: function(){
+	  		if (this._loadingTeachers) return;
+	  		var page = this.get('_currentTeacherPage');
+	  		var index = this.get('selectedTeacherIndex');
+
+	  		var api = app.currentAPI();
+	  		if (api){
+	  			var that = this;
+
+	  			that.set('_loadingTeachers', true);
+	  			var callback = function(data, error){
+	  				that.set('_loadingTeachers',false);
+					var teachers = that.get('teachers');
+					teachers.clear();
+					if (error){
+						app.showError('查询失败',error.message);
+					}else if (data) {
+						for (var i = 0; i < data.length; i++) {
+							var u = app.User.alloc(data[i]);
+							teachers.pushObject(u);
+						};
+					}
+	  			}
+
+	  			if (index == 0) api.getAllTeachers(page,callback);
+	  			else if (index == 1) api.getSeniorTeachers(page,callback);
+	  			else if (index == 2) api.getNormalTeachers(page,callback);
+	  		}
+	  	},
+	  	teacherPageChanged: function(){
+	  		this.refreshTeachers();
+	  	}.observes('_currentTeacherPage'),
 	});
 });

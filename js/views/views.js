@@ -1,4 +1,4 @@
-define(['app','views/tableview'],function(app){
+define(['app','views/tableview','views/teachercell'],function(app){
 	app.Focusable = Em.Mixin.create({
 		focused: false,
 		focusIn: function(e){
@@ -85,6 +85,37 @@ define(['app','views/tableview'],function(app){
 				var code = pass ? "success" : "error";
 				next(code, desc);
 			});
+		},
+	});
+
+	app.LoadingView = Em.View.extend({
+		template: Em.Handlebars.compile('<section class="loading-section"><div class="loading-view"></div></section>'),
+	});
+	app.PromptView = Em.View.extend({
+		text: '',
+		template: Em.Handlebars.compile('<section class="prompt-section">{{view.text}}</section>'),
+	});
+
+	app.PagingView = Em.View.extend({
+		page: 1,
+		hasNext: false,
+		hasPrevious: function(){
+			return this.get('page') > 1;
+		}.property('page'),
+		template: Em.Handlebars.compile('<div class="search-fields paging page-controls"> \
+			<a {{bindAttr class=":btn view.hasPrevious::disabled"}} {{action prevPage href=true target="view"}}>上一页</a> \
+					第 {{view.page}} 页 \
+					<a {{bindAttr class=":btn view.hasNext::disabled"}} {{action nextPage href=true target="view"}}>下一页</a> \
+				</div>'),
+		prevPage: function(){
+			if (this.get('hasPrevious')){
+				this.set('page',this.get('page') - 1);
+			}
+		},
+		nextPage: function(){
+			if (this.get('hasNext')){
+				this.set('page',this.get('page') + 1)
+			}
 		},
 	});
 });

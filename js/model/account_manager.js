@@ -134,4 +134,10 @@ define(['app','model/account'],function(app){
 			});
 		}
 	});
+
+	app.currentAPI = function(){
+		var account = app.accountManager.get('currentAccount');
+		if (account) return account.api();
+		return null;
+	};
 });

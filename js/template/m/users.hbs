@@ -75,28 +75,43 @@
 	</div>
 </div>
 
-
+<div class="section-header">
+	<h3>出题教师管理<h3>
+</div>
 <div class="row-fluid">
 	<div class="span12">
 		<div class="widget-box">
 			<div class="widget-title">
 				<ul class="nav nav-tabs">
-				  	<li class="active">
-				  	  	<a href="#">全部教师</a>
+				  	<li {{bindAttr class="showingAllTeachers:active"}}>
+				  	  	<a href="#" {{action showAllTeachers}}>全部教师</a>
 				  	</li>
-				  	<li><a href="#">出题教师</a></li>
-				  	<li><a href="#">非出题教师</a></li>
+				  	<li {{bindAttr class="showingSeniorTeachers:active"}}>
+				  		<a href="#" {{action showSeniorTeachers}}>出题教师</a></li>
+				  	<li {{bindAttr class="showingNormalTeachers:active"}}>
+				  		<a href="#" {{action showNormalTeachers}}>非出题教师</a></li>
 				</ul>
-				<div class="buttons">
-					<a href="#" class="btn btn-mini">
-						<i class="icon-plus"></i> 刷新
-					</a>
-				</div>
 			</div>
-			<div class="widget-content">
-				<table class="table table-bordered table-hover table-striped table-centered user-table">
-					<tr><th>头像</th><th>用户名</th><th>名称</th><th>性别</th><th>用户类型</th></tr>
-				</table>
+			<div class="widget-content nopadding">
+				
+					{{#if showingTeachers}}
+						{{#if loadingTeachers}}
+							{{view Theses.LoadingView}}
+						{{else}}
+							<div class="user-list">
+								{{#if hasTeachers}}
+									{{#each teachers}}
+										{{view Theses.TeacherCell teacher=this}}
+									{{/each}}
+								{{else}}
+									{{view Theses.PromptView text="无结果"}}
+								{{/if}}
+							</div>
+							{{view Theses.PagingView pageBinding="_currentTeacherPage" hasNextBinding="hasMoreTeachers"}}
+						{{/if}}
+					{{else}}
+						{{view Theses.PromptView text="选择上方的教师种类，以开始管理教师出题资格"}}
+					{{/if}}
 			</div>
 		</div>
 	</div>

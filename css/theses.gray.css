@@ -891,9 +891,70 @@ form.update-profile fieldset.reset-password input {
 .widget-title [class^="icon-"],.widget-title [class*=" icon-"] {
   margin-top: -1px;
 }
+.widget-title .buttons {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
 
 
-.user-table-avatar {
+.user-table-avatar ,img.avatar-list {
+  width: 50px;
+  height: 50px;
+}
+
+.section-header {
+  height: 20px;
+}
+.section-header h3 {
+  font-weight: 700;
+  color: #888;
+  text-shadow: 0 1px 0px #fff;
+  font-size: 16px;
+  padding-top: 5px;
+  line-height: 20px;
+}
+
+.widget-content .user-list {
+  padding: 10px;
+}
+.widget-content .user-list .teacher-cell {
+  padding: 10px 0;
+  border-top: 1px dotted #ccc;
+}
+
+.widget-content .userinfo {
+  overflow: hidden;
+}
+
+.widget-content .userinfo label {
+    padding-left: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+}
+
+.widget-content .teacherinfo {
+  position: relative;
+}
+.widget-content .teacherinfo label {
+    padding-right: 100px;
+}
+.widget-content .teacher-action {
+    position: absolute;
+    right: 0px;
+    top: 10px;
+}
+
+.widget-content .page-controls .btn {
+  margin: 0;
+}
+
+.teacher-cell .loading-view {
+  position: absolute;
+  top: 0;
+  right: 15px;
   width: 50px;
   height: 50px;
 }

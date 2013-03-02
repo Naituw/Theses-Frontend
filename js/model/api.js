@@ -159,5 +159,57 @@ define(['app'],function(app){
 		createUser: function(params,callback){
 			this.POST('user/create.json',params,callback);
 		},
+		getAllTeachers: function(page,callback){
+			var account = this.get('authenticateWithAccount');
+			if (!account) return;
+
+			var params = {
+				deptid: account.user.get('departmentInfo').deptid,
+				max_level: 40,
+				min_level: 30,
+				page: page,
+				count: 20,
+			};
+
+			this.GET('users/show.json',params,callback);
+		},
+		getSeniorTeachers: function(page,callback){
+			var account = this.get('authenticateWithAccount');
+			if (!account) return;
+
+			var params = {
+				deptid: account.user.get('departmentInfo').deptid,
+				level: 40,
+				page: page,
+				count: 20,
+			};
+
+			this.GET('users/show.json',params,callback);
+		},
+		getNormalTeachers: function(page,callback){
+			var account = this.get('authenticateWithAccount');
+			if (!account) return;
+
+			var params = {
+				deptid: account.user.get('departmentInfo').deptid,
+				level: 30,
+				page: page,
+				count: 20,
+			};
+
+			this.GET('users/show.json',params,callback);
+		},
+		levelUpTeacher: function(teacherid,callback){
+			var params = {
+				id: teacherid,
+			};
+			this.POST('teachers/levelup.json',params,callback);
+		},
+		levelDownTeacher: function(teacherid,callback){
+			var params = {
+				id: teacherid,
+			};
+			this.POST('teachers/leveldown.json',params,callback);
+		},
 	});
 });

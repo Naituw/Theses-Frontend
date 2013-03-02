@@ -1,0 +1,12 @@
+<div class="span12 teacherinfo">
+	<img class="pull-left avatar-list desktop" 	src="http://	tp2.sinaimg.cn/3200179125/180/0/1" />
+	<div class="userinfo">
+		<label class="username">{{username}} {{#if screenname.length}}（ {{screenname}} ）{{/if}}</label>
+		<label class="description">{{genderString}}， {{departmentInfo.name}}</label>
+	</div>
+	{{#if view.pendingState}}
+		<div class="loading-view"></div>
+	{{else}}
+		<button {{bindAttr class=":btn :pull-right :teacher-action view.buttonClass"}} {{action buttonClicked target="view"}}>{{view.buttonTitle}}</button>
+	{{/if}}
+</div>
