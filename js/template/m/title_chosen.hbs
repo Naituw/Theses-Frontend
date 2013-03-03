@@ -1,1 +1,5 @@
-{{view Theses.WrongTimeView name="选题"}}
+{{#if Theses.milestoneManager.isTitleChosenTime}}
+	论题选择
+{{else}}
+	{{view Theses.WrongTimeView name="选题"}}
+{{/if}}

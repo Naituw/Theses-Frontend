@@ -135,7 +135,18 @@ define(['app','model/model'],function(app){
             };
         },
 
-        
+        isTitleAssignTime: function(){
+            return this.get('currentStone').get('name') == 'title_assign';
+        }.property('currentStone'),
+        isTitleChosenTime: function(){
+            return this.get('currentStone').get('name') == 'title_chosen';
+        }.property('currentStone'),
+        isComposeTime: function(){
+            return this.get('currentStone').get('name') == 'compose';
+        }.property('currentStone'),
+        isTitleVerifyTime: function(){
+            return this.get('isTitleAssignTime') || this.get('isTitleChosenTime');
+        }.property('isTitleAssignTime','isTitleChosenTime'),
     });
 	app.applicationManager = Em.Object.create({
 		times: null,

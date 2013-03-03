@@ -1,1 +1,5 @@
-{{view Theses.WrongTimeView name="论题审核"}}
+{{#if Theses.milestoneManager.isTitleVerifyTime}}
+	论题审核
+{{else}}
+	{{view Theses.WrongTimeView name="论题审核"}}
+{{/if}}
