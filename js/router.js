@@ -106,22 +106,26 @@ define(["app"],function(app){
 			  		},
 			  	}),
 
-				thesesChoosen: app.Route.extend({
+				titleChoosen: app.Route.extend({
 			  		title: '选择论题',
-			  		route: '/theses_choosen',
+			  		route: '/title_choosen',
 			  		iconName: 'check',
 			  		maxLevel: 10,
 			  		sidebar: true,
+
+			  		connectOutlets: function(router, context) {
+			  			router.get('mainController').connectOutlet('content','titleChoosen');
+			  		},
 			  	}),
 
-			  	thesesAdmin: app.Route.extend({
+			  	titlesAdmin: app.Route.extend({
 			  		title: '论题管理',
-			  		route: '/theses_admin',
+			  		route: '/titles_admin',
 			  		iconName: 'folder-open',
 			  		sidebar: true,
 			  		//redirectsTo: 'index',
 			  		connectOutlets: function(router, context) {
-			  			router.get('mainController').connectOutlet('content','theses');
+			  			router.get('mainController').connectOutlet('content','titlesAdmin');
 			  		},
 			  		level: 60,
 			  		maxLevel: 70,
@@ -132,24 +136,24 @@ define(["app"],function(app){
 			  		}),*/
 			  	}),
 
-			  	thesesMine: app.Route.extend({
+			  	titlesMine: app.Route.extend({
 			  		title: '我的论题',
-			  		route: '/theses_mine',
+			  		route: '/titles_mine',
 			  		iconName: 'folder-open',
 			  		sidebar: true,
 			  		connectOutlets: function(router, context) {
-			  			router.get('mainController').connectOutlet('content','theses');
+			  			router.get('mainController').connectOutlet('content','titlesMine');
 			  		},
 			  		maxLevel: 40,
 			  	}),
 
-			  	thesesVerify: app.Route.extend({
+			  	titlesVerify: app.Route.extend({
 			  		title: '论题审核',
-			  		route: '/theses_verify',
+			  		route: '/titles_verify',
 			  		iconName: 'eye-open',
 			  		sidebar: true,
 			  		connectOutlets: function(router, context) {
-			  			router.get('mainController').connectOutlet('content','theses');
+			  			router.get('mainController').connectOutlet('content','titlesVerify');
 			  		},
 			  		level: 40,
 			  		maxLevel: 70,
