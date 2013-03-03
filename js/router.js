@@ -13,6 +13,7 @@ define(["app"],function(app){
 		iconName: null,
 		level: 10,
 		maxLevel: 0,
+		levels: null,
 		active: false,
 		sidebar: false,
 		navitem: true,
@@ -26,6 +27,8 @@ define(["app"],function(app){
 			}
 			if (!currentUserLevel){
 				Em.run.later(app.logout,1);
+			} else if (this.levels && $.inArray(currentUserLevel, this.levels) < 0) {
+				router.transitionNext('root.main.index');
 			} else if (currentUserLevel < needLevel) {
 				router.transitionNext('root.main.index');
 			} else if (this.maxLevel && currentUserLevel > this.maxLevel){
