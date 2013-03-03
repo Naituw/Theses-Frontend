@@ -136,5 +136,98 @@ define(["app"],function(app){
             }
         },
     });
-    
+    app.TitleStates = {
+        createByStudent: 1 << 1,
+        pickedByTeacherAndStudent: 1 << 2,
+        verifiedByAdmin: 1 << 3,
+        verifiedByTeacher: 1 << 4,
+        valid: 1 << 5,
+    };
+    app.Title = app.Model.extend({
+        "titleid": 0,
+        "title": null,
+        "teacherid": 0,
+        "student_num": 0,
+        "department": null,
+        "state": 0,
+        "available_majors": null,
+        "description": null,
+        "require_info": null,
+        departmentInfo : function(){
+            var d = this.get('department');
+            if (!isNaN(d)){
+                return app.majorsManager.departmentWithID(d);
+            } else {
+                return d;
+            }
+        }.property('department','Theses.majorsManager.departments.@each'),
+        valid: function(){
+            return (this.state & app.TitleStates.valid) != 0;
+        }.property('state'),
+        verifiedByTeacher: function(){
+            return (this.state & app.TitleStates.verifiedByTeacher) != 0;
+        }.property('state'),
+        verifiedByAdmin: function(){
+            return (this.state & app.TitleStates.verifiedByAdmin) != 0;
+        }.property('state'),
+        verified: function(){
+            return (this.get('verifiedByTeacher') && this.get('verifiedByAdmin'));
+        }.property('verifiedByTeacher','verifiedByAdmin'),
+        createByStudent: function(){
+            return (this.state & app.TitleStates.createByStudent) != 0;
+        }.property('state'),
+        waitingForPick: function(){
+            var s = this.state;
+            if (!(s & app.TitleStates.pickedByTeacherAndStudent) && 
+                !this.get('createByStudent') && 
+                this.get('verifiedByAdmin')){
+                return true;
+            }
+            return false;
+        }.property('state'),
+        finished: function(){
+            return this.state >= 99;
+        }.property('state'),
+        waitingForOral: function(){
+            return this.state >= 89 && this.state < 99;
+        }.property('state'),
+        waitingForReview: function(){
+            return this.state >= 79 && this.state < 89;
+        }.property('state'),
+        composing: function(){
+            return this.state >= 69 && this.state < 79;
+        }.property('state'),
+        stateName: function(){
+            var that = this;
+            var s = this.get('state');
+            var get = function('name'){return that.get(name)};
+            if (get('finished')){
+                return "论文流程已结束";
+            }else if (get('waitingForOral')){
+                return "评审已结束，等待答辩";
+            }else if (get('waitingForReview')){
+                return "撰写结束，等待评审";
+            }else if (get('composing')){
+                return "审核通过，开始撰写";
+            }
+            // 论题无效，审核未通过
+            else if (!get('valid')){
+                if (get('verifiedByAdmin')){
+                    return "教师审核未通过";
+                }else if (get('verifiedByTeacher')){
+                    return "管理员审核未通过";
+                }
+            }
+            // 论题仍有效，仍在审核
+            else{
+                if (get('waitingForPick'){
+                    return "等待学生选择";
+                }else if (get('verifiedByAdmin')){
+                    return "等待教师审核"
+                }else{
+                    return "等待管理员审核"
+                }
+            }
+        }.property('state'),
+    });
 });
