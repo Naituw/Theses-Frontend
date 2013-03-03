@@ -200,7 +200,7 @@ define(["app"],function(app){
         stateName: function(){
             var that = this;
             var s = this.get('state');
-            var get = function('name'){return that.get(name)};
+            var get = function(name){return that.get(name)};
             if (get('finished')){
                 return "论文流程已结束";
             }else if (get('waitingForOral')){
@@ -220,7 +220,7 @@ define(["app"],function(app){
             }
             // 论题仍有效，仍在审核
             else{
-                if (get('waitingForPick'){
+                if (get('waitingForPick')){
                     return "等待学生选择";
                 }else if (get('verifiedByAdmin')){
                     return "等待教师审核"
