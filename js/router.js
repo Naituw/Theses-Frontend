@@ -106,15 +106,15 @@ define(["app"],function(app){
 			  		},
 			  	}),
 
-				titleChoosen: app.Route.extend({
+				titleChosen: app.Route.extend({
 			  		title: '选择论题',
-			  		route: '/title_choosen',
+			  		route: '/title_chosen',
 			  		iconName: 'check',
 			  		maxLevel: 10,
 			  		sidebar: true,
 
 			  		connectOutlets: function(router, context) {
-			  			router.get('mainController').connectOutlet('content','titleChoosen');
+			  			router.get('mainController').connectOutlet('content','titleChosen');
 			  		},
 			  	}),
 

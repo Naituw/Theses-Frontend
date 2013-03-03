@@ -133,7 +133,9 @@ define(['app','model/model'],function(app){
                     if(callback)callback();
                 });
             };
-        }
+        },
+
+        
     });
 	app.applicationManager = Em.Object.create({
 		times: null,
