@@ -118,4 +118,11 @@ define(['app','views/tableview','views/teachercell'],function(app){
 			}
 		},
 	});
+
+	app.WrongTimeView = Em.View.extend({
+		name: "",
+		template: Em.Handlebars.compile('<div class="wrong-time-wrapper"><p class="wrong-time-description">\
+			<strong>现在不是{{view.name}}时间</strong><br>请前往<a href="/#/dashboard">管理中心</a>查看时间安排\
+			</p></div>'),
+	});
 });
