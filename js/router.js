@@ -106,28 +106,53 @@ define(["app"],function(app){
 			  		},
 			  	}),
 
-				titleChoosen: app.Route.extend({
+				thesesChoosen: app.Route.extend({
 			  		title: '选择论题',
-			  		route: '/title_choosen',
+			  		route: '/theses_choosen',
 			  		iconName: 'check',
 			  		maxLevel: 10,
 			  		sidebar: true,
 			  	}),
 
-			  	theses: app.Route.extend({
-			  		title: '论文管理',
-			  		route: '/theses',
+			  	thesesAdmin: app.Route.extend({
+			  		title: '论题管理',
+			  		route: '/theses_admin',
 			  		iconName: 'folder-open',
 			  		sidebar: true,
 			  		//redirectsTo: 'index',
 			  		connectOutlets: function(router, context) {
 			  			router.get('mainController').connectOutlet('content','theses');
 			  		},
+			  		level: 60,
+			  		maxLevel: 70,
 			  		/*index: app.Route.extend({
 			  			title: '论文管理',
 			  			navitem: false,
 			  			route: '/',
 			  		}),*/
+			  	}),
+
+			  	thesesMine: app.Route.extend({
+			  		title: '我的论题',
+			  		route: '/theses_mine',
+			  		iconName: 'folder-open',
+			  		sidebar: true,
+			  		connectOutlets: function(router, context) {
+			  			router.get('mainController').connectOutlet('content','theses');
+			  		},
+			  		maxLevel: 40,
+			  	}),
+
+			  	thesesVerify: app.Route.extend({
+			  		title: '论题审核',
+			  		route: '/theses_verify',
+			  		iconName: 'eye-open',
+			  		sidebar: true,
+			  		connectOutlets: function(router, context) {
+			  			router.get('mainController').connectOutlet('content','theses');
+			  		},
+			  		level: 40,
+			  		maxLevel: 70,
 			  	}),
 
 			  	/*
