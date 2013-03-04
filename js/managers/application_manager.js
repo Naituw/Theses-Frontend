@@ -45,7 +45,7 @@ define(['app','model/model'],function(app){
             return this == app.milestoneManager.get('nextStone');
         }.property('Theses.milestoneManager.nextStone'),
     });
-    app.milestoneManager = Em.Object.create({
+    app.MilestoneManager = Em.Object.extend({
     	milestones: Em.A(),
     	init: function(){
     		var a = this.get('milestones');
@@ -136,18 +136,22 @@ define(['app','model/model'],function(app){
         },
 
         isTitleAssignTime: function(){
+            if (!this.get('currentStone')) return false;
             return this.get('currentStone').get('name') == 'title_assign';
         }.property('currentStone'),
         isTitleChosenTime: function(){
+            if (!this.get('currentStone')) return false;
             return this.get('currentStone').get('name') == 'title_chosen';
         }.property('currentStone'),
         isComposeTime: function(){
+            if (!this.get('currentStone')) return false;
             return this.get('currentStone').get('name') == 'compose';
         }.property('currentStone'),
         isTitleVerifyTime: function(){
             return this.get('isTitleAssignTime') || this.get('isTitleChosenTime');
         }.property('isTitleAssignTime','isTitleChosenTime'),
     });
+    app.milestoneManager = app.MilestoneManager.create();
 	app.applicationManager = Em.Object.create({
 		times: null,
 		running: false,

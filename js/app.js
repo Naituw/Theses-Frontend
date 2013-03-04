@@ -9,6 +9,7 @@ define(["jquery",'text!template/alert.hbs',"plugins","handlebars", "ember", "boo
 		VERSION: '1.0',
 		rootElement: '#theses-app',
 		storeNamespace: 'theses-emberjs',
+		autoinit: false,
 		apiRoot: 'http://lwapi.sinaapp.com/',
 		loadingView: $('#loading'),
 		loadingCount: 0,

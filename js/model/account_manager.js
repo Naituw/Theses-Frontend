@@ -1,5 +1,5 @@
 define(['app','model/account'],function(app){
-	app.accountManager = Ember.Object.create({
+	app.AccountManager = Ember.Object.extend({
 		accounts: Em.A(),
 		apiRoot: function(){
 			return app.apiRoot;
@@ -9,6 +9,13 @@ define(['app','model/account'],function(app){
 			if (this.accounts.length > 0) return this.accounts[0];
 			else return null;
 		}.property('accounts.@each'),
+		currentLevel: function(){
+			var a = this.get('currentAccount');
+			if (a){
+				return a.user.level;
+			}
+			return 0;
+		}.property('currentAccount.user.level'),
 		signed: function(){
 			return (this.get('currentAccount') != null);
 		}.property('currentAccount'),
@@ -134,6 +141,7 @@ define(['app','model/account'],function(app){
 			});
 		}
 	});
+	app.accountManager = app.AccountManager.create();
 
 	app.currentAPI = function(){
 		var account = app.accountManager.get('currentAccount');

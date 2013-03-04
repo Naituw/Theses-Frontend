@@ -48,6 +48,7 @@ define(["app"],function(app){
 			return (this === app.mainController.get('currentNavItem'));
 		}.property('Theses.router.currentState'),
 	});
+
 	app.Router = Em.Router.extend({
 		enableLogging: true,
 		transitionNext: function(path){
@@ -129,11 +130,6 @@ define(["app"],function(app){
 			  		},
 			  		level: 60,
 			  		maxLevel: 70,
-			  		/*index: app.Route.extend({
-			  			title: '论文管理',
-			  			navitem: false,
-			  			route: '/',
-			  		}),*/
 			  	}),
 
 			  	titlesMine: app.Route.extend({
@@ -158,23 +154,6 @@ define(["app"],function(app){
 			  		level: 40,
 			  		maxLevel: 70,
 			  	}),
-
-			  	/*
-			  	messages: app.Route.extend({
-			  		title: '短消息',
-			  		route: '/messages',
-			  		iconName: 'comment',
-			  		sidebar: true,
-			  		unread: 2,
-			  	}),
-			  	notifications: app.Route.extend({
-			  		title: '通知',
-			  		route: '/notifications',
-			  		iconName: 'bullhorn',
-			  		sidebar: true,
-			  		level: 100,
-			  	}),
-				*/
 			}),
 			login: app.Route.extend({
 				route: '/login',

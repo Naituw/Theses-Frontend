@@ -1,5 +1,5 @@
 define(['app','model/model'],function(app){
-	app.majorsManager = Em.Controller.create({
+	app.MajorsManager = Em.Controller.extend({
 		loading: false,
 		postingMajor: false,
 		postingDepartment: false,
@@ -115,4 +115,5 @@ define(['app','model/model'],function(app){
         	'Theses.accountManager.currentAccount.user.department.deptid'),
 
 	});
+	app.majorsManager = app.MajorsManager.create();
 });
