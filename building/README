@@ -1,0 +1,4 @@
+Building Steps:
+
+1.install node
+2.run 'node r.js -o ../js/app.build.js'
