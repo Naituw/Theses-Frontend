@@ -147,13 +147,19 @@ define(["app"],function(app){
 			  		}),
 			  		titlesShow: app.Route.extend({
 			  			title: '查看论题',
-			  			route: '/:title_id',
-			  			deserialize: function(router, params){ 
-     						return params.title_id;
+			  			route: '/:titleid',
+			  			deserialize: function(router, context){ 
+     						return context.titleid;
  						},
- 						serialize: function(){
- 							return {title_id: 123};
+ 						serialize: function(router, context){
+ 							if (!context || !context.titleid){
+ 								router.transitionTo('index');
+ 							}
+ 							return {titleid: context.titleid};
  						},
+ 						connectOutlets: function(router, context) {
+			  				router.get('mainController').connectOutlet('content','titlesShow',context);
+			  			},
 			  		}),
 			  	}),
 
