@@ -137,10 +137,24 @@ define(["app"],function(app){
 			  		route: '/titles_mine',
 			  		iconName: 'folder-open',
 			  		sidebar: true,
-			  		connectOutlets: function(router, context) {
-			  			router.get('mainController').connectOutlet('content','titlesMine');
-			  		},
 			  		maxLevel: 40,
+			  		initialState: 'index',
+			  		index: app.Route.extend({
+			  			route: '/',
+						connectOutlets: function(router, context) {
+			  				router.get('mainController').connectOutlet('content','titlesMine');
+			  			},
+			  		}),
+			  		titlesShow: app.Route.extend({
+			  			title: '查看论题',
+			  			route: '/:title_id',
+			  			deserialize: function(router, params){ 
+     						return params.title_id;
+ 						},
+ 						serialize: function(){
+ 							return {title_id: 123};
+ 						},
+			  		}),
 			  	}),
 
 			  	titlesVerify: app.Route.extend({
