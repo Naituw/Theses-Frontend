@@ -49,7 +49,7 @@ define(['app','model/account'],function(app){
 			account.api().verifyCredentials(function(data,error){
 				if (error) {
 				}else {
-					account.user = app.User.create(data);
+					account.user = app.User.alloc(data);
 					that.addAccount(account,store);
 				}
 				if(callback)callback(data,error);
