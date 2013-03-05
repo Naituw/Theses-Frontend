@@ -5,15 +5,31 @@
 				<span class="icon"><i class="icon-folder-open"></i></span>
 				<h5>我的论题</h5>
 				<div class="buttons">
-					<a href="#" class="btn btn-mini">
-						<i class="icon-plus"></i> 出题
+					<a href="#" class="btn btn-mini" {{action refresh}}>
+						<i class="icon-refresh"></i> 刷新
 					</a>
+					{{#if canAssignNewTitle}}
+						<a href="#" class="btn btn-mini" {{action assignNew}}>
+							<i class="icon-plus"></i> 出题
+						</a>
+					{{/if}}
 				</div>
 			</div>
 			<div class="widget-content nopadding">
-
-
-
+				{{#if loading}}
+					{{view Theses.LoadingView}}
+				{{else}}
+					{{#if titles.length}}
+						<div class="custom-list">
+							{{#each titles}}
+								{{view Theses.TitleCell title=this}}
+							{{/each}}
+						</div>
+					{{else}}
+						{{view Theses.PromptView text="暂无数据，点击刷新来重新获取论题列表"}}
+					{{/if}}
+					{{view Theses.PagingView pageBinding="currentPage" hasNextBinding="hasMoreTitles"}}
+				{{/if}}
 			</div>
 		</div>
 	</div>

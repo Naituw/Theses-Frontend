@@ -915,10 +915,10 @@ form.update-profile fieldset.reset-password input {
   line-height: 20px;
 }
 
-.widget-content .user-list {
+.widget-content .custom-list {
   padding: 10px;
 }
-.widget-content .user-list .teacher-cell {
+.widget-content .custom-list .teacher-cell {
   padding: 10px 0;
   border-top: 1px dotted #ccc;
 }

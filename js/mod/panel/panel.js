@@ -1,4 +1,5 @@
-define(['app','text!template/panel/panel.hbs','mod/panel/profile','mod/panel/settings','mod/panel/user_edit'],function(app,tpl){
+define(['app','text!template/panel/panel.hbs','mod/panel/profile','mod/panel/settings','mod/panel/user_edit',
+	'mod/panel/apply_title','mod/panel/new_title'],function(app,tpl){
 	app.PanelView = Em.View.extend({
 		template: Em.Handlebars.compile(tpl),
 	});

@@ -211,5 +211,8 @@ define(['app'],function(app){
 			};
 			this.POST('teachers/leveldown.json',params,callback);
 		},
+		getMyTitles: function(page, callback){
+			this.GET('theses/mine.json',{page:page},callback);
+		}
 	});
 });
