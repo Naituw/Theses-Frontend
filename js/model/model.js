@@ -1,4 +1,5 @@
 define(["app"],function(app){
+
     app.Model = Em.Object.extend({
         update: function(args){
             this.prepareData(args);
@@ -7,13 +8,41 @@ define(["app"],function(app){
         prepareData: function(args){
 
         },
+        loading: false,
     });
     app.Model.reopenClass({
         alloc: function(args){
             var o = this.create();
             o.update(args);
+
+            var c = this.find(o.get(this.primaryKey));
+            if (c) c.setProperties(o);
+            else this.getStore().pushObject(o);
+
             return o;
-        }
+        },
+        _Store: {},
+        getStore: function(){
+            var s = this._Store;
+            var k = this.toLocaleString();
+
+            var _s = s[k];
+            if (!_s){
+                _s = Em.A();
+                s[k] = _s;
+            }
+            return _s;
+        },
+        primaryKey: "id",
+        find: function(id){
+            var key = this.primaryKey;
+            var s = this.getStore();
+            for (var i = s.length - 1; i >= 0; i--) {
+                var o = s[i];
+                if (o.get(key) == id) return o;
+            };
+            return null;
+        },
     });
     app.Levels = {
         superAdmin: 80,
@@ -44,6 +73,9 @@ define(["app"],function(app){
             }
             return '';
         }.property('name'),
+    });
+    app.Major.reopenClass({
+        primaryKey: "majorid",
     });
     app.Department = app.Model.extend({
         "deptid": 0,
@@ -78,6 +110,9 @@ define(["app"],function(app){
                 data.majors = ms;
             }
         },
+    });
+    app.Department.reopenClass({
+        primaryKey: "deptid",
     });
     app.User = app.Model.extend({
 	    "avatar": null,
@@ -136,6 +171,9 @@ define(["app"],function(app){
             }
         },
     });
+    app.User.reopenClass({
+        primaryKey: "userid",
+    });
     app.TitleStates = {
         createByStudent: 1 << 1,
         pickedByTeacherAndStudent: 1 << 2,
@@ -148,18 +186,13 @@ define(["app"],function(app){
         "title": null,
         "teacherid": 0,
         "student_num": 0,
-        "department": null,
+        "deptid": 0,
         "state": 0,
         "available_majors": null,
         "description": null,
         "require_info": null,
         departmentInfo : function(){
-            var d = this.get('department');
-            if (!isNaN(d)){
-                return app.majorsManager.departmentWithID(d);
-            } else {
-                return d;
-            }
+            return app.majorsManager.departmentWithID(this.deptid);
         }.property('department','Theses.majorsManager.departments.@each'),
         valid: function(){
             return (this.state & app.TitleStates.valid) != 0;
@@ -228,6 +261,10 @@ define(["app"],function(app){
                     return "等待管理员审核"
                 }
             }
+            return "无效论题";
         }.property('state'),
+    });
+    app.Title.reopenClass({
+        primaryKey: "titleid",
     });
 });
