@@ -1,13 +1,4 @@
 define(['app','text!template/m/titles_mine.hbs'],function(app,tpl){
-	app.TitleCell = Em.View.extend({
-		classNames: ['row-fluid','title-cell'],
-		title: null,
-		template: Em.Handlebars.compile('<div class="span12" {{action clicked target="view"}}>\
-			{{#with view.title}}{{title}}{{/with}}</div>'),
-		clicked: function(){
-			app.router.transitionTo('titlesShow',this.title);
-		},
-	})
 	app.TitlesMineView = Em.View.extend({
 		template: Em.Handlebars.compile(tpl),
 	});

@@ -20,7 +20,7 @@
 					{{view Theses.LoadingView}}
 				{{else}}
 					{{#if titles.length}}
-						<div class="custom-list">
+						<div class="custom-list bordered-list">
 							{{#each titles}}
 								{{view Theses.TitleCell title=this}}
 							{{/each}}

@@ -125,4 +125,20 @@ define(['app','views/tableview','views/teachercell'],function(app){
 			<strong>现在不是{{view.name}}时间</strong><br>请前往<a href="/#/dashboard">管理中心</a>查看时间安排\
 			</p></div>'),
 	});
+
+	app.TitleCell = Em.View.extend({
+		classNames: ['row-fluid','title-cell'],
+		title: null,
+		template: Em.Handlebars.compile('<div class="span12">\
+			{{#with view.title}}<h4>{{title}}{{title}}</h4><span {{bindAttr class="view.stateClass"}}>{{stateName}}</span>{{/with}}</div>'),
+		click: function(){
+			app.router.transitionTo('titlesShow',this.title);
+		},
+		stateClass: function(){
+			var s = this.get('title.state');
+			if (s < 33) return 'text-error';
+			else if (s < 68) return 'text-warning';
+			else return 'text-success';
+		}.property('title.state'),
+	})
 });
