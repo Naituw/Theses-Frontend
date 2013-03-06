@@ -45,6 +45,16 @@ define(['app','text!template/main.hbs','mod/sidebar','mod/navbar','model/account
             var items = this.get('navItems');
             return items.get('lastObject');
         }.property('Theses.router.currentState'),
+        currentNavTitle: function(){
+            var items = this.get('navItems');
+            var title = null;
+            for (var i = items.length - 1; i >= 0; i--) {
+                var item = items[i];
+                title = item.get('title');
+                if (title) break;
+            };
+            return title;
+        }.property('navItems'),
         navItemPressed: function(event){
             var route = event.context;
             app.get('router').transitionNext(route.get('path'));
