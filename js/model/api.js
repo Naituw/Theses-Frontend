@@ -213,6 +213,13 @@ define(['app'],function(app){
 		},
 		getMyTitles: function(page, callback){
 			this.GET('theses/mine.json',{page:page},callback);
+		},
+		getDocumentList: function(titleid, page, callback){
+			var p = {
+				titleid: titleid,
+				page: page,
+			}
+			this.GET('theses/documents.json',p,callback);
 		}
 	});
 });
