@@ -149,9 +149,7 @@ define(["app"],function(app){
 			  			title: '查看论题',
 			  			route: '/:titleid',
 			  			deserialize: function(router, context){
-			  				var c = app.Title.find(context.titleid);
-			  				if (!c) c = context.titleid;
-     						return c;
+     						return app.Title.load(context.titleid);
  						},
  						serialize: function(router, context){
  							if (!context || !context.titleid){

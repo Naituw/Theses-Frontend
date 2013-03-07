@@ -9,6 +9,7 @@ define(["app"],function(app){
 
         },
         loading: false,
+        loadingFailed: false,
     });
     app.Model.reopenClass({
         alloc: function(args){
@@ -16,7 +17,10 @@ define(["app"],function(app){
             o.update(args);
 
             var c = this.find(o.get(this.primaryKey));
-            if (c) c.setProperties(o);
+            if (c) {
+                c.setProperties(o);
+                c.set('loading',false);
+            }
             else this.getStore().pushObject(o);
 
             return o;
@@ -34,6 +38,7 @@ define(["app"],function(app){
             return _s;
         },
         primaryKey: "id",
+        uri: null,
         find: function(id){
             var key = this.primaryKey;
             var s = this.getStore();
@@ -42,6 +47,33 @@ define(["app"],function(app){
                 if (o.get(key) == id) return o;
             };
             return null;
+        },
+        load: function(id){
+            var s = this.find(id);
+            if (s) return s;
+
+            if (!this.uri) return null;
+
+            var key = this.primaryKey;
+            var o = this.create();
+            o.set(key,id);
+            o.set('loading',true);
+
+            this.getStore().pushObject(o);
+
+            var that = this;
+
+            app.currentAPI().GET(this.uri,{id:id},function(data,error){
+                if (!error){
+                    that.alloc(data);
+                } else {
+                    o.set('loadingFailed',true);
+                    o.set('loading',false);
+                    that.getStore().removeObject(o);
+                }
+            })
+
+            return o;
         },
     });
     app.Levels = {
@@ -76,6 +108,7 @@ define(["app"],function(app){
     });
     app.Major.reopenClass({
         primaryKey: "majorid",
+        uri: "major/single.json",
     });
     app.Department = app.Model.extend({
         "deptid": 0,
@@ -113,6 +146,7 @@ define(["app"],function(app){
     });
     app.Department.reopenClass({
         primaryKey: "deptid",
+        uri: "department/single.json",
     });
     app.User = app.Model.extend({
 	    "avatar": null,
@@ -154,14 +188,21 @@ define(["app"],function(app){
         }.property('department','Theses.majorsManager.departments.@each'),
         majorInfo: function(){
             var mid = this.get('major_id');
+            if (!mid) return null;
             var dept = this.get('departmentInfo');
             var result = null;
-            if (mid && dept){
-                dept.get('majors').forEach(function(item){
-                    if (item.majorid == mid) {
-                        result = item;
-                    }
-                });
+            if (dept){
+                var m = dept.get('majors');
+                if (m){
+                    m.forEach(function(item){
+                        if (item.majorid == mid) {
+                            result = item;
+                        }
+                    });
+                }
+            }
+            if (!result){
+                result = app.Major.find(mid);
             }
             return result;
         }.property('major_id','departmentInfo'),
@@ -173,6 +214,7 @@ define(["app"],function(app){
     });
     app.User.reopenClass({
         primaryKey: "userid",
+        uri: "user/single.json",
     });
     app.TitleStates = {
         createByStudent: 1 << 1,
@@ -266,5 +308,6 @@ define(["app"],function(app){
     });
     app.Title.reopenClass({
         primaryKey: "titleid",
+        uri: "title/single.json",
     });
 });

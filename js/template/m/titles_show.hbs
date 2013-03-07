@@ -1,1 +1,9 @@
-查看论文: {{content.title}}
+{{#if content.loading}}
+{{view Theses.LoadingView}}
+{{else}}
+  {{#if content.loadingFailed}}
+  	{{view Theses.PromptView text="论题加载失败，请尝试返回重新获取"}}
+  {{else}}
+	查看论文: {{content.title}}
+  {{/if}}
+{{/if}}
