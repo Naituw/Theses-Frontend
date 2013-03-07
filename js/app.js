@@ -13,6 +13,7 @@ define(["jquery",'text!template/alert.hbs',"plugins","handlebars", "ember", "boo
 		apiRoot: 'http://lwapi.sinaapp.com/',
 		loadingView: $('#loading'),
 		loadingCount: 0,
+		enableLog: true,
 		startLoading: function(){
 			this.loadingCount++;
 			if (this.loadingCount > 0) {
@@ -26,7 +27,19 @@ define(["jquery",'text!template/alert.hbs',"plugins","handlebars", "ember", "boo
 				this.loadingView.hide();
 			}
 		},
+		_heartbeats: Em.A(),
+		addHeartBeat: function(func){
+			this._heartbeats.pushObject(func);
+		},
 	});
+
+	(function(app){
+		for (var i = Theses._heartbeats.length - 1; i >= 0; i--) {
+			var func = Theses._heartbeats[i];
+			func();
+		};
+		setTimeout(arguments.callee, 3 * 60 * 1000);
+	})(Theses);
 
 	// Alert View .
 	Theses.AlertView = Em.View.extend({

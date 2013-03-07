@@ -1,5 +1,7 @@
 define(["app"],function(app){
-
+    app.currentTime = function(){
+        return (new Date).getTime();
+    };
     app.Model = Em.Object.extend({
         update: function(args){
             this.prepareData(args);
@@ -10,11 +12,13 @@ define(["app"],function(app){
         },
         loading: false,
         loadingFailed: false,
+        _lastAllocTime: 0,
     });
     app.Model.reopenClass({
         alloc: function(args){
             var o = this.create();
             o.update(args);
+            o._lastAllocTime = app.currentTime();
 
             var c = this.find(o.get(this.primaryKey));
             if (c) {
@@ -36,6 +40,25 @@ define(["app"],function(app){
                 s[k] = _s;
             }
             return _s;
+        },
+        purgeStore: function(){
+            var t = app.currentTime();
+            var s = this.getStore();
+            if (!s) return;
+
+            var removal = Em.A();
+            for (var i = s.length - 1; i >= 0; i--) {
+                var item = s[i];
+                if (t - item._lastAllocTime >  2.5 * 60 * 1000){
+                    removal.pushObject(item);
+
+                    if (app.enableLog ){
+                        console.log(item);
+                    }               
+                }
+            };
+            
+            s.removeObjects(removal);
         },
         primaryKey: "id",
         uri: null,
@@ -76,6 +99,7 @@ define(["app"],function(app){
             return o;
         },
     });
+
     app.Levels = {
         superAdmin: 80,
         seniorAdmin: 70,
@@ -309,5 +333,13 @@ define(["app"],function(app){
     app.Title.reopenClass({
         primaryKey: "titleid",
         uri: "title/single.json",
+    });
+
+    app.addHeartBeat(function(){
+        console.log('\n\nNow:' + app.currentTime() + ', Purge:');
+        app.User.purgeStore();
+        app.Title.purgeStore();
+        app.Major.purgeStore();
+        app.Department.purgeStore();
     });
 });
