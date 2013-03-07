@@ -160,6 +160,10 @@ define(['app','text!template/m/users.hbs','views/views'],function(app,tpl){
 	 /*
 	  * Teachers
 	  */
+	  	canManageTeachers: function(){
+	  		var l = app.accountManager.get('currentLevel');
+	  		return l >= 60;
+	  	}.property('Theses.accountManager.currentLevel'),
 	  	selectedTeacherIndex: -1,
 	  	setSelectedTeacherIndex: function(index){
 	  		if (this._loadingTeachers) return;
