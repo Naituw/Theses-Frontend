@@ -148,8 +148,10 @@ define(["app"],function(app){
 			  		titlesShow: app.Route.extend({
 			  			title: '查看论题',
 			  			route: '/:titleid',
-			  			deserialize: function(router, context){ 
-     						return context.titleid;
+			  			deserialize: function(router, context){
+			  				var c = app.Title.find(context.titleid);
+			  				if (!c) c = context.titleid;
+     						return c;
  						},
  						serialize: function(router, context){
  							if (!context || !context.titleid){
