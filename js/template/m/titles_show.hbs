@@ -4,6 +4,93 @@
   {{#if content.loadingFailed}}
   	{{view Theses.PromptView text="论题加载失败，请尝试返回重新获取"}}
   {{else}}
-	查看论文: {{content.title}}
+
+
+<div class="row-fluid">
+	<div class="span12">
+		<div class="widget-box">
+			<div class="widget-title">
+				<span class="icon"><i class="icon-folder-open"></i></span>
+				<h5>论题信息</h5>
+				
+			</div>
+			<div class="widget-content">
+				<table class="table table-bordered">
+					<tr>
+						<td><strong>ID</strong></td>
+						<td>{{content.titleid}}</td>
+					</tr>
+					<tr>
+						<td><strong>标题</strong></td>
+						<td>{{content.title}}</td>
+					</tr>
+					<tr>
+						<td><strong>导师</strong></td>
+						<td>{{teacherName}}</td>
+					</tr>
+					<tr>
+						<td><strong>系别</strong></td>
+						<td>{{content.departmentName}}</td>
+					</tr>
+					<tr>
+						<td><strong>状态</strong></td>
+						<td>{{content.stateName}}</td>
+					</tr>
+					<tr>
+						<td><strong>可选专业</strong></td>
+						<td>{{avaliableMajors}}</td>
+					</tr>
+					<tr>
+						<td><strong>说明</strong></td>
+						<td>{{content.description}}</td>
+					</tr>
+					<tr>
+						<td><strong>要求</strong></td>
+						<td>{{content.require_info}}</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row-fluid">
+	<div class="span12">
+		<div class="widget-box">
+			<div class="widget-title">
+				<span class="icon"><i class="icon-user"></i></span>
+				<h5>相关用户</h5>
+				<div class="buttons">
+					<a href="#" class="btn btn-mini" {{action refreshUsers href=true}}>
+						<i class="icon-refresh"></i> 刷新
+					</a>
+				</div>
+			</div>
+			<div class="widget-content">
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row-fluid">
+	<div class="span12">
+		<div class="widget-box">
+			<div class="widget-title">
+				<span class="icon"><i class="icon-file"></i></span>
+				<h5>文档列表</h5>
+				<div class="buttons">
+					<a href="#" class="btn btn-mini" {{action refreshDocuments href=true}}>
+						<i class="icon-refresh"></i> 刷新
+					</a>
+				</div>
+			</div>
+			<div class="widget-content nopadding">
+
+				{{view Theses.PagingView}}
+			</div>
+		</div>
+	</div>
+</div>
+
   {{/if}}
 {{/if}}

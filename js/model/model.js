@@ -254,12 +254,17 @@ define(["app"],function(app){
         "student_num": 0,
         "deptid": 0,
         "state": 0,
-        "available_majors": null,
+        "available_major": null,
         "description": null,
         "require_info": null,
         departmentInfo : function(){
             return app.majorsManager.departmentWithID(this.deptid);
-        }.property('department','Theses.majorsManager.departments.@each'),
+        }.property('deptid','Theses.majorsManager.departments.@each'),
+        departmentName: function(){
+            var d = this.get('departmentInfo');
+            if (d) return d.name;
+            return this.deptid + '';
+        }.property('departmentInfo'),
         valid: function(){
             return (this.state & app.TitleStates.valid) != 0;
         }.property('state'),

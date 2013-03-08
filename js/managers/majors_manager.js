@@ -44,7 +44,7 @@ define(['app','model/model'],function(app){
 				var ms = d.majors;
 				for (var j = ms.length - 1; j >= 0; j--) {
 					var m = ms[j];
-					if (m.marjorid == id) return m;
+					if (m.majorid == id) return m;
 				};
 			};
 			return null;
