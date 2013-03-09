@@ -32,23 +32,26 @@ define(['app','text!template/upload.hbs'],function(app,tpl){
     	}.property(),
     	opened: true,
     	updatePanelFrame: function(){
-    		var empty = !app.get('uploadManager.tasks.length');
-    		var opened = this.get('opened');
+    		var that = this;
+    		Em.run.later(this,function(){
+    			var empty = !app.get('uploadManager.tasks.length');
+    			var opened = that.get('opened');
 
-    		var dom = $('#upload-panel');
-    		var height = dom.height();
-    		var bottom = 0;
+    			var dom = $('#upload-panel');
+    			var height = dom.height();
+    			var bottom = 0;
 
-    		if (empty) bottom = -height;
-    		else if (!opened) bottom = -(height - 22);
+    			if (empty) bottom = -height;
+    			else if (!opened) bottom = -(height - 22);
 
-    		if (!empty) dom.show();
+    			if (!empty) dom.show();
 
-    		dom.animate({
-    			bottom: bottom,
-    		}, 200, function(){
-    			if (empty) dom.hide();
-    		});
+    			dom.animate({
+    				bottom: bottom,
+    			}, 200, function(){
+    				if (empty) dom.hide();
+    			});
+    		},100);
     	}.observes('Theses.uploadManager.tasks.length','opened'),
     	togglePanel: function(){
     		this.set('opened',!this.opened);
