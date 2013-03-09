@@ -41,6 +41,22 @@ $.upload = function(file, options){
 })(jQuery);
 
 
+(function($, window, undefined) {
+    var oldXHR = $.ajaxSettings.xhr;
+    $.ajaxSettings.xhr = function() {
+        var xhr = oldXHR();
+        if(xhr instanceof window.XMLHttpRequest) {
+            xhr.addEventListener('progress', this.progress, false);
+        }
+        
+        if(xhr.upload) {
+            xhr.upload.addEventListener('progress', this.progress, false);
+        }
+        
+        return xhr;
+    };
+})(jQuery, window);
+
 /*
  * base64
  */ 

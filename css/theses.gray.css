@@ -1043,12 +1043,99 @@ form.update-profile fieldset.reset-password input {
 
 
 #upload-panel {
-  width: 100px;
-  height: 50px;
+  display: none;
+  width:400px;
   position: fixed;
   bottom: 0;
   left: 50%;
-  margin-left: -50px;
-  background: red;
+  margin-left: -90px;
   z-index: 999999;
 }
+#upload-panel.empty {
+  bottom: -50%;
+}
+#upload-panel.active {
+  bottom: 0;
+}
+#upload-panel.inactive {
+
+}
+
+#upload-list-switch {
+  display: block;
+  width: 200px;
+  margin: 0 auto;
+  background-color: #ddd;
+  border: 1px solid #aaa;
+  border-top: 0;
+  text-align: center;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  cursor: pointer;
+}
+#upload-list-switch:hover {
+  background-color: #ccc;
+}
+#upload-list-switch:active {
+  background-color: #bbb;
+}
+
+#upload-list {
+  padding: 15px;
+  padding-top: 0px;
+  background-color: #eee;
+  border: 1px solid #aaa;
+  border-bottom: none;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+}
+
+#upload-panel .upload-item {
+  float: left;
+  width: 100%;
+  padding-top: 10px;
+  border-bottom: 1px dotted #bbb;
+  position: relative;
+}
+#upload-panel .upload-item h4 {
+  font-size: 14px;
+  margin: 0;
+  margin-bottom: 5px;
+  padding-right: 50px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  color: #444;
+}
+
+#upload-panel .upload-item .progress {
+  margin-right: 50px;
+  border: 1px solid #bbb;
+}
+
+#upload-panel .upload-item span {
+  position: absolute;
+  line-height: 20px;
+  bottom: 20px;
+  right: 0;
+  color: #888;
+}
+
+#upload-panel .upload-item .upload-cancel {
+  position: absolute;
+  right: 0;
+  top: 10px;
+  height: 18px;
+  opacity: 0.7;
+}
+
+#upload-panel .upload-item .upload-cancel:hover {
+  opacity: 0.9;
+}
+
+#upload-panel .upload-item .upload-cancel:active {
+  opacity: 1.0;
+}
+
+

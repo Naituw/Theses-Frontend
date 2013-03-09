@@ -41,8 +41,8 @@ define(['app'],function(app){
     			}catch(e){
         			data = {code:500,message:"服务器内部错误"};
     			}
+    			if (!data) data = {};
 				data.errorThrown = errorThrown;
-				if (!data) data = {};
 				if (callback) callback(null, data);
 			};
 
@@ -54,6 +54,8 @@ define(['app'],function(app){
 				'Auth': this.authHeader(),
 			};
 
+			var xhr = null;
+
 			if (file) {
 				var data = new FormData();
 				data.append('upload',file);
@@ -61,7 +63,8 @@ define(['app'],function(app){
 					var value = parameters[key];
 					data.append(key,value);
 				}
-				$.ajax(url, {
+
+				xhr = $.ajax(url, {
     				type: method,
     				dataType: 'json',
     				success: successCallback,
@@ -71,10 +74,18 @@ define(['app'],function(app){
     				processData: false,
     				contentType: false,
     				data: data,
+    				progress: function(e){
+    					if(e.lengthComputable) {
+        				    var p = (e.loaded / e.total);
+        				    if (xhr.progressChanged){
+        				    	xhr.progressChanged(p);
+        				    }
+        				}
+    				}
   				});
 			} else {
 
-				$.ajax(url,{
+				xhr = $.ajax(url,{
 					type: method,
 					dataType: 'json',
 					data: parameters,
@@ -84,14 +95,16 @@ define(['app'],function(app){
 					complete: completeCallback,
 				});
 			}
+
+			return xhr;
 		},
 		GET: function(path,paramaters,callback){
-			this.request(path, "GET", paramaters, callback);
+			return this.request(path, "GET", paramaters, callback);
 		},
 		POST: function(path,parameters,callback){
-			this.request(path, "POST", parameters, callback);
+			return this.request(path, "POST", parameters, callback);
 		},
-		upload: function(path, file, parameters, callback, maxSize, fileTypes){
+		upload: function(path, file, desc, parameters, callback, maxSize, fileTypes){
 			if (!file) return;
 			var error = null;
 			if (file.size > maxSize) {
@@ -110,7 +123,8 @@ define(['app'],function(app){
 				app.showError('上传失败',error);
 			}
 			else{
-				this.request(path, "POST", parameters, callback, file);
+				//url, file, parameters, apiObject, desc, _callback
+				app.uploadManager.addTask(path, file, parameters || {}, this, desc, callback);
 			}
 		},
 		verifyCredentials: function(callback){
@@ -133,7 +147,7 @@ define(['app'],function(app){
             this.POST('account/set_password.json',params,callback); 
 		},
 		updateAvatar: function(file,callback){
-			this.upload('account/update_avatar.json',file,null,callback, 2 * 1024 * 1024, ['jpg','png','gif']);
+			this.upload('account/update_avatar.json',file,'用户头像更新',null,callback, 2 * 1024 * 1024, ['jpg','png','gif']);
 		},
 		getTimes: function(callback){
 			this.GET('theses/times.json',null,callback);

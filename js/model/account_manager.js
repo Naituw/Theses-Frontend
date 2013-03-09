@@ -115,7 +115,6 @@ define(['app','model/account'],function(app){
 			var that = this;
 			this.get('currentAccount').api().updateAvatar(file, function(data, error){
 				if(error){
-					app.showError('头像上传失败',error.message);
 				}
 				else{
 					that.updateCurrentAccountWithData(data);
