@@ -67,6 +67,23 @@
 				</div>
 			</div>
 			<div class="widget-content">
+				<div class="related-users">
+					<div class="related-teacher">
+						<h5>导师</h5>
+						<div class="user-cell">
+							<img src="http://lwapi-pic.stor.sinaapp.com/user_2_8.png"/>
+						</div>
+					</div>
+					<div class="related-students">
+						<h5>选题学生</h5>
+						<div class="user-cell">
+
+						</div>
+						<div class="user-cell">
+
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -82,10 +99,13 @@
 					<a href="#" class="btn btn-mini" {{action refreshDocuments href=true}}>
 						<i class="icon-refresh"></i> 刷新
 					</a>
+					<a href="#" class="desktop btn btn-mini">
+						<i class="icon-upload"></i> 上传新文档
+					</a>
 				</div>
 			</div>
 			<div class="widget-content nopadding">
-
+				{{view Theses.PromptView text="暂无数据，请点击刷新重新获取"}}
 				{{view Theses.PagingView}}
 			</div>
 		</div>

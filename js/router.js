@@ -70,6 +70,7 @@ define(["app"],function(app){
 			    	router.get('mainController').connectOutlet('navbar','navbar');
 			    	router.get('mainController').connectOutlet('sidebar','sidebar');
 			    	router.get('mainController').connectOutlet('panel','panel');
+			    	router.get('mainController').connectOutlet('upload','uploadPanel');
 			    },
 			    index: app.Route.extend({
 			    	route: '/',

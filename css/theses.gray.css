@@ -1009,3 +1009,46 @@ form.update-profile fieldset.reset-password input {
   float: right;
   padding: 5px 0;
 }
+
+.related-users {
+
+}
+
+.related-users h5 {
+  font-size: 15px;
+  margin: 0;
+  margin-bottom: 10px;
+  color: #888;
+}
+
+.related-users .related-teacher {
+  border-bottom: 1px dotted #ccc;
+  overflow: hidden;
+}
+
+.related-users .related-students {
+  border-bottom: 1px dotted #ccc;
+  padding-top: 15px;
+  overflow: hidden;
+}
+
+.user-cell {
+  height: 70px;
+  border-top: 1px dotted #ccc;
+}
+
+
+
+
+
+
+#upload-panel {
+  width: 100px;
+  height: 50px;
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  margin-left: -50px;
+  background: red;
+  z-index: 999999;
+}
