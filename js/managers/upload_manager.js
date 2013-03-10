@@ -25,7 +25,7 @@ define(['app'],function(app){
 		tasks: Em.A(),
 		taskFinished: function(task, error){
 			if (error){
-				if (error.errorThrown != null || error.code){ // 判断是否为用户取消
+				if (!error.aborted){ // 判断是否为用户取消
 					app.showError(task.desc, '文件上传失败: ' + error.message);
 				}
 			}else {

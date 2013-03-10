@@ -42,7 +42,9 @@ define(['app'],function(app){
         			data = {code:500,message:"服务器内部错误"};
     			}
     			if (!data) data = {};
+    			if (!data.message) data.message = "未知错误";
 				data.errorThrown = errorThrown;
+				data.aborted = (textStatus == "abort");
 				if (callback) callback(null, data);
 			};
 
@@ -233,7 +235,7 @@ define(['app'],function(app){
 				titleid: titleid,
 				page: page,
 			}
-			this.GET('theses/documents.json',p,callback);
+			this.GET('documents/show.json',p,callback);
 		}
 	});
 });
