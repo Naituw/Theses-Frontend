@@ -44,12 +44,14 @@ define(["app"],function(app){
         purgeStore: function(){
             var t = app.currentTime();
             var s = this.getStore();
+            var aliveTime = this.aliveTime;
             if (!s) return;
+            if (aliveTime == 0) return;
 
             var removal = Em.A();
             for (var i = s.length - 1; i >= 0; i--) {
                 var item = s[i];
-                if (t - item._lastAllocTime >  2.5 * 60 * 1000){
+                if (t - item._lastAllocTime >  aliveTime){
                     removal.pushObject(item);
 
                     if (app.enableLog ){
@@ -62,6 +64,7 @@ define(["app"],function(app){
         },
         primaryKey: "id",
         uri: null,
+        aliveTime: 0,
         find: function(id){
             var key = this.primaryKey;
             var s = this.getStore();
@@ -239,6 +242,7 @@ define(["app"],function(app){
     app.User.reopenClass({
         primaryKey: "userid",
         uri: "user/single.json",
+        aliveTime: 15 * 60 * 1000,
     });
     app.TitleStates = {
         createByStudent: 1 << 1,
@@ -338,6 +342,7 @@ define(["app"],function(app){
     app.Title.reopenClass({
         primaryKey: "titleid",
         uri: "title/single.json",
+        aliveTime: 15 * 60 * 1000,
     });
 
     app.addHeartBeat(function(){
