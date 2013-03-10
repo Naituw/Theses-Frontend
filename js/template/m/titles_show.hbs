@@ -67,23 +67,30 @@
 				</div>
 			</div>
 			<div class="widget-content">
-				<div class="related-users">
-					<div class="related-teacher">
-						<h5>导师</h5>
-						<div class="user-cell">
-							<img src="http://lwapi-pic.stor.sinaapp.com/user_2_8.png"/>
+				{{#if loadingUsers}}
+					{{view Theses.LoadingView}}
+				{{else}}
+					{{#if teacher}}
+					<div class="related-users">
+						<div class="related-teacher">
+							<h5>导师</h5>
+							{{view Theses.UserCell user=teacher}}	
+						</div>
+						<div class="related-students">
+							<h5>选题学生</h5>
+							{{#if students.length}}
+								{{#each students}}
+									{{view Theses.UserCell user=this}}	
+								{{/each}}
+							{{else}}
+								{{view Theses.PromptView text="暂时没有学生选择此论题"}}
+							{{/if}}	
 						</div>
 					</div>
-					<div class="related-students">
-						<h5>选题学生</h5>
-						<div class="user-cell">
-
-						</div>
-						<div class="user-cell">
-
-						</div>
-					</div>
-				</div>
+					{{else}}
+						{{view Theses.PromptView text="暂无数据，请点击刷新重新获取"}}
+					{{/if}}
+				{{/if}}
 			</div>
 		</div>
 	</div>

@@ -140,5 +140,33 @@ define(['app','views/tableview','views/teachercell'],function(app){
 			else if (s < 68) return 'text-warning';
 			else return 'text-success';
 		}.property('title.state'),
-	})
+	});
+
+	app.UserCell = Em.View.extend({
+		classNames: ['user-cell'],
+		user: null,
+		lineOne: function(){
+			var u = this.user;
+			if (!u) return '';
+			var result = u.userid;
+			if (u.screenname && u.screenname.length) 
+				result += ('（' + u.screenname + '）');
+			result += ('，' + u.get('levelType'));
+			return result;
+		}.property('user','user.screenname'),
+		lineTwo: function(){
+			var u = this.user;
+			if (!u) return '';
+			var result = '';
+			var major = u.get('majorInfo');
+			if (major) result += (major.name + '，');
+			result += u.get('departmentInfo.name');
+			return result;
+		}.property('user','user.departmentInfo','user.majorInfo'),
+		template: Em.Handlebars.compile('<img {{bindAttr src="view.user.avatarThumbURL"}} class="pull-left"/>\
+							<div class="user-info">\
+								<label>{{view.lineOne}}</label>\
+								<label>{{view.lineTwo}}</label>\
+							</div>'),
+	});
 });

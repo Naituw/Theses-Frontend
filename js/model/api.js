@@ -228,7 +228,7 @@ define(['app'],function(app){
 			this.POST('teachers/leveldown.json',params,callback);
 		},
 		getMyTitles: function(page, callback){
-			this.GET('theses/mine.json',{page:page},callback);
+			this.GET('titles/mine.json',{page:page},callback);
 		},
 		getDocumentList: function(titleid, page, callback){
 			var p = {
@@ -236,6 +236,9 @@ define(['app'],function(app){
 				page: page,
 			}
 			this.GET('documents/show.json',p,callback);
-		}
+		},
+		getTitleRelatedUsers: function(titleid,callback){
+			this.GET('title/extra_info.json',{titleid:titleid},callback);
+		},
 	});
 });

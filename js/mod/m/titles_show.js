@@ -8,7 +8,6 @@ define(['app','text!template/m/titles_show.hbs'],function(app,tpl){
         }.property(),
 		avaliableMajors: function(){
 			var ms = this.content.available_major;
-			console.log(ms);
 			if (Object.prototype.toString.call(ms) != '[object Array]') return '';
 			var results = Em.A();
 			for (var i = ms.length - 1; i >= 0; i--) {
@@ -43,9 +42,35 @@ define(['app','text!template/m/titles_show.hbs'],function(app,tpl){
 
 		}.property('canAdmin','content','Theses.accountManager.currentAccount.user.userid'),
 
-
+		teacher: null,
+		students: Em.A(),
+		loadingUsers: false,
 		refreshUsers: function(){
+			if (this.loadingUsers) return;
+			if (!this.content.titleid) return;
+			var api = app.currentAPI();
+			if (api){
+				this.set('loadingUsers',true);
+				var that = this;
+				api.getTitleRelatedUsers(this.content.titleid,function(data, error){
+					that.set('loadingUsers',false);
+					if (error){
+						app.showError('获取相关用户失败',error.message);
+					}else {
+						var t = data.teacher;
+						var s = data.students;
+						var students = that.students;
 
+						if (t) that.set('teacher',app.User.alloc(t));
+						if (s && s.length){
+							for (var i = 0; i < s.length; i++) {
+								var raw = s[i];
+								students.pushObject(app.User.alloc(raw));
+							};
+						}
+					}
+				});
+			}
 		},
 
 
