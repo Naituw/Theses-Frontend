@@ -41,7 +41,12 @@ define(['app'],function(app){
     			}catch(e){
         			data = {code:500,message:"服务器内部错误"};
     			}
-    			if (!data) data = {};
+    			if (!data) {
+    				data = {};
+    				if (!jqXHR.getAllResponseHeaders()){
+    					data.message = "无法连接到服务器，请检查您的网络设置";
+    				}
+    			}
     			if (!data.message) data.message = "未知错误";
 				data.errorThrown = errorThrown;
 				data.aborted = (textStatus == "abort");
