@@ -345,6 +345,20 @@ define(["app"],function(app){
         aliveTime: 15 * 60 * 1000,
     });
 
+    app.Document = app.Model.extend({
+        docid: 0,
+        titleid: 0,
+        authorid: 0,
+        author: null,
+        doctype: 0,
+        create_at: 0,
+        prepareData: function(data){
+            if (data.author){
+                data.author = app.User.alloc(data.author);
+            }
+        }
+    });
+
     app.addHeartBeat(function(){
         console.log('\n\nNow:' + app.currentTime() + ', Purge:');
         app.User.purgeStore();

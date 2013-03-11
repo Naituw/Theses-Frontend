@@ -58,7 +58,7 @@ define(['app','text!template/m/titles_show.hbs'],function(app,tpl){
 						app.showError('获取相关用户失败',error.message);
 					}else {
 						var t = data.teacher;
-						var s = data.students;
+						var s = data.student;
 						var students = that.students;
 
 						if (t) that.set('teacher',app.User.alloc(t));
@@ -73,9 +73,54 @@ define(['app','text!template/m/titles_show.hbs'],function(app,tpl){
 			}
 		},
 
+		documents: Em.A(),
+		currentDocPage: 1,
+		loadingDocuments: false,
+		hasMoreDocuments: function(){
+			return this.get('documents.length') > 0;
+		}.property('documents.length'),
+		loadDocuments: function(){
+			if (this.loadingDocuments) return;
+			if (!this.content.titleid) return;
+			var api = app.currentAPI();
+			if (api){
+				this.set('loadingDocuments',true);
+				var that = this;
+				api.getDocumentList(this.content.titleid, this.currentDocPage, function(data,error){
+					that.set('loadingDocuments',false);
+					if (error){
+						app.showError('文档加载失败',error.message);
+					}else {
+						var d = that.documents;
+						d.clear();
+
+						for (var i = 0; i < data.length; i++) {
+							d.pushObject(app.Document.alloc(data[i]));
+						};
+					}
+				});
+			}
+		},
 
 		refreshDocuments: function(){
-
+			this.set('currentDocPage',1);
+			this.loadDocuments();
 		},
+		documentPageChanged: function(){
+			this.loadDocuments();
+		}.observes('currentDocPage'),
+
+
+
+		reset: function(){
+			this.set('teacher',null);
+			this.students.clear();
+			this.set('loadingUsers',false);
+
+			this.documents.clear();
+			this.set('currentDocPage',1);
+			this.set('loadingDocuments',false);
+
+		}.observes('content.titleid'),
 	});
 });

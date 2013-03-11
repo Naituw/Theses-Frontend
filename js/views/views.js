@@ -157,11 +157,12 @@ define(['app','views/tableview','views/teachercell'],function(app){
 		lineTwo: function(){
 			var u = this.user;
 			if (!u) return '';
-			var result = '';
+			var result = [];
 			var major = u.get('majorInfo');
-			if (major) result += (major.name + '，');
-			result += u.get('departmentInfo.name');
-			return result;
+			var dept = u.get('departmentInfo');
+			if (major) result.pushObject(major.name);
+			if (dept) result.pushObject(dept.name);
+			return result.join('，');
 		}.property('user','user.departmentInfo','user.majorInfo'),
 		template: Em.Handlebars.compile('<img {{bindAttr src="view.user.avatarThumbURL"}} class="pull-left"/>\
 							<div class="user-info">\

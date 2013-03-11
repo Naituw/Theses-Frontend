@@ -112,8 +112,18 @@
 				</div>
 			</div>
 			<div class="widget-content nopadding">
-				{{view Theses.PromptView text="暂无数据，请点击刷新重新获取"}}
-				{{view Theses.PagingView}}
+				{{#if loadingDocuments}}
+					{{view Theses.LoadingView}}
+				{{else}}
+					{{#if documents.length}}
+						{{#each documents}}
+							<div>{{title}}</div>
+						{{/each}}
+					{{else}}
+						{{view Theses.PromptView text="暂无数据，请点击刷新重新获取"}}
+					{{/if}}
+				{{/if}}
+				{{view Theses.PagingView pageBinding="currentDocPage" hasNextBinding="hasMoreDocuments"}}
 			</div>
 		</div>
 	</div>
