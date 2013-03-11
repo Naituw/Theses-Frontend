@@ -10,7 +10,9 @@ define(['app','text!template/navbar.hbs'],function(app,tpl){
         	return app.get('accountManager').get('currentAccount');
         }.property('Theses.accountManager.currentAccount'),
         signout: function(){
-            app.get('accountManager').signout();
+            app.confirmationManager.addRequest('确认要退出吗？','页面将会刷新',function(){
+                app.get('accountManager').signout();
+            });
         },
         profile: function(){
             app.get('panelController').openOutlet('panelProfile','用户资料','更新你的账户信息');
