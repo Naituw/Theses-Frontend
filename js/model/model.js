@@ -349,12 +349,32 @@ define(["app"],function(app){
         docid: 0,
         titleid: 0,
         authorid: 0,
+        filename: null,
+        title: null,
         author: null,
         doctype: 0,
         create_at: 0,
+        fileType: function(){
+            var f = this.get('filename');
+            if (!f) return 'zip';
+            var re = /(?:\.([^.]+))?$/;
+            var ext = re.exec(f)[1];
+            if (!ext) return 'zip';
+            ext = ext.toLowerCase();
+
+            if (ext == 'pdf') return 'pdf';
+            if (ext == 'zip' || ext == 'rar' || ext == '7z') return 'zip';
+            if (ext == 'png' || ext == 'jpg' || ext == 'jpeg' || ext == 'gif') return 'img';
+            if (ext == 'doc' || ext == 'docx') return 'doc';
+            if (ext == 'xls' || ext == 'xlsx') return 'xls';
+            if (ext == 'ppt' || ext == 'pptx') return 'ppt';
+        }.property('filename'),
         prepareData: function(data){
             if (data.author){
                 data.author = app.User.alloc(data.author);
+            }
+            if (data.createAt){
+                data.create_at = data.createAt;
             }
         }
     });

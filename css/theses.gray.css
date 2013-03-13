@@ -1200,3 +1200,82 @@ form.update-profile fieldset.reset-password input {
   padding-top: 10px;
   margin-top: 20px;
 }
+
+
+
+.document-cell {
+  height: 62px;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+}
+.document-cell:hover{
+  background-color: #eee;
+}
+
+.document-cell .document-info {
+  padding: 0px 10px;
+  padding-right: 20px;
+}
+.document-cell .document-info h4 {
+  margin: 0px;
+  font-size: 16px;
+  line-height: 32px;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+}
+.document-cell .document-info span {
+  line-height: 20px;
+  color: #888;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+}
+.document-cell .close {
+  position: absolute;
+  right: 15px;
+  top: 30px;
+}
+
+.filetype {
+  width: 60px;
+  height: 60px;
+}
+[class^="filetype-"],
+[class*=" filetype-"] {
+  width: 39px;
+  height: 50px;
+  margin: 5px auto 5px;
+  background: url('../img/filetypes.png') no-repeat;
+}
+.filetype-doc {
+  background-position: 0 0;
+}
+.filetype-xls {
+  background-position: -39px 0;
+}
+.filetype-ppt {
+  background-position: -78px 0;
+}
+.filetype-img {
+  background-position: 0 -50px;
+}
+.filetype-pdf {
+  background-position: -39px -50px;
+}
+.filetype-zip {
+  background-position: -78px -50px;
+}
+
+
+
+
+
+

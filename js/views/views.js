@@ -170,4 +170,70 @@ define(['app','views/tableview','views/teachercell'],function(app){
 								<label>{{view.lineTwo}}</label>\
 							</div>'),
 	});
+
+	app.DocumentCell = Em.View.extend({
+		classNames: ['document-cell'],
+		doc: null,
+		lineTwo: function(){
+			var u = this.get('doc.author');
+			var r = '';
+			if (u && u.userid) r += u.userid;
+			if (u && u.screenname) r += (' (' + u.screenname + ') ');
+			if (this.doc && this.doc.create_at) r += ('上传于 ' + this.doc.create_at);
+			return r;
+		}.property('doc.create_at','doc.author'),
+		canDelete: function(){
+			var user = app.get('accountManager.currentAccount.user');
+			var l = user.level;
+			if (l >= 60 && l <= 70) return true;
+			var cid = user.userid;
+			if (cid && cid == this.get('doc.author.userid')) return true;
+			return false;
+		}.property('Theses.accountManager.currentAccount.user.userid','doc.author.userid'),
+		fileType: function(){
+			var t = this.get('doc.fileType');
+			return 'filetype-' + t;
+		}.property('doc.fileType'),
+
+		pendingDelete: false,
+		delete: function(){
+			var that = this;
+			if (!that.doc || !that.doc.docid) return;
+			app.confirmationManager.addRequest('确定要删除文档吗？','删除后的文档将不能再恢复',function(){
+				var api = app.currentAPI();
+				if (api){
+					that.set('pendingDelete',true);
+					api.deleteDocument(that.doc.docid, function(data,error){
+						that.set('pendingDelete',false);
+						if (error){
+							app.showError('删除文档失败',error.message);
+						}else if(that.get('controller')) {
+							var c = that.get('controller');
+							if (c.documentDidDelete){
+								c.documentDidDelete(that.doc);
+							}
+						}
+					})
+				}
+			});
+		},
+		click: function(e){
+			if (e.target.className == 'close') return;
+
+			alert('download');
+		},
+
+		template: Em.Handlebars.compile('\
+			{{#if view.pendingDelete}}{{view Theses.LoadingView}}{{else}}\
+					<div class="filetype pull-left">\
+						<div {{bindAttr class="view.fileType"}}></div>\
+					</div>\
+					<div class="document-info">\
+						<h4>{{view.doc.filename}}</h4>\
+						<span>{{view.lineTwo}}</span>\
+					</div>\
+					{{#if view.canDelete}}\
+						<button class="close" {{action delete target="view" bubbles=false}}>&times;</button>\
+					{{/if}}{{/if}}'),
+	});
 });

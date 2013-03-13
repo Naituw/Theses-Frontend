@@ -245,5 +245,13 @@ define(['app'],function(app){
 		getTitleRelatedUsers: function(titleid,callback){
 			this.GET('title/extra_info.json',{titleid:titleid},callback);
 		},
+
+		uploadDocument: function(titleid,file,callback){
+			this.upload('documents/upload.json',file,file.name,{titleid:titleid},callback, 16 * 1024 * 1024, 
+				['jpg','png','gif','jpeg','pdf','zip','rar','7z','doc','docx','xls','xlsx','ppt','pptx']);
+		},
+		deleteDocument: function(docid,callback){
+			this.GET('documents/remove.json',{docid:docid},callback);
+		}
 	});
 });

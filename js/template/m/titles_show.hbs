@@ -88,7 +88,7 @@
 						</div>
 					</div>
 					{{else}}
-						{{view Theses.PromptView text="暂无数据，请点击刷新重新获取"}}
+						{{view Theses.PromptView text="暂无数据，您可能没有权限查看此信息"}}
 					{{/if}}
 				{{/if}}
 			</div>
@@ -106,9 +106,13 @@
 					<a href="#" class="btn btn-mini" {{action refreshDocuments href=true}}>
 						<i class="icon-refresh"></i> 刷新
 					</a>
-					<a href="#" class="desktop btn btn-mini">
-						<i class="icon-upload"></i> 上传新文档
-					</a>
+					{{#if canUploadDocument}}
+						<input id="upload-document-input" class="hidden-input" type="file" name="upload">
+
+						<a href="#" class="desktop btn btn-mini" {{action uploadButtonPressed target="view"}}>
+							<i class="icon-upload"></i> 上传新文档
+						</a>
+					{{/if}}
 				</div>
 			</div>
 			<div class="widget-content nopadding">
@@ -117,7 +121,7 @@
 				{{else}}
 					{{#if documents.length}}
 						{{#each documents}}
-							<div>{{title}}</div>
+							{{view Theses.DocumentCell doc=this}}
 						{{/each}}
 					{{else}}
 						{{view Theses.PromptView text="暂无数据，请点击刷新重新获取"}}

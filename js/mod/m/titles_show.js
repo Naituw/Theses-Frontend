@@ -1,6 +1,24 @@
 define(['app','text!template/m/titles_show.hbs'],function(app,tpl){
 	app.TitlesShowView = Em.View.extend({
 		template: Em.Handlebars.compile(tpl),
+		uploadButtonPressed: function(){
+			var that = this;
+			var input = this.$().find('#upload-document-input');
+            input.click();
+            input.unbind('change');
+            input.change(function(){
+                var file = this.files[0];
+                var api = app.currentAPI();
+                if (file && api) {
+                    api.uploadDocument(that.get('controller.content.titleid'),file,function(data, error){
+                    	if(!error){
+                    		var a = app.Document.alloc(data);
+                    		that.get('controller').documentUploaded(a);
+                    	}
+                    });
+                }
+            });
+		},
 	});
 	app.TitlesShowController = Em.ObjectController.extend({
 		target: function(){
@@ -45,7 +63,7 @@ define(['app','text!template/m/titles_show.hbs'],function(app,tpl){
 		teacher: null,
 		students: Em.A(),
 		loadingUsers: false,
-		refreshUsers: function(){
+		reloadUsers: function(ignoreError){
 			if (this.loadingUsers) return;
 			if (!this.content.titleid) return;
 			var api = app.currentAPI();
@@ -55,11 +73,12 @@ define(['app','text!template/m/titles_show.hbs'],function(app,tpl){
 				api.getTitleRelatedUsers(this.content.titleid,function(data, error){
 					that.set('loadingUsers',false);
 					if (error){
-						app.showError('获取相关用户失败',error.message);
+						if (!ignoreError) app.showError('获取相关用户失败',error.message);
 					}else {
 						var t = data.teacher;
 						var s = data.student;
 						var students = that.students;
+						students.clear();
 
 						if (t) that.set('teacher',app.User.alloc(t));
 						if (s && s.length){
@@ -71,6 +90,9 @@ define(['app','text!template/m/titles_show.hbs'],function(app,tpl){
 					}
 				});
 			}
+		},
+		refreshUsers: function(ignoreError){
+			this.reloadUsers(false);
 		},
 
 		documents: Em.A(),
@@ -109,6 +131,12 @@ define(['app','text!template/m/titles_show.hbs'],function(app,tpl){
 		documentPageChanged: function(){
 			this.loadDocuments();
 		}.observes('currentDocPage'),
+		documentDidDelete: function(doc){
+			this.documents.removeObject(doc);
+		},
+		documentUploaded: function(doc){
+			this.documents.insertAt(0,doc);
+		},
 
 
 
@@ -121,6 +149,16 @@ define(['app','text!template/m/titles_show.hbs'],function(app,tpl){
 			this.set('currentDocPage',1);
 			this.set('loadingDocuments',false);
 
+			this.reloadUsers(true);
 		}.observes('content.titleid'),
+
+		canUploadDocument: function(){
+			var uid = app.get('accountManager.currentAccount.user.userid');
+			for (var i = this.students.length - 1; i >= 0; i--) {
+				var u = this.students[i];
+				if (u.userid == uid) return true;
+			};
+			return false;
+		}.property('Theses.accountManager.currentAccount.user.userid','students.@each'),
 	});
 });
