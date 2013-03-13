@@ -1223,6 +1223,7 @@ form.update-profile fieldset.reset-password input {
   margin: 0px;
   font-size: 16px;
   line-height: 32px;
+  height: 32px;
   display: block;
   white-space: nowrap;
   overflow: hidden;
@@ -1230,6 +1231,7 @@ form.update-profile fieldset.reset-password input {
   -o-text-overflow: ellipsis;
 }
 .document-cell .document-info span {
+  height: 20px;
   line-height: 20px;
   color: #888;
   display: block;

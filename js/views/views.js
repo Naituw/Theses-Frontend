@@ -179,7 +179,10 @@ define(['app','views/tableview','views/teachercell'],function(app){
 			var r = '';
 			if (u && u.userid) r += u.userid;
 			if (u && u.screenname) r += (' (' + u.screenname + ') ');
-			if (this.doc && this.doc.create_at) r += ('上传于 ' + this.doc.create_at);
+			if (this.doc && this.doc.create_at) {
+				var d = new Date(this.doc.create_at);
+				r += ('上传于 ' + d.format('yyyy年MM月dd日 hh:mm'));
+			}
 			return r;
 		}.property('doc.create_at','doc.author'),
 		canDelete: function(){
