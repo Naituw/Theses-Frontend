@@ -22,7 +22,7 @@ define(["app"],function(app){
 			var needLevel = this.get('level');
 			var account = app.get('accountManager').get('currentAccount');
 			var currentUserLevel = 0;
-			if (account){
+			if (account && account.user){
 				currentUserLevel = account.user.level;
 			}
 			if (!currentUserLevel){
