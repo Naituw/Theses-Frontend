@@ -252,6 +252,9 @@ define(['app'],function(app){
 		},
 		deleteDocument: function(docid,callback){
 			this.GET('documents/remove.json',{docid:docid},callback);
-		}
+		},
+		downloadDocument: function(docid,callback){
+			this.GET('documents/download.json',{docid:docid},callback);
+		},
 	});
 });

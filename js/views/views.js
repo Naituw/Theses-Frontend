@@ -197,6 +197,7 @@ define(['app','views/tableview','views/teachercell'],function(app){
 
 		pendingDelete: false,
 		delete: function(){
+			if(this.get('pendingDelete')) return;
 			var that = this;
 			if (!that.doc || !that.doc.docid) return;
 			app.confirmationManager.addRequest('确定要删除文档吗？','删除后的文档将不能再恢复',function(){
@@ -217,10 +218,24 @@ define(['app','views/tableview','views/teachercell'],function(app){
 				}
 			});
 		},
+		pendingDownload: false,
 		click: function(e){
 			if (e.target.className == 'close') return;
-
-			alert('download');
+			if (this.get('pendingDownload')) return;
+			var that = this;
+			var api = app.currentAPI();
+			if (api){
+				this.set('pendingDownload',true);
+				api.downloadDocument(this.get('doc.docid'),function(data,error){
+					that.set('pendingDownload',false);
+					if (error){
+						app.showError('文档下载失败',error.message);
+					}else {
+						var url = data.url;
+						if (url) window.location.href = url;
+					}
+				})
+			}
 		},
 
 		template: Em.Handlebars.compile('\
