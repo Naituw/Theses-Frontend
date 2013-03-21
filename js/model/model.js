@@ -350,6 +350,7 @@ define(["app"],function(app){
         titleid: 0,
         authorid: 0,
         filename: null,
+        fileName: null,
         title: null,
         author: null,
         doctype: 0,
@@ -376,7 +377,13 @@ define(["app"],function(app){
             if (data.createAt){
                 data.create_at = data.createAt;
             }
-        }
+        },
+        displayName: function(){
+            var filename = this.get('filename');
+            if (!filename) filename = this.get('fileName');
+            if (!filename || !filename.length) filename = "未命名文件";
+            return filename;
+        }.property('filename'),
     });
 
     app.addHeartBeat(function(){

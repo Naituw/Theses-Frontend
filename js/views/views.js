@@ -247,11 +247,22 @@ define(['app','views/tableview','views/teachercell'],function(app){
 						<div {{bindAttr class="view.fileType"}}></div>\
 					</div>\
 					<div class="document-info">\
-						<h4>{{view.doc.filename}}</h4>\
+						<h4>{{view.doc.displayName}}</h4>\
 						<span>{{view.lineTwo}}</span>\
 					</div>\
 					{{#if view.canDelete}}\
 						<button class="close" {{action delete target="view" bubbles=false}}>&times;</button>\
 					{{/if}}{{/if}}'),
+	});
+
+	app.DropdownItems = Em.Object.extend({
+		title: null,
+		enabled: true,
+		callback: function(){},
+	});
+	app.DropdownButton = Em.View.extend({
+		template: Em.Handlebars.compile(''),
+		title: null,
+		
 	});
 });

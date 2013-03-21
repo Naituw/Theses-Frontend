@@ -1,0 +1,60 @@
+  <form novalidate="" autocomplete="on" class="update-profile"> 
+                        <div class="yield" style="padding-top:20px">
+                            <fieldset class='reset-password'>
+                                <div class="control-group">
+                                    <div class="control-label">
+                                        <label>论文题目：</label>
+                                    </div>
+                                    <div class="controls">
+                                        <input type="text">
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <div class="control-label">
+                                        <label>可选人数：</label>
+                                    </div>
+                                    <div class="controls">
+                                        <select>
+                                        	<option>1</option>
+                                        	<option>2</option>
+                                        	<option>3</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="control-group">
+                                    <div class="control-label">
+                                        <label>可选专业：</label>
+                                    </div>
+                                    <div class="controls">
+                                        <select multiple="multiple">
+                                        	<option>计算机科学与技术</option>
+                                        	<option>艺术设计</option>
+                                        	<option>通信工程</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <div class="control-label">
+                                        <label>描述：</label>
+                                    </div>
+                                    <div class="controls">
+                                        <textarea></textarea>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <div class="control-label">
+                                        <label>要求：</label>
+                                    </div>
+                                    <div class="controls">
+                                         <textarea></textarea>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div> 
+                        <footer> 
+                            <button type="submit" class="blue submit" {{action submit target="view" href=true}}>
+                                <span>创建论题</span>
+                            </button> 
+                        </footer> 
+                    </form>
