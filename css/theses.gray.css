@@ -736,6 +736,15 @@ form.update-profile fieldset.reset-password label {
 form.update-profile fieldset.reset-password input {
   width: 186px;
 }
+form.update-profile fieldset.reset-password select {
+  width: 200px;
+}
+form.update-profile fieldset.reset-password textarea {
+  width: 186px;
+  resize: none;
+  margin-bottom: 0;
+  height: 80px;
+}
 
 .panel .profile-basic-info {
 	height: 100px;
@@ -1278,6 +1287,182 @@ form.update-profile fieldset.reset-password input {
 
 
 
+#message-panel {
+  width: 320px;
+  height: auto;
+  min-height: 300px;
+  position: fixed;
+  right: 0;
+  top: 84px;
+  bottom: 40px;
+  background: #ddd;
+  border: 1px solid #777;
+  border-right: 0 none;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  box-shadow: 5px 10px 40px rgba(0,0,0,0.8);
+  overflow: hidden;
+}
+
+.navigation-bar {
+  height: 44px;
+  padding: 0px 5px;
+}
+
+.navigation-bar a {
+  display: inline-block;
+  width: 50px;
+}
+
+.navigation-bar button i {
+  opacity: 0.6;
+}
+.navigation-bar button:hover i {
+  opacity: 0.9;
+}
 
 
+.navigation-bar h4 {
+  display: inline-block;
+  width: 220px;
+  text-align: center;
+  text-shadow: 0 1px 0 white;
+}
 
+
+#message-panel .message-content-wrapper {
+  position: absolute;
+  height: auto;
+  width: auto;
+  left: 5px;
+  right: 5px;
+  top: 44px;
+  bottom: 20px;
+  background:#E1E5EC;
+  border: 1px solid #bbb;
+  border-radius: 4px;
+  z-index: -2;
+}
+
+#message-panel .message-content {
+  padding: 10px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 46px;
+  overflow: scroll;
+}
+
+.message-content .message-row {
+  overflow: auto;
+  min-height: 33px;
+  position: relative;
+  padding-bottom: 5px;
+}
+
+.message-content .message-row-left {
+
+}
+
+.message-content .message-row-right {
+  
+}
+
+.message-content .message-row .bubble-avatar {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  bottom: 3px;
+  -webkit-border-radius: 4px;
+     -moz-border-radius: 4px;
+          border-radius: 4px;
+}
+
+.message-content .message-row-left .bubble-avatar {
+  float: left;
+  left: 0;
+}
+.message-content .message-row-right .bubble-avatar {
+  float: right;
+  right: 0;
+}
+
+.message-content .bubble{
+  position: relative; 
+  margin-top: 3px;
+  max-width: 185px;
+  clear: both;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.6);
+}
+
+.message-content .bubble:before {
+  z-index: -1;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  content: "";
+}
+
+.message-content .message-row-left .bubble{
+  float: left;
+  margin-right: auto;
+  margin-left: 36px;
+  padding: 2px 10px 4px 15px;
+}
+
+.message-content .message-row-left .bubble:before{
+  border-width: 10px 11px 11px 16px; 
+  border-image: url(../img/bubble-left.png) 10 11 11 16 stretch stretch;
+  -webkit-border-image: url(../img/bubble-left.png) 10 11 11 16 stretch stretch;
+  -moz-border-image: url(../img/bubble-left.png) 10 11 11 16 stretch stretch;
+  -o-border-image: url(../img/bubble-left.png) 10 11 11 16 stretch stretch;
+}
+
+.message-content .message-row-right .bubble{
+  float: right;
+  margin-left: auto;
+  margin-right: 36px;
+  text-align: left;
+  padding:2px 17px 4px 9px;
+}
+
+.message-content .message-row-right .bubble:before{
+  border-width: 10px 16px 11px 11px; 
+  border-image: url(../img/bubble-right.png) 10 16 11 11 stretch stretch;
+  -webkit-border-image: url(../img/bubble-right.png) 10 16 11 11 stretch stretch;
+  -moz-border-image: url(../img/bubble-right.png) 10 16 11 11 stretch stretch;
+  -o-border-image: url(../img/bubble-right.png) 10 16 11 11 stretch stretch;
+}
+
+.message-content .message-time {
+  text-align: center;
+  color: #999;
+  font-size: 13px;
+  padding: 5px 0;
+}
+
+.message-input-wrapper {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 36px;
+  border-top: 1px solid rgba(0,0,0,0.08);
+  padding: 5px 0;
+}
+
+.message-input-wrapper input {
+  margin: 5px;
+  margin-left: 8px;
+  width: 220px;
+  border-radius: 20px;
+  height: 20px;
+  padding: 2px 8px;
+}
+.message-input-wrapper button {
+  border-radius: 20px;
+  width: 45px;
+}
