@@ -7,12 +7,13 @@ define(['app','text!template/m/titles_mine.hbs'],function(app,tpl){
             return this;
         }.property(),
 		canAssignNewTitle: function(){
-			var l = app.accountManager.get('currentLevel');
-			return l == 40;
-		}.property('Theses.accountManager.currentLevel'),
+			if (app.accountManager.get('currentLevel') != 40) return false;
+			var m = app.milestoneManager;
+			return (m.get('isTitleAssignTime') || m.get('isTitleChosenTime'));
+		}.property('Theses.accountManager.currentLevel','Theses.milestoneManager.currentStone'),
 
 		assignNew: function(){
-
+			app.panelController.openOutlet('newTitle','出新论题','创建新论题');
 		},
 
 		titles: Em.A(),
