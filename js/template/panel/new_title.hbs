@@ -6,7 +6,7 @@
                                         <label>论文题目：</label>
                                     </div>
                                     <div class="controls">
-                                        <input type="text">
+                                        {{view Ember.TextField valueBinding="title"}}
                                     </div>
                                 </div>
                                 <div class="control-group">
@@ -14,11 +14,7 @@
                                         <label>可选人数：</label>
                                     </div>
                                     <div class="controls">
-                                        <select>
-                                        	<option>1</option>
-                                        	<option>2</option>
-                                        	<option>3</option>
-                                        </select>
+                                        {{view Ember.Select contentBinding="available_student_nums" valueBinding="student_num"}}
                                     </div>
                                 </div>
 
@@ -27,11 +23,7 @@
                                         <label>可选专业：</label>
                                     </div>
                                     <div class="controls">
-                                        <select multiple="multiple">
-                                        	<option>计算机科学与技术</option>
-                                        	<option>艺术设计</option>
-                                        	<option>通信工程</option>
-                                        </select>
+                                        {{view Ember.Select contentBinding="available_majors" optionValuePath="content.majorid" optionLabelPath="content.name" selectionBinding="majors" multiple=true}}
                                     </div>
                                 </div>
                                 <div class="control-group">
@@ -39,7 +31,7 @@
                                         <label>描述：</label>
                                     </div>
                                     <div class="controls">
-                                        <textarea></textarea>
+                                        {{view Ember.TextArea valueBinding="description"}}
                                     </div>
                                 </div>
                                 <div class="control-group">
@@ -47,13 +39,13 @@
                                         <label>要求：</label>
                                     </div>
                                     <div class="controls">
-                                         <textarea></textarea>
+                                         {{view Ember.TextArea valueBinding="requirements"}}
                                     </div>
                                 </div>
                             </fieldset>
                         </div> 
                         <footer> 
-                            <button type="submit" class="blue submit" {{action submit target="view" href=true}}>
+                            <button type="submit" class="blue submit" {{action submit href=true}}>
                                 <span>创建论题</span>
                             </button> 
                         </footer> 
