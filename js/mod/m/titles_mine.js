@@ -23,6 +23,8 @@ define(['app','text!template/m/titles_mine.hbs'],function(app,tpl){
 			return this.get('titles.length') > 0;
 		}.property('titles.length'),
 		loadTitles: function(){
+			if (this.loading) return;
+
 			var api = app.currentAPI();
 			if (api){
 				this.set('loading',true);

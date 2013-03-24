@@ -19,10 +19,9 @@
 					{{view Theses.LoadingView}}
 				{{else}}
 					{{#if titles.length}}
-						<div class="custom-list">
+						<div class="review-title-list">
 							{{#each titles}}
-								{{view Theses.ReviewTitleCell}}
-								{{view Theses.ReviewTitleCell}}
+								{{view Theses.ReviewTitleCell title=this}}
 							{{/each}}
 						</div>
 					{{else}}

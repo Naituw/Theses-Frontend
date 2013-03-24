@@ -186,6 +186,15 @@ define(["app"],function(app){
         "screenname": null,
         "userid": 0,
         "username": null,
+        displayName: function(){
+            var u = this.get('username');
+            var s = this.get('screenname');
+            var result = u + '';
+            if (s){
+                result += (' ' + s);
+            }
+            return result;
+        }.property('screenname','username'),
         levelType: function(){
             var l = this.get('level');
             return app.NameForLevel(l);
@@ -261,6 +270,17 @@ define(["app"],function(app){
         "available_major": null,
         "description": null,
         "require_info": null,
+        prepareData: function(data){
+            if (data.teacher) data.teacher = app.User.alloc(data.teacher);
+            if (data.students){
+                var s = Em.A();
+                for (var i = 0; i < data.students.length; i++) {
+                    var raw = data.students[i];
+                    s.pushObject(app.User.alloc(raw));
+                };
+                data.students.s;
+            }
+        },
         departmentInfo : function(){
             return app.majorsManager.departmentWithID(this.deptid);
         }.property('deptid','Theses.majorsManager.departments.@each'),

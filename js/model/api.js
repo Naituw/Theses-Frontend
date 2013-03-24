@@ -258,6 +258,9 @@ define(['app'],function(app){
 		},
 		createTitle: function(params,callback){
 			this.POST('theses/create_title.json',params,callback);
-		}
+		},
+		getWaitingForReviewTitles: function(page, callback){
+			this.GET('theses/waiting_reviews.json',{page:page},callback);
+		},
 	});
 });

@@ -148,7 +148,7 @@ define(['app','views/tableview','views/teachercell'],function(app){
 		lineOne: function(){
 			var u = this.user;
 			if (!u) return '';
-			var result = u.userid;
+			var result = u.username;
 			if (u.screenname && u.screenname.length) 
 				result += ('（' + u.screenname + '）');
 			result += ('，' + u.get('levelType'));
@@ -177,7 +177,7 @@ define(['app','views/tableview','views/teachercell'],function(app){
 		lineTwo: function(){
 			var u = this.get('doc.author');
 			var r = '';
-			if (u && u.userid) r += u.userid;
+			if (u && u.username) r += u.username;
 			if (u && u.screenname) r += (' (' + u.screenname + ') ');
 			if (this.doc && this.doc.create_at) {
 				var d = new Date(this.doc.create_at);

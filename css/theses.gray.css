@@ -1470,13 +1470,20 @@ form.update-profile fieldset.reset-password textarea {
   width: 45px;
 }
 
-
+.review-title-list {
+  padding: 10px 0;
+}
 .review-title-cell {
   position: relative;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #ddd;
+  cursor: pointer;
+  padding: 0 10px;
+}
+.review-title-cell:hover {
+  background: #f3f3f3;
 }
 .review-title-cell:first-of-type {
-  border-top: 1px solid #ccc;
+  border-top: 1px solid #ddd;
 }
 .review-title-cell .overview {
   height: 50px;
@@ -1486,16 +1493,19 @@ form.update-profile fieldset.reset-password textarea {
 .review-title-cell .overview .icon {
   position: absolute;
   top: 0;
-  left: 0;
+  left: 10px;
   height: 50px;
   line-height: 50px;
   width: 20px;
   text-align: left;
+  opacity: 0.75;
 }
 .review-title-cell .overview .title-name {
   padding-left: 20px;
   padding-right: 85px;
   line-height: 50px;
+  font-size: 16px;
+  font-weight: 700;
 
   white-space: nowrap;
   overflow: hidden;
@@ -1505,7 +1515,7 @@ form.update-profile fieldset.reset-password textarea {
 
 .review-title-cell .overview .loading-section {
   position: absolute;
-  right: 0px;
+  right: 10px;
   top: 10px;
   width: 80px;
   padding: 0;
@@ -1516,7 +1526,7 @@ form.update-profile fieldset.reset-password textarea {
 
 .review-title-cell .overview .btn-group {
   position: absolute;
-  right: 0px;
+  right: 10px;
   top: 10px;
   width: 80px;
 }
@@ -1526,4 +1536,17 @@ form.update-profile fieldset.reset-password textarea {
 
 .review-title-cell .extended {
   border-top: 1px dotted #ddd;
+  padding: 0 10px;
+}
+
+.review-title-cell .extended dd {
+  color: #666;
+}
+
+.review-title-cell .extended dt {
+  margin-top: 10px;
+}
+
+.review-title-cell .extended dt:first-of-type {
+  margin-top: 0;
 }

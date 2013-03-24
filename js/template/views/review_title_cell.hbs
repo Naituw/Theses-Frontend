@@ -1,6 +1,6 @@
 <div class="overview">
 	<span class="icon"><i {{bindAttr class="view.opened:icon-chevron-down:icon-chevron-right"}}></i></span>
-	<div class="title-name" title="基于云计算平台和REST架构的论文管理系统">基于云计算平台和REST架构的论文管理系统</div>
+	<div class="title-name" {{bindAttr title="view.title.title"}}>{{view.title.title}}</div>
 		{{#if view.pendingState}}
 			{{view Theses.LoadingView}}
 		{{else}}
@@ -10,8 +10,8 @@
 				</div>
 			{{else}}
 				<div class="btn-group">
-					<button class="btn btn-success" {{action allow target="view"}}><i class="icon-white icon-ok"></i></button>
-					<button class="btn btn-danger" {{action deny target="view"}}><i class="icon-white icon-remove"></i></button>
+					<button class="btn btn-success" {{action allow target="view"}} title="通过"><i class="icon-white icon-ok"></i></button>
+					<button class="btn btn-danger" {{action deny target="view"}} title="否决"><i class="icon-white icon-remove"></i></button>
 				</div>
 			{{/if}}
 		{{/if}}
@@ -19,16 +19,23 @@
 </div>
 {{#if view.opened}}
 <div class="extended">
-	<dl class="dl-horizontal">
+	<dl>
   		<dt>Description / 论题说明</dt>
-  		<dd>基于云计算平台和REST架构的论文管理系统基于云计算平台和REST架构的论文管理系统基于云计算平台和REST架构的论文管理系统基于云计算平台和REST架构的论文管理系统</dd>
+  		<dd>{{view.title.description}}</dd>
   		<dt>Requirements / 要求</dt>
-  		<dd>基于云计算平台和REST架构的论文管理系统基于云计算平台和REST架构的论文管理系统基于云计算平台和REST架构的论文管理系统基于云计算平台和REST架构的论文管理系统</dd>
+  		<dd>{{view.requirements}}</dd>
+  		<dt>Majors / 可选专业</dt>
+  		<dd>{{view.avaliableMajors}}</dd>
+  		{{#if view.title.teacher}}
   		<dt>Teacher / 指导教师</dt>
-  		<dd>0110100 苑俊英</dd>
+  		<dd>{{view.title.teacher.displayName}}</dd>
+  		{{/if}}
+  		{{#if view.title.students.length}}
   		<dt>Students / 选题学生</dt>
-  		<dd>09201170 吴天</dd>
-  		<dd>09201161 邱波潮</dd>
+  		{{#each view.title.students}}
+  			<dd>{{displayName}}</dd>
+  		{{/each}}
+  		{{/if}}
 	</dl>
 </div>
 {{/if}}
