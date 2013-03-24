@@ -9,10 +9,30 @@ define(['app','text!template/m/titles_verify.hbs','text!template/views/review_ti
 		},
 
 		pendingState: false,
+		postState: function(pass){
+			if (this.pendingState) return;
+			if (!this.title || !this.title.titleid) return;
+
+			var a = app.currentAPI();
+			if (a){
+				var self = this;
+				this.set('pendingState',true);
+				a.reviewTitle(this.title.titleid, pass, function(data,error){
+					self.set('pendingState',false);
+					if (error) {
+						app.showError('审核论文失败',error.message);
+					} else {
+						self.set('proccessed',true);
+					}
+				});
+			}
+		},
 		allow: function(){
+			this.postState(true);
 			return false;
 		},
 		deny: function(){
+			this.postState(false);
 			return false;
 		},
 

@@ -262,5 +262,12 @@ define(['app'],function(app){
 		getWaitingForReviewTitles: function(page, callback){
 			this.GET('theses/waiting_reviews.json',{page:page},callback);
 		},
+		reviewTitle: function(titleid, pass, callback){
+			var params = {
+				title: titleid,
+				pass: pass ? 1 : 2,
+			};
+			this.POST('theses/verify.json',params,callback);
+		}
 	});
 });
