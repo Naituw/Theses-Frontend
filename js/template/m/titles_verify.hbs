@@ -1,5 +1,42 @@
 {{#if Theses.milestoneManager.isTitleVerifyTime}}
-	论题审核
+	
+
+
+<div class="row-fluid">
+	<div class="span12">
+		<div class="widget-box">
+			<div class="widget-title">
+				<span class="icon"><i class="icon-eye-open"></i></span>
+				<h5>论题审核</h5>
+				<div class="buttons">
+					<a href="#" class="btn btn-mini" {{action refresh}}>
+						<i class="icon-refresh"></i> 刷新
+					</a>
+				</div>
+			</div>
+			<div class="widget-content nopadding">
+				{{#if loading}}
+					{{view Theses.LoadingView}}
+				{{else}}
+					{{#if titles.length}}
+						<div class="custom-list">
+							{{#each titles}}
+								{{view Theses.ReviewTitleCell}}
+								{{view Theses.ReviewTitleCell}}
+							{{/each}}
+						</div>
+					{{else}}
+						{{view Theses.PromptView text="暂无数据，点击刷新来重新获取待审核论题列表"}}
+					{{/if}}
+					{{view Theses.PagingView pageBinding="currentPage" hasNextBinding="hasMoreTitles"}}
+				{{/if}}
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
 {{else}}
 	{{view Theses.WrongTimeView name="论题审核"}}
 {{/if}}

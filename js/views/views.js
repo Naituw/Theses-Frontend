@@ -261,8 +261,35 @@ define(['app','views/tableview','views/teachercell'],function(app){
 		callback: function(){},
 	});
 	app.DropdownButton = Em.View.extend({
-		template: Em.Handlebars.compile(''),
+		template: Em.Handlebars.compile('<div class="btn-group"> \
+			<button class="btn dropdown-toggle" data-toggle="dropdown">\
+				{{view.title}} \
+				<span class="caret"></span>\
+			</button> \
+			<ul class="dropdown-menu"> \
+				{{#each view.items}}\
+					<li><a>{{title}}</a></li>\
+				{{/each}}\
+			</ul> </div>'),
 		title: null,
-		
+		items: Em.A(),
+
+		itemAtIndexPressed: function(index){
+			if (index >= this.items.get('length') || index < 0) return;
+			var item = this.items[index];
+			if (item.callback) item.callback();
+		},
+
+		didInsertElement: function(){
+			var self = this;
+			this.$().delegate('.dropdown-menu li','click',function(){
+				var index = $(this).parent().find('li').index($(this));
+				self.itemAtIndexPressed(index);
+			});
+			app.dbdb = this;
+		},
+		willDestroyElement: function(){
+			this.$().undelegate('.dropdown-menu li','click');
+		},
 	});
 });

@@ -1,0 +1,34 @@
+<div class="overview">
+	<span class="icon"><i {{bindAttr class="view.opened:icon-chevron-down:icon-chevron-right"}}></i></span>
+	<div class="title-name" title="基于云计算平台和REST架构的论文管理系统">基于云计算平台和REST架构的论文管理系统</div>
+		{{#if view.pendingState}}
+			{{view Theses.LoadingView}}
+		{{else}}
+			{{#if view.proccessed}}
+				<div class="btn-group">
+					<button class="btn disabled">已处理</button>
+				</div>
+			{{else}}
+				<div class="btn-group">
+					<button class="btn btn-success" {{action allow target="view"}}><i class="icon-white icon-ok"></i></button>
+					<button class="btn btn-danger" {{action deny target="view"}}><i class="icon-white icon-remove"></i></button>
+				</div>
+			{{/if}}
+		{{/if}}
+	
+</div>
+{{#if view.opened}}
+<div class="extended">
+	<dl class="dl-horizontal">
+  		<dt>Description / 论题说明</dt>
+  		<dd>基于云计算平台和REST架构的论文管理系统基于云计算平台和REST架构的论文管理系统基于云计算平台和REST架构的论文管理系统基于云计算平台和REST架构的论文管理系统</dd>
+  		<dt>Requirements / 要求</dt>
+  		<dd>基于云计算平台和REST架构的论文管理系统基于云计算平台和REST架构的论文管理系统基于云计算平台和REST架构的论文管理系统基于云计算平台和REST架构的论文管理系统</dd>
+  		<dt>Teacher / 指导教师</dt>
+  		<dd>0110100 苑俊英</dd>
+  		<dt>Students / 选题学生</dt>
+  		<dd>09201170 吴天</dd>
+  		<dd>09201161 邱波潮</dd>
+	</dl>
+</div>
+{{/if}}

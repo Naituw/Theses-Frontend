@@ -739,6 +739,9 @@ form.update-profile fieldset.reset-password input {
 form.update-profile fieldset.reset-password select {
   width: 200px;
 }
+form.update-profile fieldset.reset-password select[multiple="multiple"] {
+  opacity: 0.99; /* Hack for Windows XP Chrome scrollbar*/
+}
 form.update-profile fieldset.reset-password textarea {
   width: 186px;
   resize: none;
@@ -1465,4 +1468,62 @@ form.update-profile fieldset.reset-password textarea {
 .message-input-wrapper button {
   border-radius: 20px;
   width: 45px;
+}
+
+
+.review-title-cell {
+  position: relative;
+  border-bottom: 1px solid #ccc;
+}
+.review-title-cell:first-of-type {
+  border-top: 1px solid #ccc;
+}
+.review-title-cell .overview {
+  height: 50px;
+  overflow: hidden;
+}
+
+.review-title-cell .overview .icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 50px;
+  line-height: 50px;
+  width: 20px;
+  text-align: left;
+}
+.review-title-cell .overview .title-name {
+  padding-left: 20px;
+  padding-right: 85px;
+  line-height: 50px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+}
+
+.review-title-cell .overview .loading-section {
+  position: absolute;
+  right: 0px;
+  top: 10px;
+  width: 80px;
+  padding: 0;
+}
+.review-title-cell .overview .loading-section .loading-view {
+  height: 30px;
+}
+
+.review-title-cell .overview .btn-group {
+  position: absolute;
+  right: 0px;
+  top: 10px;
+  width: 80px;
+}
+.review-title-cell .overview .btn-group .disabled {
+  width: 80px;
+}
+
+.review-title-cell .extended {
+  border-top: 1px dotted #ddd;
 }
