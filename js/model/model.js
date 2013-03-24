@@ -216,11 +216,15 @@ define(["app"],function(app){
         }.property('gender'),
         departmentInfo : function(){
             var d = this.get('department');
-            if (!isNaN(d)){
-                return app.majorsManager.departmentWithID(d);
-            } else {
-                return d;
+            var id = d;
+            if (isNaN(d)){
+                id = d.deptid;
             }
+
+            if (id){
+                return app.majorsManager.departmentWithID(id);
+            }
+            return null;
         }.property('department','Theses.majorsManager.departments.@each'),
         majorInfo: function(){
             var mid = this.get('major_id');
