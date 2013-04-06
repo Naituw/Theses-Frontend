@@ -16,20 +16,25 @@
 				</div>
 			</div>
 			<div class="widget-content nopadding">
-				{{#if loading}}
-					{{view Theses.LoadingView}}
-				{{else}}
-					{{#if titles.length}}
+				{{#with Theses.myTitlesManager}}
+					{{#if mytitles.length}}
 						<div class="custom-list bordered-list">
-							{{#each titles}}
+							{{#each mytitles}}
 								{{view Theses.TitleCell title=this}}
 							{{/each}}
 						</div>
 					{{else}}
 						{{view Theses.PromptView text="暂无数据，点击刷新来重新获取论题列表"}}
 					{{/if}}
-					{{view Theses.PagingView pageBinding="currentPage" hasNextBinding="hasMoreTitles"}}
-				{{/if}}
+
+					{{#if loading}}
+						{{view Theses.LoadingView}}
+					{{else}}
+						{{#if hasMore}}
+							<div class="load-more-container"><button class="btn btn-large btn-block" {{action loadMore}}>加载更多</button></div>
+						{{/if}}
+					{{/if}}
+				{{/with}}
 			</div>
 		</div>
 	</div>

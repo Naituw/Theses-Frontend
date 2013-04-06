@@ -374,7 +374,6 @@ define(["app"],function(app){
         titleid: 0,
         authorid: 0,
         filename: null,
-        fileName: null,
         title: null,
         author: null,
         doctype: 0,

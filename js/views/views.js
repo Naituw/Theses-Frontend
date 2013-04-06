@@ -229,6 +229,7 @@ define(['app','views/tableview','views/teachercell'],function(app){
 			var api = app.currentAPI();
 			if (api){
 				this.set('pendingDownload',true);
+				var baseURL = api.get('_apiRoot');
 				api.downloadDocument(this.get('doc.docid'),function(data,error){
 					that.set('pendingDownload',false);
 					if (error){

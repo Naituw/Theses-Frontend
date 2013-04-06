@@ -1,5 +1,46 @@
 {{#if Theses.milestoneManager.isTitleChosenTime}}
-	论题选择
+	
+{{#if Theses.myTitlesManager.hasValidTitle}}
+	<div class="alert alert-block" style="margin-bottom:0px;margin-top:20px;">
+	  <h4>注意!</h4>
+	  每个同学仅可以选择一个论题，再进行选择将不会成功。请前往 <a href="/#/titles_mine">我的论题</a> 页面查看当前已选择论题的状态。
+	</div>
+{{/if}}
+
+<div class="row-fluid">
+	<div class="span12">
+		<div class="widget-box">
+			<div class="widget-title">
+				<span class="icon"><i class="icon-check"></i></span>
+				<h5>论题选择</h5>
+				<div class="buttons">
+					<a href="#" class="btn btn-mini" {{action refresh}}>
+						<i class="icon-refresh"></i> 刷新
+					</a>
+				</div>
+			</div>
+			<div class="widget-content nopadding">
+				{{#if loading}}
+					{{view Theses.LoadingView}}
+				{{else}}
+					{{#if titles.length}}
+						<div class="review-title-list">
+							{{#each titles}}
+								{{view Theses.ReviewTitleCell title=this}}
+							{{/each}}
+						</div>
+					{{else}}
+						{{view Theses.PromptView text="暂无数据，点击刷新来重新获取待选论题列表"}}
+					{{/if}}
+					{{view Theses.PagingView pageBinding="currentPage" hasNextBinding="hasMoreTitles"}}
+				{{/if}}
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
 {{else}}
 	{{view Theses.WrongTimeView name="选题"}}
 {{/if}}
