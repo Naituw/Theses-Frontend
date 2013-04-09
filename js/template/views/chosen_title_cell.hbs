@@ -1,0 +1,34 @@
+<div class="overview">
+	<span class="icon"><i {{bindAttr class="view.opened:icon-chevron-down:icon-chevron-right"}}></i></span>
+	<div class="title-name" {{bindAttr title="view.title.title"}}>{{view.title.title}}</div>
+		{{#if view.pendingState}}
+			{{view Theses.LoadingView}}
+		{{else}}
+			<div class="btn-group">
+				<button {{bindAttr class=":btn controller.pendingSelection:disabled"}} style="width:100%" {{action chooseButtonClicked target="view"}} title="选择">选择</button>
+			</div>
+		{{/if}}
+	
+</div>
+{{#if view.opened}}
+<div class="extended">
+	<dl>
+  		<dt>Description / 论题说明</dt>
+  		<dd>{{view.title.description}}</dd>
+  		<dt>Requirements / 要求</dt>
+  		<dd>{{view.requirements}}</dd>
+  		<dt>Majors / 可选专业</dt>
+  		<dd>{{view.avaliableMajors}}</dd>
+  		{{#if view.title.teacher}}
+  		<dt>Teacher / 指导教师</dt>
+  		<dd>{{view.title.teacher.displayName}}</dd>
+  		{{/if}}
+  		{{#if view.title.students.length}}
+  		<dt>Students / 选题学生</dt>
+  		{{#each view.title.students}}
+  			<dd>{{displayName}}</dd>
+  		{{/each}}
+  		{{/if}}
+	</dl>
+</div>
+{{/if}}

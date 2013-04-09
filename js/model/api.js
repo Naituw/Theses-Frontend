@@ -268,6 +268,12 @@ define(['app'],function(app){
 				pass: pass ? 1 : 2,
 			};
 			this.POST('theses/verify.json',params,callback);
-		}
+		},
+		getAvailableTitles: function(page, callback){
+			this.GET('theses/availables.json',{page:page},callback);
+		},
+		chooseTitle: function(titleid, callback){
+			this.POST('theses/choose.json',{titleid:titleid},callback);
+		},
 	});
 });

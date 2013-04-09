@@ -92,6 +92,11 @@ define(['app'],function(app){
 				this.reloadMyTitles();
 			}
 		},
+
+		addTitle: function(title){
+			var ts = this.get('mytitles');
+			ts.insertAt(0,title);
+		},
 	});
 	app.myTitlesManager = app.MyTitlesManager.create();
 });

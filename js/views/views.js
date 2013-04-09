@@ -130,7 +130,7 @@ define(['app','views/tableview','views/teachercell'],function(app){
 		classNames: ['row-fluid','title-cell'],
 		title: null,
 		template: Em.Handlebars.compile('<div class="span12">\
-			{{#with view.title}}<h4>{{title}}{{title}}</h4><span {{bindAttr class="view.stateClass"}}>{{stateName}}</span>{{/with}}</div>'),
+			{{#with view.title}}<h4>{{title}}</h4><span {{bindAttr class="view.stateClass"}}>{{stateName}}</span>{{/with}}</div>'),
 		click: function(){
 			app.router.transitionTo('titlesShow',this.title);
 		},
