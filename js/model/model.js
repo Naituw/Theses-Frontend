@@ -54,7 +54,7 @@ define(["app"],function(app){
                 if (t - item._lastAllocTime >  aliveTime){
                     removal.pushObject(item);
 
-                    if (app.enableLog ){
+                    if (app.enableLog){
                         console.log(item);
                     }               
                 }
@@ -66,6 +66,7 @@ define(["app"],function(app){
         uri: null,
         aliveTime: 0,
         find: function(id){
+            if (!id) return null;
             var key = this.primaryKey;
             var s = this.getStore();
             for (var i = s.length - 1; i >= 0; i--) {
