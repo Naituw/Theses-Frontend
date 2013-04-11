@@ -94,6 +94,21 @@ define(['app','text!template/m/titles_show.hbs'],function(app,tpl){
 		refreshUsers: function(ignoreError){
 			this.reloadUsers(false);
 		},
+		isCurrentUserOwnerTeacher: function(){
+			var cid = app.get('accountManager.currentAccount.user.userid');
+			var tid = this.get('content.teacherid');
+			if (cid != tid) return false;
+			return true;
+		}.property('Theses.accountManager.currentAccount.user.userid','content.teacherid'),
+		showsReviewTip: function(){
+			if (!this.get('isCurrentUserOwnerTeacher')) return false;
+			return app.get('milestoneManager.isTitleReviewTime');
+		}.property('isCurrentUserOwnerTeacher','Theses.milestoneManager.isTitleReviewTime'),
+		studentClicked: function(user, controller){
+			if (!controller.get('isCurrentUserOwnerTeacher')) return;
+			app.get('panelController').openOutlet('titleMark','论题打分','对 ' + user.username + ' 的 ' + controller.content.title);
+		},
+
 
 		documents: Em.A(),
 		currentDocPage: 1,

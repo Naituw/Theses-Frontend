@@ -50,6 +50,12 @@
 	</div>
 </div>
 
+{{#if showsReviewTip}}
+<div class="alert alert-info" style="margin-bottom:0;">
+  现在是论文评分时间，点击一个选题学生开始评分
+</div>
+{{/if}}
+
 <div class="row-fluid">
 	<div class="span12">
 		<div class="widget-box">
@@ -74,13 +80,11 @@
 						</div>
 						<div class="related-students">
 							<h5>选题学生</h5>
-							{{#if students.length}}
-								{{#each students}}
-									{{view Theses.UserCell user=this}}	
-								{{/each}}
+							{{#each students}}
+								{{view Theses.UserCell user=this clickAction=../studentClicked}}
 							{{else}}
 								{{view Theses.PromptView text="暂时没有学生选择此论题"}}
-							{{/if}}	
+							{{/each}}
 						</div>
 					</div>
 					{{else}}

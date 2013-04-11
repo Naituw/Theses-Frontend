@@ -19,6 +19,9 @@ define(['app','text!template/navbar.hbs'],function(app,tpl){
         },
         settings: function(){
             app.get('panelController').openOutlet('panelSettings','设置','更换密码');
-        }
+        },
+        message: function(){
+            app.messageController.open();
+        },
     });
 });

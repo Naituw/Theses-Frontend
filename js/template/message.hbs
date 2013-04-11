@@ -1,0 +1,162 @@
+{{#if opened}}
+<div {{bindAttr class=":overlay active:active:unactive"}} class="overlay active">
+    <div class="cover">
+
+    <div id="message-panel"> 
+        <div id="message-left">
+            <header class="navigation-bar">
+                <button id="new-message-button" type="button" class="btn">
+                    <i class="message-compose-icon"></i>
+                </button>
+            </header>
+            <div id="conversations">
+                <div class="conversation">
+                    <div class="conversation-new-flag"></div>
+                    <img class="conversation-avatar" src="http://tp2.sinaimg.cn/1642635773/50/5660473790/0">
+                    <div class="conversation-user">
+                        <div class="screenname">
+                            我们爱讲冷笑话
+                        </div>
+                        <div class="info">
+                            092011070 / 学生
+                        </div>
+                    </div>
+                </div>
+                <div class="conversation selected">
+                                        <div class="conversation-new-flag"></div>
+                    <img class="conversation-avatar" src="http://lwapi-picmin.stor.sinaapp.com/user_1_22.jpg">
+                    <div class="conversation-user">
+                        <div class="screenname">
+                            波潮
+                        </div>
+                        <div class="info">
+                            092011061 / 学生
+                        </div>
+                    </div>
+                </div>
+                <div class="conversation">
+                    <img class="conversation-avatar" src="https://trello-avatars.s3.amazonaws.com/816dea068ffaff64dd56ca0ae4cd4182/30.png">
+                    <div class="conversation-user">
+                        <div class="screenname">
+                            吴天
+                        </div>
+                        <div class="info">
+                            092011070 / 学生
+                        </div>
+                    </div>
+                </div>
+                <div class="conversation">
+                    <img class="conversation-avatar" src="https://trello-avatars.s3.amazonaws.com/816dea068ffaff64dd56ca0ae4cd4182/30.png">
+                    <div class="conversation-user">
+                        <div class="screenname">
+                            吴天
+                        </div>
+                        <div class="info">
+                            092011070 / 学生
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="message-right">
+            <header class="navigation-bar">
+                <img class="message-current-avatar" src="http://lwapi-picmin.stor.sinaapp.com/user_1_22.jpg">
+                <div class="message-current-info">
+                    波潮 / 092011070
+                </div>
+                <a class="close" id="message-panel-close" href="#" {{action close href="true"}}>&times;</a>
+            </header>
+            <div class="message-content-wrapper">
+                <div class="message-content">
+                    <div class="message-row message-row-left">
+                        <div class="message-row-inner">
+                            <img class="bubble-avatar" src="http://lwapi-picmin.stor.sinaapp.com/user_1_22.jpg" />
+                            <div class="bubble">
+                                在吗？
+                            </div>
+                        </div>
+                        <div class="time">09:21 04-11</div>
+                    </div>
+
+                    <div class="message-row message-row-right">
+                        <div class="message-row-inner">
+                        <img class="bubble-avatar" src="https://trello-avatars.s3.amazonaws.com/816dea068ffaff64dd56ca0ae4cd4182/30.png" />
+                        <div class="bubble bubble-left">
+                            在
+                        </div>
+                        </div>
+                        <div class="time">09:21 04-11</div>
+                    </div>
+
+                    <div class="message-row message-row-left">
+                        <div class="message-row-inner">
+                        <img class="bubble-avatar" src="http://lwapi-picmin.stor.sinaapp.com/user_1_22.jpg" />
+                        <div class="bubble">
+                            发送邮件通知的接口做好了，文档更新到了Gist上
+                        </div>
+                        </div>
+                        <div class="time">09:21 04-11</div>
+                    </div>
+
+                    <div class="message-row message-row-right">
+                        <div class="message-row-inner">
+                        <img class="bubble-avatar" src="https://trello-avatars.s3.amazonaws.com/816dea068ffaff64dd56ca0ae4cd4182/30.png" />
+                        <div class="bubble bubble-left">
+                            好的
+                        </div>
+                        </div>
+                        <div class="time">09:21 04-11</div>
+                    </div>
+                    <div class="message-row message-row-right">
+                        <div class="message-row-inner">
+                        <img class="bubble-avatar" src="https://trello-avatars.s3.amazonaws.com/816dea068ffaff64dd56ca0ae4cd4182/30.png" />
+                        <div class="bubble bubble-left">
+                            那个文档上传的接口有问题
+                        </div>
+                        </div>
+                        <div class="time">09:21 04-11</div>
+                    </div>
+                    <div class="message-row message-row-right">
+                        <div class="message-row-inner">
+                        <img class="bubble-avatar" src="https://trello-avatars.s3.amazonaws.com/816dea068ffaff64dd56ca0ae4cd4182/30.png" />
+                        <div class="bubble bubble-left">
+                            好像读不了上传文件的文件名
+                        </div>
+                        </div>
+                        <div class="time">09:21 04-11</div>
+                    </div>
+
+                    <div class="message-row message-row-left">
+                        <div class="message-row-inner">
+                        <img class="bubble-avatar" src="http://lwapi-picmin.stor.sinaapp.com/user_1_22.jpg" />
+                        <div class="bubble">
+                            好，我去看看
+                        </div>
+                        </div>
+                        <div class="time">09:21 04-11</div>
+                    </div>
+                </div>
+                <div class="message-input-wrapper">
+                    <div class="line-separator"></div>
+                    <input type="text" />
+                    <button class="btn btn-primary btn-mini">发送</button>
+                </div>
+            </div>
+
+        </div>
+<!--
+        
+            <header class="navigation-bar">
+                <button class="btn btn-link" href="#">
+                    <i class="icon-chevron-left"></i>
+                </button>
+                <h4>bobo</h4>
+                
+            </header>
+            
+        
+-->
+        </div>
+    </div>
+</div>
+{{/if}}

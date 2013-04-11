@@ -125,9 +125,9 @@ define(['app','text!template/m/title_chosen.hbs','text!template/views/chosen_tit
 
 		pendingSelection: false,
 		didSelectTitle: function(title){
-			app.myTitlesManager.addTitle(title);
 			app.showSuccess('选题成功','您已选择: ' + title.title);
 			app.router.transitionNext('root.main.titlesMine');
+			app.myTitlesManager.addTitle(title);
 		},
 	});
 });

@@ -164,6 +164,11 @@ define(['app','views/tableview','views/teachercell'],function(app){
 			if (dept) result.pushObject(dept.name);
 			return result.join('，');
 		}.property('user','user.departmentInfo','user.majorInfo'),
+		clickAction: null,
+		click: function(){
+			var a = this.clickAction;
+			if (a) a(this.user, this.get('controller'));
+		},
 		template: Em.Handlebars.compile('<img {{bindAttr src="view.user.avatarThumbURL"}} class="pull-left"/>\
 							<div class="user-info">\
 								<label>{{view.lineOne}}</label>\

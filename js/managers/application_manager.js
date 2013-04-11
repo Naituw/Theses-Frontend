@@ -47,17 +47,16 @@ define(['app','model/model'],function(app){
     });
     app.MilestoneManager = Em.Object.extend({
     	milestones: Em.A(),
-    	init: function(){
-    		var a = this.get('milestones');
-    		var m = app.Milestone;
-    		a.pushObject(m.alloc({name: "teacher_chosen",desc: "开始给教师添加资格",tip: "教师资格添加", viewLevel:30}));
-    		a.pushObject(m.alloc({name: "title_assign",desc: "出题开始时间", tip: "教师出题", viewLevel:30}));
-    		a.pushObject(m.alloc({name: "title_chosen",desc: "选题开始时间", tip: "学生选题"}));
-    		a.pushObject(m.alloc({name: "compose",desc: "选题截止", tip: "论文撰写"}));
-    		a.pushObject(m.alloc({name: "deadline",desc: "论文撰写截止", tip: "教师评审论文"}));
-    		a.pushObject(m.alloc({name: "oral_examination",desc: "答辩时间", tip: "答辩"}));
-    		this._super();
-    	},
+        initMilestones: function(){
+            var a = this.get('milestones');
+            var m = app.Milestone;
+            a.pushObject(m.alloc({name: "teacher_chosen",desc: "开始给教师添加资格",tip: "教师资格添加", viewLevel:30}));
+            a.pushObject(m.alloc({name: "title_assign",desc: "出题开始时间", tip: "教师出题", viewLevel:30}));
+            a.pushObject(m.alloc({name: "title_chosen",desc: "选题开始时间", tip: "学生选题"}));
+            a.pushObject(m.alloc({name: "compose",desc: "选题截止", tip: "论文撰写"}));
+            a.pushObject(m.alloc({name: "deadline",desc: "论文撰写截止", tip: "教师评审论文"}));
+            a.pushObject(m.alloc({name: "oral_examination",desc: "答辩时间", tip: "答辩"}));
+        },
         currentStoneIndex: function(){
             var stones = this.get('milestones');
             var now = (new Date()).getTime();
@@ -150,12 +149,16 @@ define(['app','model/model'],function(app){
         isTitleVerifyTime: function(){
             return this.get('isTitleAssignTime') || this.get('isTitleChosenTime');
         }.property('isTitleAssignTime','isTitleChosenTime'),
+        isTitleReviewTime: function(){
+            return this.get('currentStone.name') == 'deadline';
+        }.property('currentStone'),
     });
     app.milestoneManager = app.MilestoneManager.create();
 	app.applicationManager = Em.Object.create({
 		times: null,
 		running: false,
 		_run: function(){
+            app.milestoneManager.initMilestones();
             app.milestoneManager.reloadMilestones();
             app.majorsManager.reloadDepartments();
 		},
