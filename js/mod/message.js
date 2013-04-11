@@ -9,6 +9,8 @@ define(['app','text!template/message.hbs'],function(app,tpl){
         init: function(){
             app.messageController = this;
         },
+
+        // Open & Close
         opened: false,
         active: false,
         open: function(){
@@ -24,6 +26,14 @@ define(['app','text!template/message.hbs'],function(app,tpl){
             Em.run.later(function(){
                 that.set('opened',false);
             },400);
+        },
+
+        // New Conversation
+        newConversationMode: false,
+        pendingNewConversation: false,
+
+        newConversationButtonPressed: function(){
+            this.set('newConversationMode', true);
         },
 	});
 });

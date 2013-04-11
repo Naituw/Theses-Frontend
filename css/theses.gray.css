@@ -127,6 +127,10 @@ body {
 	#sidebar > ul {
 		background-color: #2a2f35;
 	}
+
+  .overlay .panel {
+    top: 0;
+  }
 }
 @media (min-width: 481px) and (max-width: 767px) {
 	#sidebar > ul ul:before {
@@ -260,6 +264,11 @@ body {
   }
   .overlay footer.overlay-footer span.secure {
     background-image: url("/assets/badges/secure@2x.png");
+  }
+}
+@media (max-width: 480px) {
+  .overlay .panel {
+    top: 0;
   }
 }
 @-moz-keyframes showPanel {

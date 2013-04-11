@@ -1599,7 +1599,7 @@ form {
 
 @media (max-width: 480px) {
 	#login {
-		width: 330px;
+		width: 320px;
 	}
 	#login-main {
 		padding-top: 20px;

@@ -7,7 +7,7 @@
 #message-panel {
   width: 600px;
   height: auto;
-  min-height: 300px;
+  min-height: 150px;
   position: fixed;
   top: 84px;
   bottom: 84px;
@@ -150,7 +150,7 @@
 }
 
 .conversation:hover {
-  background: #FFFDF7;
+  background: #EDFBFF;
   cursor: pointer;
 }
 
@@ -315,7 +315,7 @@
 .message-content .bubble{
   position: relative; 
   margin-top: 3px;
-  max-width: 185px;
+  max-width: 260px;
   clear: both;
   text-shadow: 0 1px 0 rgba(255,255,255,0.6);
   color: #000;
@@ -409,6 +409,58 @@
 .message-input-wrapper button {
   border-radius: 20px;
   width: 45px;
+  height: 26px;
+}
+
+/* --------------------------------------------------------
+ *  New Conversation
+ * --------------------------------------------------------
+ */
+
+#new-conversation {
+  position: absolute;
+  width: 180px;
+  top: 0;
+  left: 50%;
+  bottom: 0;
+  height: auto;
+  margin-left: -90px;
+  padding-top: 94px;
+  overflow: scroll;
+}
+#new-conversation::-webkit-scrollbar {
+  display: none;
+}
+
+.new-conversation-tip {
+  width: 150px;
+  height: 30px;
+  padding-top: 96px;
+  margin: 0px auto 10px;
+  background: url(../img/new-conversation.png) no-repeat top center;
+  text-align: center;
+
+  font-size: 16px;
+  font-weight: 700;
+
+  opacity: 0.4;
+}
+
+.new-conversation-target {
+  padding-top: 20px;
+}
+.new-conversation-target input {
+  width: 100px;
+  float: left;
+}
+.new-conversation-target button {
+  float: right;
+}
+.new-conversation-target .loading-section {
+  padding-top: 0;
+}
+.new-conversation-target .loading-view {
+  height: 20px;
 }
 
 
@@ -438,6 +490,9 @@
 
   .message-content .message-row .bubble-avatar {
     display: none;
+  }
+  .message-content .bubble {
+    max-width: 185px;
   }
   .message-content .message-row-left .bubble {
     margin-left: 0px;

@@ -5,7 +5,7 @@
     <div id="message-panel"> 
         <div id="message-left">
             <header class="navigation-bar">
-                <button id="new-message-button" type="button" class="btn">
+                <button id="new-message-button" type="button" class="btn" {{action newConversationButtonPressed}}>
                     <i class="message-compose-icon"></i>
                 </button>
             </header>
@@ -66,6 +66,21 @@
                 </div>
                 <a class="close" id="message-panel-close" href="#" {{action close href="true"}}>&times;</a>
             </header>
+            {{#if newConversationMode}}
+                <div id="new-conversation">
+                    <div class="new-conversation-tip">
+                        新对话
+                    </div>
+                    <div class="new-conversation-target">
+                        {{#if pendingNewConversation}}
+                            {{view Theses.LoadingView}}
+                        {{else}}
+                            <input type="text" placeholder="对方的名字"/>
+                            <button class="btn btn-primary">开始</button>
+                        {{/if}}
+                    </div>
+                </div>
+            {{else}}
             <div class="message-content-wrapper">
                 <div class="message-content">
                     <div class="message-row message-row-left">
@@ -142,7 +157,7 @@
                     <button class="btn btn-primary btn-mini">发送</button>
                 </div>
             </div>
-
+            {{/if}}
         </div>
 <!--
         
