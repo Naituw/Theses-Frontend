@@ -23,7 +23,7 @@ Theses论文管理系统的前端，基于Ember.js实现。
 * <del>出题</del>
 * <del>审题</del>
 * <del>上传文档</del>
-* 选题
+* <del>选题</del>
 * 打分
 * 私信交流
 * 邮件通知
