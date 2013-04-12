@@ -1,0 +1,16 @@
+<div {{bindAttr class=":conversation view.selected:selected"}}>
+    {{#with view.conversation}}
+        {{#if newFlag}}
+            <div class="conversation-new-flag"></div>
+        {{/if}}
+        <img class="conversation-avatar" {{bindAttr src="with_user.avatar_thumb"}}>
+        <div class="conversation-user">
+            <div class="screenname">
+                {{screenname}}
+            </div>
+            <div class="info">
+                {{info}}
+            </div>
+        </div>
+    {{/with}}
+</div>

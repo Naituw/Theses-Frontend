@@ -22,7 +22,7 @@ define(["app"],function(app){
 
             var c = this.find(o.get(this.primaryKey));
             if (c) {
-                c.setProperties(o);
+                if (c !== o) c.setProperties(o);
                 c.set('loading',false);
             }
             else this.getStore().pushObject(o);

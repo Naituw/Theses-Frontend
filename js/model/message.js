@@ -37,13 +37,13 @@ define(['app','model/model'],function(app){
         }.property('this.conversationid'),
         setUnknownProperty: function(key,value){
     		if (key == "lastViewTime"){
-    			localStorage[this.localStorageKey()] = value;
+    			localStorage[this.get('localStorageKey')] = value;
     		}
     		return this._super(key,value);
     	},
     	unknownProperty: function(key){
     		if (key == "lastViewTime"){
-    			return localStorage[this.localStorageKey()];
+    			return localStorage[this.get('localStorageKey')];
     		}
     		return this._super(key);
     	},
@@ -51,6 +51,6 @@ define(['app','model/model'],function(app){
 	app.Conversation.reopenClass({
         primaryKey: "conversationid",
         uri: "conversation/single.json",
-        aliveTime: 15 * 60 * 1000,
+        aliveTime: 0,
     });
 });

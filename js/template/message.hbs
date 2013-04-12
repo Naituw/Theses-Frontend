@@ -10,60 +10,19 @@
                 </button>
             </header>
             <div id="conversations">
-                <div class="conversation">
-                    <div class="conversation-new-flag"></div>
-                    <img class="conversation-avatar" src="http://tp2.sinaimg.cn/1642635773/50/5660473790/0">
-                    <div class="conversation-user">
-                        <div class="screenname">
-                            我们爱讲冷笑话
-                        </div>
-                        <div class="info">
-                            092011070 / 学生
-                        </div>
-                    </div>
-                </div>
-                <div class="conversation selected">
-                                        <div class="conversation-new-flag"></div>
-                    <img class="conversation-avatar" src="http://lwapi-picmin.stor.sinaapp.com/user_1_22.jpg">
-                    <div class="conversation-user">
-                        <div class="screenname">
-                            波潮
-                        </div>
-                        <div class="info">
-                            092011061 / 学生
-                        </div>
-                    </div>
-                </div>
-                <div class="conversation">
-                    <img class="conversation-avatar" src="https://trello-avatars.s3.amazonaws.com/816dea068ffaff64dd56ca0ae4cd4182/30.png">
-                    <div class="conversation-user">
-                        <div class="screenname">
-                            吴天
-                        </div>
-                        <div class="info">
-                            092011070 / 学生
-                        </div>
-                    </div>
-                </div>
-                <div class="conversation">
-                    <img class="conversation-avatar" src="https://trello-avatars.s3.amazonaws.com/816dea068ffaff64dd56ca0ae4cd4182/30.png">
-                    <div class="conversation-user">
-                        <div class="screenname">
-                            吴天
-                        </div>
-                        <div class="info">
-                            092011070 / 学生
-                        </div>
-                    </div>
-                </div>
+                {{#each Theses.messagesManager.conversations}}
+                    {{view Theses.ConversationRow conversation=this}}
+                {{/each}}
             </div>
         </div>
         <div id="message-right">
             <header class="navigation-bar">
-                <img class="message-current-avatar" src="http://lwapi-picmin.stor.sinaapp.com/user_1_22.jpg">
-                <div class="message-current-info">
-                    波潮 / 092011070
-                </div>
+                {{#if selectedConversation}}
+                    <img class="message-current-avatar" {{bindAttr src="selectedConversation.with_user.avatar_thumb"}}>
+                    <div class="message-current-info">
+                        {{selectedConversation.with_user.screenname}} / {{selectedConversation.with_user.username}}
+                    </div>
+                {{/if}}
                 <a class="close" id="message-panel-close" href="#" {{action close href="true"}}>&times;</a>
             </header>
             {{#if newConversationMode}}

@@ -275,5 +275,10 @@ define(['app'],function(app){
 		chooseTitle: function(titleid, callback){
 			this.POST('theses/choose.json',{titleid:titleid},callback);
 		},
+		conversationList: function(laterThan,callback){
+			params = {};
+			if (laterThan) params.later_than = laterThan;
+			this.GET('conversations/list.json',params,callback);
+		},
 	});
 });
