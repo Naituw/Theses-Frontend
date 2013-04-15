@@ -221,6 +221,25 @@
   color: #fff;
 }
 
+.more-conversations {
+    background: #fff;
+    border-bottom: 1px solid #ccc;
+    height: 70px;
+}
+.more-conversations .loading-section {
+
+}
+.more-conversations .loading-view {
+
+}
+.more-conversations .load-more-button {
+  text-align: center;
+  display: block;
+  height: 100%;
+  line-height: 70px;
+  cursor: pointer;
+}
+
 /* --------------------------------------------------------
  *  Message Right
  * --------------------------------------------------------
