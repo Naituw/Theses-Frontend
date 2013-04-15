@@ -100,7 +100,7 @@ define(['app','text!template/m/titles_show.hbs'],function(app,tpl){
 								var stu = app.UserSelection.create();
 								stu.set('user',user);
 
-								var sel = selections[2];//selections[user.userid];
+								var sel = selections[user.userid];
 								if (sel) stu.set('selection',sel);
 
 								students.pushObject(stu);
