@@ -12,7 +12,6 @@ define(['app','views/tableview','views/teachercell'],function(app){
 	app.AsyncValidation = Em.Mixin.create({
 		required: true,
 		valid: function(){
-			console.log(this.get('controller'));
 			if (this.get('focused')){
 				this.set('code','');
 				this.set('message','');
@@ -82,6 +81,19 @@ define(['app','views/tableview','views/teachercell'],function(app){
 		inputClassNames: ['span12'],
 		validate: function(value,next){
 			app.validator.username(value,function(pass,desc){
+				var code = pass ? "success" : "error";
+				next(code, desc);
+			});
+		},
+	});
+
+	app.ScoreField = app.TextField.extend({
+		placeholder: 'Score',
+		title: '分数',
+		inputClassNames: ['span12'],
+		type: 'number',
+		validate: function(value,next){
+			app.validator.score(value,function(pass,desc){
 				var code = pass ? "success" : "error";
 				next(code, desc);
 			});
@@ -164,15 +176,40 @@ define(['app','views/tableview','views/teachercell'],function(app){
 			if (dept) result.pushObject(dept.name);
 			return result.join('，');
 		}.property('user','user.departmentInfo','user.majorInfo'),
+		template: Em.Handlebars.compile('<img {{bindAttr src="view.user.avatarThumbURL"}} class="pull-left"/>\
+							<div class="user-info">\
+								<label>{{view.lineOne}}</label>\
+								<label>{{view.lineTwo}}</label>\
+							</div>'),
+	});
+	app.UserSelectionCell = app.UserCell.extend({
+		selection: null,
+		hasComment: function(){
+			var comment = this.get('selection.comment');
+			if (!comment) return false;
+			return (comment.length > 0);
+		}.property('selection.comment'),
+		articleScoreClass: function(){
+			if (this.get('selection.articleScore') >= 60) return 'text-success';
+			return 'text-error';
+		}.property('selection.articleScore'),
+		oralScoreClass: function(){
+			if (this.get('selection.oralScore') >= 60) return 'text-success';
+			return 'text-error';
+		}.property('selection.oralScore'),
+
 		clickAction: null,
 		click: function(){
 			var a = this.clickAction;
-			if (a) a(this.user, this.get('controller'));
+			if (a) a(this.user, this.selection, this.get('controller'));
 		},
 		template: Em.Handlebars.compile('<img {{bindAttr src="view.user.avatarThumbURL"}} class="pull-left"/>\
 							<div class="user-info">\
 								<label>{{view.lineOne}}</label>\
 								<label>{{view.lineTwo}}</label>\
+								{{#if view.selection.articleScore}}<label {{bindAttr class="view.articleScoreClass"}}>论文得分：{{view.selection.articleScore}}</label>{{/if}}\
+								{{#if view.selection.oralScore}}<label {{bindAttr class="view.oralScoreClass"}}>答辩得分：{{view.selection.oralScore}}</label>{{/if}}\
+								{{#if view.hasComment}}<label class="text-info">导师评价：{{view.selection.comment}}</label>{{/if}}\
 							</div>'),
 	});
 
@@ -222,7 +259,7 @@ define(['app','views/tableview','views/teachercell'],function(app){
 								c.documentDidDelete(that.doc);
 							}
 						}
-					})
+					});
 				}
 			});
 		},

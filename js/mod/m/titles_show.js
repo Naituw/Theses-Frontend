@@ -77,14 +77,33 @@ define(['app','text!template/m/titles_show.hbs'],function(app,tpl){
 					}else {
 						var t = data.teacher;
 						var s = data.student;
+						var sels = data.selections;
 						var students = that.students;
 						students.clear();
 
 						if (t) that.set('teacher',app.User.alloc(t));
+
+						var selections = {};
+						if (sels && sels.length){
+							for (var i = sels.length - 1; i >= 0; i--) {
+								var raw = sels[i];
+								var sel = app.Selection.alloc(raw);
+								var sid = sel.studentid;
+								if (sid) selections[sid] = sel;
+							};
+						}
+
 						if (s && s.length){
 							for (var i = 0; i < s.length; i++) {
 								var raw = s[i];
-								students.pushObject(app.User.alloc(raw));
+								var user = app.User.alloc(raw);
+								var stu = app.UserSelection.create();
+								stu.set('user',user);
+
+								var sel = selections[2];//selections[user.userid];
+								if (sel) stu.set('selection',sel);
+
+								students.pushObject(stu);
 							};
 						}
 					}
@@ -104,10 +123,26 @@ define(['app','text!template/m/titles_show.hbs'],function(app,tpl){
 			if (!this.get('isCurrentUserOwnerTeacher')) return false;
 			return app.get('milestoneManager.isTitleReviewTime');
 		}.property('isCurrentUserOwnerTeacher','Theses.milestoneManager.isTitleReviewTime'),
-		studentClicked: function(user, controller){
-			if (!controller.get('isCurrentUserOwnerTeacher')) return;
-			app.get('panelController').openOutlet('titleMark','论题打分','对 ' + user.username + ' 的 ' + controller.content.title);
+		studentWithUserID: function(userid){
+			for (var i = this.students.length - 1; i >= 0; i--) {
+				var student = this.students[i];
+				if (student.user.userid == userid) return student;
+			};
+			return null;
 		},
+		studentClicked: function(user, selection, controller){
+			if (!controller.get('isCurrentUserOwnerTeacher')) return;
+			var stu = controller.studentWithUserID(user.userid);
+			if (!stu.selection){
+				var sel = app.Selection.create();
+				sel.selectionid = 0;
+				sel.studentid = stu.user.userid;
+				sel.titleid = controller.content.titleid;
+				stu.selection = sel;
+			}
+			app.get('panelController').openOutlet('titleMark','论题打分','对 ' + user.username + ' 的 ' + controller.content.title, stu);
+		},
+		_ignoreChange: false,
 
 
 		documents: Em.A(),

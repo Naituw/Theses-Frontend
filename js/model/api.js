@@ -280,5 +280,8 @@ define(['app'],function(app){
 			if (laterThan) params.later_than = laterThan;
 			this.GET('conversations/list.json',params,callback);
 		},
+		markTitle: function(params, callback){
+			this.POST('theses/mark.json',params,callback);
+		},
 	});
 });

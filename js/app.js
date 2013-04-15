@@ -10,7 +10,7 @@ define(["jquery",'text!template/alert.hbs',"plugins","handlebars", "ember", "boo
 		rootElement: '#theses-app',
 		storeNamespace: 'theses-emberjs',
 		autoinit: false,
-		apiRoot: 'http://lwapi.sinaapp.com/',
+		apiRoot: 'https://lwapi.sinaapp.com/',
 		loadingView: $('#loading'),
 		loadingCount: 0,
 		enableLog: true,

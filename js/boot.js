@@ -14,7 +14,7 @@ require.config({
 		'plugins' : ['jquery','bootstrap'],
 		'app': ['ember','bootstrap','plugins'],
 	},
-	waitSeconds: 60,
+	waitSeconds: 0,
 	urlArgs: "bust=" + (new Date()).getTime(),
 });
 

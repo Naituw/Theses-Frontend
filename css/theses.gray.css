@@ -1054,19 +1054,23 @@ form.update-profile fieldset.reset-password textarea {
 }
 
 .user-cell {
-  height: 70px;
+  height: auto;
+  min-height: 70px;
   border-top: 1px dotted #ccc;
+  position: relative;
 }
 
 .user-cell img {
   width: 50px;
   height: 50px;
-  padding-top: 10px;
-  padding-right: 10px;
+  position: absolute;
+  top: 10px;
+  left: 0px;
 }
 
 .user-cell .user-info {
   padding: 10px;
+  padding-left: 60px;
   padding-top: 12px;
 }
 .user-cell .user-info label {
@@ -1075,7 +1079,10 @@ form.update-profile fieldset.reset-password textarea {
   text-overflow: ellipsis;
   -o-text-overflow: ellipsis;
 }
-
+.user-cell .user-info label.score {
+  color: green;
+  white-space: pre-wrap;
+}
 
 
 

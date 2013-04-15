@@ -81,7 +81,7 @@
 						<div class="related-students">
 							<h5>选题学生</h5>
 							{{#each students}}
-								{{view Theses.UserCell user=this clickAction=../studentClicked}}
+								{{view Theses.UserSelectionCell user=this.user selection=this.selection clickAction=../studentClicked}}
 							{{else}}
 								{{view Theses.PromptView text="暂时没有学生选择此论题"}}
 							{{/each}}

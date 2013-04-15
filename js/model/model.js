@@ -370,6 +370,25 @@ define(["app"],function(app){
         aliveTime: 15 * 60 * 1000,
     });
 
+    app.Selection = app.Model.extend({
+        selectionid: 0,
+        studentid: 0,
+        titleid: 0,
+        articleScore: 0,
+        oralScore: 0,
+        comment: null,
+        createAt: null,
+    });
+    app.Selection.reopenClass({
+        primaryKey: "selectionid",
+        aliveTime: 1, // Out Date Immediately
+    });
+
+    app.UserSelection = Em.Object.extend({ // Don't need app.Model features, just a bean class.
+        user: null,
+        selection: null,
+    });
+
     app.Document = app.Model.extend({
         docid: 0,
         titleid: 0,

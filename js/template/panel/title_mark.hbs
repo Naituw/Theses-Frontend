@@ -3,27 +3,17 @@
                         <div class="yield" style="padding-top:20px">
                             <fieldset class="reset-password">
                                 <div class="control-group">
-                                    <div class="control-label">
-                                        <label>论文分数：</label>
-                                    </div>
-                                    <div class="controls">
-                                        <input type="text">
-                                    </div>
+                                    {{view Theses.ScoreField valueBinding="articleScore" title="论文分数："}}
                                 </div>
                                 <div class="control-group">
-                                    <div class="control-label">
-                                        <label>答辩分数：</label>
-                                    </div>
-                                    <div class="controls">
-                                        <input type="text">
-                                    </div>
+                                    {{view Theses.ScoreField valueBinding="oralScore" title="答辩分数："}}
                                 </div>
                                 <div class="control-group">
                                     <div class="control-label">
                                         <label>评价：</label>
                                     </div>
                                     <div class="controls">
-                                        <textarea type="text" style="height: 109px; float: right; width: 187px; margin: 0px 0px 10px;"></textarea>
+                                        {{view Ember.TextArea style="height: 109px; float: right; width: 187px; margin: 0px 0px 10px;" valueBinding="comment"}}
                                     </div>
                                 </div>
                             </fieldset>

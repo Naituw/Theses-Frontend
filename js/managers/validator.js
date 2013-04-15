@@ -25,5 +25,11 @@ define(['app'],function(app){
 			else if (!regex.test(value)) callback(false,"请输入合法的Email地址");
 			else callback(true,"");
 		},
+		score: function(value,callback){
+			var num = parseInt(value);
+			if (value.length > 0 && !$.isNumeric(value)) callback(false, "分数只能是数字");
+			else if (num <= 0 || num > 100) callback(false, "请填入1到100的整数或留空");
+			else callback(true, '');
+		},
 	});
 });
