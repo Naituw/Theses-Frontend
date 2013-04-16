@@ -19,6 +19,11 @@ body {
 
 }
 
+.label-mute {
+  background: #777;
+  color: #ddd;
+}
+
 #search input[type=text], #search button {
 	background-color: #222222;
 }

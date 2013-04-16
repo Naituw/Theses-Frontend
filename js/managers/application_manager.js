@@ -161,6 +161,7 @@ define(['app','model/model'],function(app){
             app.milestoneManager.initMilestones();
             app.milestoneManager.reloadMilestones();
             app.majorsManager.reloadDepartments();
+            app.messagesManager.initiate();
 		},
 		run: function(){
 			if(this.get('running')) return;

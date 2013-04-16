@@ -10,7 +10,7 @@
             	<a href="#" {{action message href=true}}>
             		<i class="icon icon-envelope"></i> 
             		<span class="text">消息</span> 
-            		<span class="label label-important">5</span> 
+            		<span {{bindAttr class=":label Theses.unreadManager.unreadCount:label-important:label-mute"}}>{{Theses.unreadManager.unreadCount}}</span> 
             	</a>
             </li>
             <li>

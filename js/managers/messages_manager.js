@@ -1,8 +1,18 @@
-define(['app','model/message'],function(app){
+define(['app','model/message','managers/unread_manager'],function(app){
 	app.MessagesManager = Em.Object.extend({
 		conversations: Em.A(),
 		messages: {},
 		loadingMoreConversations: false,
+
+		initiate: function(){
+			var that = this;
+			this.loadNewConversations();
+
+			app.unreadManager.addIncreaseObserver(function(){
+				this.loadNewConversations();
+			});
+			app.unreadManager.startPoll();
+		},
 
 		oldestConversation: function(){
 			return this.conversations.get('lastObject');
@@ -52,38 +62,58 @@ define(['app','model/message'],function(app){
 				var c = news[i];
 				var exist = this.conversationWithID(c.conversationid);
 				if (exist){
-					console.assert((exist._lastAllocTime == c._lastAllocTime),'conversation last alloc time not equal');
-				} else {
-					this.insertConversation(c);
+					console.assert((exist._lastAllocTime == c._lastAllocTime),
+						'conversation last alloc time not equal');
+					this.conversations.removeObject(exist);
+					c = exist;
 				}
+				this.insertConversation(c);
 			};
 		},
-		loadMoreConversations: function(callback){
+		_loadConversations: function(laterThan, callback){
 			var a = app.currentAPI();
-			if (a){
-				var oldest = this.oldestConversation();
-				var laterThan = 0;
-				if (oldest && oldest.last_update) laterThan = oldest.last_update;
-				var that = this;
-				that.set('loadingMoreConversations',true);
-				a.conversationList(laterThan,function(data,error){
-					that.set('loadingMoreConversations',false);
-					if (error){
-					} else {
-						var news = Em.A();
-						for (var i = 0; i < data.length; i++) {
-							var raw = data[i];
-							news.pushObject(app.Conversation.alloc(raw));
-						};
-						that.updateConversationList(news);
-					}
-					if (callback) callback(data,error);
-				});
-			}
+			if (!a) return;
+
+			var that = this;
+			that.set('loadingMoreConversations',true);
+			a.conversationList(laterThan,function(data,error){
+				that.set('loadingMoreConversations',false);
+				if (error){
+				} else {
+					var news = Em.A();
+					for (var i = 0; i < data.length; i++) {
+						var raw = data[i];
+						news.pushObject(app.Conversation.alloc(raw));
+					};
+					that.updateConversationList(news);
+				}
+				if (callback) callback(data,error);
+			});
 		},
-		pollConversations: function(){
-			
-		}
+		loadNewConversations: function(callback){
+			this._loadConversations(0, function(data, error){
+				if (callback) callback(data, error);
+			});
+		},
+		loadMoreConversations: function(callback){
+			var oldest = this.oldestConversation();
+			var laterThan = 0;
+			if (oldest && oldest.last_update) laterThan = oldest.last_update;
+
+			this._loadConversations(laterThan, function(data, error){
+				if (callback) callback(data, error);
+			});
+		},
+
+		// message management
+		messagesForConversationID: function(cid){
+			var ms = this.messages[cid + ''];
+			if (!ms) {
+				ms = Em.A();
+				this.messages[cid + ''] = ms;
+			}
+			return ms;
+		},
 	});
 	app.messagesManager = app.MessagesManager.create();
 });
