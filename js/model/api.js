@@ -2,6 +2,8 @@ define(['app'],function(app){
 	app.API = Em.Object.extend({
 		authenticateWithAccount: null,
 		apiRoot: null,
+		invisible: false,
+
 		_apiRoot: function(){
 			if (this.apiRoot) return this.apiRoot;
 			if (this.authenticateWithAccount) return this.authenticateWithAccount.apiRoot;
@@ -19,8 +21,9 @@ define(['app'],function(app){
 		request: function(path, method, parameters, callback, file){
 			if (!this.authenticateWithAccount) return;
 			var url = this.get("_apiRoot") + path;
+			var invisible = this.invisible;
 
-			app.startLoading();
+			if (!invisible) app.startLoading();
 
 			var successCallback = function(data, textStatus, jqXHR){
 				if (callback) {
@@ -54,7 +57,7 @@ define(['app'],function(app){
 			};
 
 			var completeCallback = function(jqXHR, textStatus){
-				app.stopLoading();
+				if (!invisible) app.stopLoading();
 			};
 
 			var headers = {
@@ -282,6 +285,9 @@ define(['app'],function(app){
 		},
 		markTitle: function(params, callback){
 			this.POST('theses/mark.json',params,callback);
+		},
+		getUnread: function(callback){
+			this.GET('unread/get.json',null,callback);
 		},
 	});
 });
