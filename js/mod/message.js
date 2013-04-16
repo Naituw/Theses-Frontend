@@ -59,10 +59,10 @@ define(['app','text!template/message.hbs','text!template/views/conversation_row.
         loadMoreConversations: function(){
             app.messagesManager.loadMoreConversations(function(data,error){
                 if (error){
-                    app.showError('加载更多话题失败',error.message);
+                    app.showError('加载更多对话失败',error.message);
                 } else {
                     if (!data.length){
-                        app.showSuccess('没有更多话题了',null);
+                        app.showSuccess('没有更多对话了',null);
                     }
                 }
             });
@@ -94,5 +94,8 @@ define(['app','text!template/message.hbs','text!template/views/conversation_row.
                 return;
             }
         },
+
+        // Message Management
+        
 	});
 });
