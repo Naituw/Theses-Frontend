@@ -289,5 +289,19 @@ define(['app'],function(app){
 		getUnread: function(callback){
 			this.GET('unread/get.json',null,callback);
 		},
+		getMessages: function(params, callback){
+			this.GET('messages/list.json',params,callback);
+		},
+		postMessage: function(content, userid, callback){
+			if (!content || !content.length) return;
+			if (!userid) return;
+
+			var params = {
+				to_user_id: userid,
+				content: content,
+			};
+
+			this.POST('message/create.json', params, callback);
+		},
 	});
 });

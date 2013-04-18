@@ -76,8 +76,6 @@ define(['app'],function(app){
 					this.nounreadTimes = 0;
 				}
 
-				console.log(that);
-
 				if (that.pollStarted) {
 					var interval = that.nextPullInterval() * 1000;
 					Em.run.later(that, that.poll, interval);

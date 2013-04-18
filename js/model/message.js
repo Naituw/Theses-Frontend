@@ -53,4 +53,29 @@ define(['app','model/model'],function(app){
         uri: "conversation/single.json",
         aliveTime: 0,
     });
+
+    app.Message = app.Model.extend({
+        messageid: 0,
+        conversationid: 0,
+        userid: 0,
+        create_at: 0, // milliseconds
+        content: '',
+
+        sending: false,
+        failed: false,
+
+        isCurrentUser: function(){
+            var currentid = app.get('accountManager.currentAccount.user.userid');
+            return this.userid == currentid;
+        }.property('userid','Theses.accountManager.currentAccount.user.userid'),
+        dateString: function(){
+            if (this.sending) return '发送中';
+            if (!this.create_at) return '';
+            return (new Date(this.create_at)).format('hh:mm:ss MM-dd');
+        }.property('create_at','sending'),
+    });
+    app.Message.reopenClass({
+        primaryKey: "messageid",
+        aliveTime: 1,
+    });
 });

@@ -1058,3 +1058,9 @@ Date.prototype.format = function(format) //author: meizz
         ("00"+ o[k]).substr((""+ o[k]).length)); 
   return format; 
 }
+
+if(!String.prototype.trim) {  
+  String.prototype.trim = function () {  
+    return this.replace(/^\s+|\s+$/g,'');  
+  };  
+}
