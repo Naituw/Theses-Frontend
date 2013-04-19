@@ -125,6 +125,8 @@ define(['app','model/account'],function(app){
 			var account = this.get('currentAccount');
 			if (!account) return;
 
+			var that = this;
+
 			account.api().updatePassword(oldpsw, newpsw, function(data, error){
 				if (error) {
 					app.showError('密码修改失败',error.message);
@@ -132,7 +134,7 @@ define(['app','model/account'],function(app){
 					app.showSuccess('成功','密码已修改成功');
 					var token = account.tokenWithPassword(newpsw);
 					data.autoToken = token;
-					this.updateCurrentAccountWithData(data);
+					that.updateCurrentAccountWithData(data);
 				}
 				if(callback){
 					callback(error == null);

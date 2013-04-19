@@ -4,8 +4,9 @@ define(['app','model/model','model/api'],function(app){
 		password: null,
 		authToken: null,
 		tokenWithPassword: function(psw){
-			if (!this.get('username')) return null;
-			return 'Basic ' + $.base64.encode(this.get('username') + ':' + psw);
+			var username = this.get('username') || this.get('user.username');
+			if (!username) return null;
+			return 'Basic ' + $.base64.encode(username + ':' + psw);
 		},
 		user: null,
 		apiRoot: null,
