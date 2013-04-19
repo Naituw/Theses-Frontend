@@ -12,5 +12,19 @@
 	<div id="theses-app"></div>
 	<div id="loading">加载中...</div>
 </body>
-<script data-main="js/main" src="js/require.js" async="true"></script>
 </html>
+
+<script type="text/javascript">
+	if (!('-webkit-transition' in document.documentElement.style)){
+		var baseURL = location.protocol + "//" + location.hostname + (location.port && ":" + location.port) + "/";
+		window.location.replace(baseURL + 'browser.html');
+	}else {
+		var s = document.createElement("script");
+    	s.setAttribute('data-main','js/main');
+    	s.setAttribute('src','js/require.js');
+    	s.setAttribute('async','true');
+
+    	var html = document.getElementsByTagName('html')[0];
+    	html.appendChild(s);
+	}
+</script>
