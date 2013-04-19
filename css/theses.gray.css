@@ -19,6 +19,10 @@ body {
 
 }
 
+.no-margin {
+  margin: 0;
+}
+
 .label-mute {
   background: #777;
   color: #ddd;

@@ -123,10 +123,10 @@ define(['app','text!template/message.hbs','text!template/views/conversation_row.
 
         // Message Management
         selectedMessages: function(){
-            var id = this.get('selectedConversationID');
-            if (!id) return null;
-            return app.messagesManager.messagesForConversationID(id);
-        }.property('selectedConversationID'),
+            var c = this.get('selectedConversation');
+            if (!c || !c.conversationid) return null;
+            return app.messagesManager.messagesForConversationID(c.conversationid);
+        }.property('selectedConversation'),
         selectedConversationUpdated: function(){
             if (this.get('selectedConversation.last_update')){
                 this.loadMoreMessagesForCurrentConversation();

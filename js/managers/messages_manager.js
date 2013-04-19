@@ -191,10 +191,12 @@ define(['app','model/message','managers/unread_manager'],function(app){
 		loadNewerMessagesForConversationID: function(cid){
 			if (!cid) return;
 			var ms = this.messagesForConversationID(cid);
+			var c = this.conversationWithID(cid);
 			var last = ms.get('lastObject');
 			var params = {};
 			if (last){
 				params['since_id'] = last.messageid;
+				if (c && c.last_update <= last.create_at) return;
 			}
 			var that = this;
 			this.loadMessages(cid,params,function(data,error){

@@ -66,6 +66,39 @@ define(['app','text!template/m/dashboard.hbs'],function(app,tpl){
 		},
 	});
 	app.DashboardController = Em.Controller.extend({
+		target: function(){
+			return this;
+		}.property(),
+
+		// Notices
+		canPostNotice: function(){
+			return (app.get('accountManager.currentAccount.user.level') >= app.Levels.admin);
+		}.property('Theses.accountManager.currentAccount.user.level'),
+		newNoticeButtonPressed: function(){
+
+		},
+		reloadNoticeButtonPressed: function(){
+
+		},
+
+		notices: Em.A(),
+		loadingNotices: false,
+		currentNoticePage: 1,
+		loadNotices: function(){
+
+		},
+		hasMoreNotices: function(){
+			return this.get('notices.length') > 0;
+		}.property('notices.length'),
+		refresh: function(){
+			this.set('currentNoticePage',1);
+			this.loadNotices();
+		},
+		pageUpdated: function(){
+			this.loadNotices();
+		}.observes('currentNoticePage'),
+
+		// Milestones
 		loadingMilestones: function(){
 			return app.milestoneManager.get('loading');
 		}.property('Theses.milestoneManager.loading'),
