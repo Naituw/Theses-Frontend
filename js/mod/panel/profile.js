@@ -70,6 +70,7 @@ define(['app','text!template/panel/profile.hbs'],function(app,tpl){
                 if (file) {
                     app.get('accountManager').updateAvatar(file);
                 }
+                $(this).val('');
             });
             //app.get('accountManager').updateAvatar();
         },

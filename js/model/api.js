@@ -13,8 +13,7 @@ define(['app'],function(app){
 			var account = this.authenticateWithAccount;
 			if (!account) return null;
 			if (!account.authToken && account.username && account.password){
-				var authString = account.username+':'+account.password;
-				account.authToken = 'Basic ' + $.base64.encode(authString);
+				account.authToken = account.tokenWithPassword(account.password);
 			}
 			return account.authToken;
 		},
@@ -151,13 +150,16 @@ define(['app'],function(app){
 			if (!account) return;
 
 			var params = {};
-            params.old_password = $.base64.encode(oldpsw);
+			var sha = new jsSHA(oldpsw, 'TEXT');
+			var hash = sha.getHash('SHA-256','HEX');
+
+            params.old_password = $.base64.encode(hash);
             params.password = account.tokenWithPassword(newpsw);
 
             this.POST('account/set_password.json',params,callback); 
 		},
 		updateAvatar: function(file,callback){
-			this.upload('account/update_avatar.json',file,'用户头像更新',null,callback, 2 * 1024 * 1024, ['jpg','png','gif']);
+			this.upload('account/update_avatar.json',file,'用户头像更新',null,callback, 2 * 1024 * 1024, ['jpg','png','gif','jpeg']);
 		},
 		getTimes: function(callback){
 			this.GET('theses/times.json',null,callback);

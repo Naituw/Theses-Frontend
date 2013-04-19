@@ -80,8 +80,13 @@ define(['app','model/account'],function(app){
 		updateCurrentAccountWithData: function(data){
 			var account = this.get('currentAccount');
 			account.get('user').update(data);
+			if (data.authToken) account.set('authToken',data.authToken);
 			var accounts = [account];
-			localStorage['theses-accounts'] = JSON.stringify(accounts);
+			var saved = this._savedAccounts();
+			var key = 'theses-accounts';
+			if (saved && saved.length){
+				localStorage[key] = JSON.stringify(accounts);	
+			}
 		},
 
 		reloadCurrentAccountProfile: function(){
@@ -92,7 +97,7 @@ define(['app','model/account'],function(app){
 					if (!error){
 						that.updateCurrentAccountWithData(data);
 					}else if (error.code == 403){
-						// Sign out?
+						that.signout();
 					}
 				});
 			}
@@ -133,7 +138,7 @@ define(['app','model/account'],function(app){
 				} else {
 					app.showSuccess('成功','密码已修改成功');
 					var token = account.tokenWithPassword(newpsw);
-					data.autoToken = token;
+					data.authToken = token;
 					that.updateCurrentAccountWithData(data);
 				}
 				if(callback){

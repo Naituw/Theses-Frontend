@@ -6,7 +6,9 @@ define(['app','model/model','model/api'],function(app){
 		tokenWithPassword: function(psw){
 			var username = this.get('username') || this.get('user.username');
 			if (!username) return null;
-			return 'Basic ' + $.base64.encode(username + ':' + psw);
+			var sha = new jsSHA(psw, 'TEXT');
+			var hash = sha.getHash('SHA-256','HEX');
+			return 'Basic ' + $.base64.encode(username + ':' + hash);
 		},
 		user: null,
 		apiRoot: null,
