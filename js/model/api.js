@@ -303,5 +303,18 @@ define(['app'],function(app){
 
 			this.POST('message/create.json', params, callback);
 		},
+		createConversation: function(username, callback){
+			if (!username) return;
+
+			this.POST('conversation/create.json',{to_user: username},callback);
+		},
+
+		// Notifications
+		getNotifications: function(page,callback){
+			this.GET('notifications/list.json',{page:page},callback);
+		},
+		createNotification: function(params,callback){
+			this.POST('notification/create.json',params,callback);
+		},
 	});
 });

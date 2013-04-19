@@ -48,13 +48,19 @@ define(['app','model/message','managers/unread_manager'],function(app){
 			}
 
 			var index = 0;
-			for (var i = 0; i < count; i++) {
-				var conversation = cs[i];
+			for (; index < count; index++) {
+				var conversation = cs[index];
 				if (conversation.last_update <= c.last_update){
 					break;
 				}
 			}
 			cs.insertAt(index,c);
+		},
+		updatePositionForConversation: function(c){
+			Ember.run.schedule('sync', this, function(){
+				this.conversations.removeObject(c);
+				this.insertConversation(c);
+			});
 		},
 		updateConversationList: function(news){
 			for (var i = 0; i < news.length; i++) {
@@ -63,16 +69,17 @@ define(['app','model/message','managers/unread_manager'],function(app){
 				if (exist){
 					console.assert((exist._lastAllocTime == c._lastAllocTime),
 						'conversation last alloc time not equal');
-					this.conversations.removeObject(exist);
-					c = exist;
+					this.updatePositionForConversation(exist);
+				} else {
+					this.insertConversation(c);
 				}
-				this.insertConversation(c);
 			};
 		},
 		loadingConversations: false,
 		_loadConversations: function(laterThan, callback){
 			var a = app.currentAPI();
 			if (!a) return false;
+			a.invisible = true;
 
 			var that = this;
 			that.set('loadingConversations',true);
@@ -112,6 +119,48 @@ define(['app','model/message','managers/unread_manager'],function(app){
 			if (started) this.set('loadingMoreConversations',true);
 		},
 
+		pendingNewConversation: false,
+		addConversationWithUsername: function(username,callback){
+			var that =this;
+			var api = app.currentAPI();
+			if (!username || !api || this.pendingNewConversation) return;
+
+			that.set('pendingNewConversation', true);
+			api.createConversation(username, function(data, error){
+				that.set('pendingNewConversation', false);
+				var c = null;
+				if (!error){
+					var conversation = app.Conversation.alloc(data);
+					that.insertConversation(conversation);
+					c = conversation;
+				}
+				if (callback) callback(c,error);
+			});
+		},
+		updateLastViewTimeForConversationID: function(cid){
+			var c = this.conversationWithID(cid);
+			var ms = this.messagesForConversationID(cid);
+			c.updateLastViewTime(ms.get('lastObject.create_at'));
+		},
+		updateLastUpdateTimeForConversationID: function(cid){
+			var c = this.conversationWithID(cid);
+			var ms = this.messagesForConversationID(cid);
+			var last = ms.get('lastObject.create_at');
+			if (last > c.last_update){
+				c.set('last_update',last);
+				this.updatePositionForConversation(c);
+			}
+		},
+
+		newFlagsCount: function(){
+			var count = 0;
+			var cs = this.conversations;
+			for (var i = cs.length - 1; i >= 0; i--) {
+				if (cs[i].get('newFlag')) count++;
+			};
+			return count;
+		}.property('conversations.@each.newFlag'),
+
 		// message management
 		messagesForConversationID: function(cid){
 			var ms = this.messages[cid + ''];
@@ -147,11 +196,13 @@ define(['app','model/message','managers/unread_manager'],function(app){
 			if (last){
 				params['since_id'] = last.messageid;
 			}
+			var that = this;
 			this.loadMessages(cid,params,function(data,error){
 				if (!error){
 					for (var i = 0; i < data.length; i++) {
 						ms.pushObject(app.Message.alloc(data[i]));
 					};
+					that.updateLastViewTimeForConversationID(cid);
 				}
 			});
 		},
@@ -203,12 +254,17 @@ define(['app','model/message','managers/unread_manager'],function(app){
 			ms.pushObject(placeholder);
 
 			// do post
+			var that = this;
 			api.postMessage(content, c.with_user.userid, function(data, error){
-				if (error){
-					placeholder.set('failed',true);
-				} else {
-					// TODO: update placeholder to real message.
+				placeholder.set('sending',false);
+				placeholder.set('failed',(error != null));
+
+				if (!error){
+					placeholder.setProperties(data);
+					that.updateLastUpdateTimeForConversationID(cid);
+					that.updateLastViewTimeForConversationID(cid);
 				}
+
 				if (callback) callback(data, error);
 			});
 		},

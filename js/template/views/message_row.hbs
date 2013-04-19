@@ -2,9 +2,9 @@
 <div {{bindAttr class=":message-row isCurrentUser:message-row-right:message-row-left"}}>
     <div class="message-row-inner">
         {{#if isCurrentUser}}
-            <img class="bubble-avatar" {{bindAttr src="Theses.accountManager.currentAccount.user.avatar_thumb"}}/>
+            <img class="bubble-avatar" {{bindAttr src="Theses.accountManager.currentAccount.user.avatarThumbURL"}}/>
         {{else}}
-            <img class="bubble-avatar" {{bindAttr src="Theses.messageController.selectedConversation.with_user.avatar_thumb"}}/>
+            <img class="bubble-avatar" {{bindAttr src="Theses.messageController.selectedConversation.with_user.avatarThumbURL"}}/>
         {{/if}}                   
         <div class="bubble">
             {{content}}

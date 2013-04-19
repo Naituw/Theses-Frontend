@@ -50,6 +50,7 @@ define(['app','text!template/message.hbs','text!template/views/conversation_row.
             var that = this;
             Em.run.later(function(){
                 that.set('opened',false);
+                that.set('selectedConversationID',0);
             },400);
         },
 
@@ -96,17 +97,27 @@ define(['app','text!template/message.hbs','text!template/views/conversation_row.
         },
 
         newConversationTarget: '',
-        pendingNewConversation: false,
         newConversationStartButtonDisabled: function(){
             return this.newConversationTarget.length <= 0;
         }.property('newConversationTarget'),
         newConversationStart: function(){
             if (this.get('newConversationStartButtonDisabled')) return;
-
-            var conversation = app.messagesManager.conversationWithUsername(this.newConversationTarget);
+            var username = this.newConversationTarget;
+            var conversation = app.messagesManager.conversationWithUsername(username);
             if (conversation){
                 this.set('selectedConversationID',conversation.conversationid);
-                return;
+                this.loadMoreMessagesForCurrentConversation();
+            } else {
+                var that = this;
+                app.messagesManager.addConversationWithUsername(username, function(conversation, error){
+                    if (error){
+                        app.showError('开始对话失败',error.message);
+                    } else if (conversation && conversation.conversationid){
+                        that.set('selectedConversationID',conversation.conversationid);
+                        that.set('newConversationTarget','');
+                        that.loadMoreMessagesForCurrentConversation();
+                    }
+                });
             }
         },
 
@@ -132,7 +143,10 @@ define(['app','text!template/message.hbs','text!template/views/conversation_row.
                 if (c.last_update <= m.create_at) return;
             }
 
-            app.messagesManager.loadOlderMessagesForConversationID(c.conversationid);
+            app.messagesManager.loadNewerMessagesForConversationID(c.conversationid);
+        },
+        loadOlderMessagesForCurrentConversation: function(){
+
         },
 
         // New Message
@@ -173,6 +187,11 @@ define(['app','text!template/message.hbs','text!template/views/conversation_row.
             this.sendMessage(m.conversationid, m.content);
         },
         selectedMessagesCountChanged: function(){
+            Em.run.later(this, function(){
+                var $target = $('.message-content'); 
+                if (!$target || !$target.length) return;
+                $target.animate({scrollTop: $target[0].scrollHeight}, 300);
+            }, 100);
         }.observes('selectedMessages.length'),
 	});
 });

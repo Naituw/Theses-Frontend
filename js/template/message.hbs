@@ -30,7 +30,7 @@
         <div id="message-right">
             <header class="navigation-bar">
                 {{#if selectedConversation}}
-                    <img class="message-current-avatar" {{bindAttr src="selectedConversation.with_user.avatar_thumb"}}>
+                    <img class="message-current-avatar" {{bindAttr src="selectedConversation.with_user.avatarThumbURL"}}>
                     <div class="message-current-info">
                         {{selectedConversation.with_user.screenname}} / {{selectedConversation.with_user.username}}
                     </div>
@@ -43,7 +43,7 @@
                         新对话
                     </div>
                     <div class="new-conversation-target">
-                        {{#if pendingNewConversation}}
+                        {{#if Theses.messagesManager.pendingNewConversation}}
                             {{view Theses.LoadingView}}
                         {{else}}
                             <form>

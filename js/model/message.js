@@ -47,6 +47,12 @@ define(['app','model/model'],function(app){
     		}
     		return this._super(key);
     	},
+        updateLastViewTime: function(time){
+            var current = this.get('lastViewTime');
+            if (!current || time > current){
+                this.set('lastViewTime', time);
+            }
+        },
 	});
 	app.Conversation.reopenClass({
         primaryKey: "conversationid",
@@ -71,7 +77,7 @@ define(['app','model/model'],function(app){
         dateString: function(){
             if (this.sending) return '发送中';
             if (!this.create_at) return '';
-            return (new Date(this.create_at)).format('hh:mm:ss MM-dd');
+            return (new Date(this.create_at)).format('hh:mm MM-dd');
         }.property('create_at','sending'),
     });
     app.Message.reopenClass({
