@@ -1,0 +1,21 @@
+<div class="overview">
+	<span class="icon">
+	{{#if view.notice.url}}
+		<i class="icon-share-alt"></i>
+	{{else}}
+		<i {{bindAttr class="view.opened:icon-chevron-down:icon-chevron-right"}}></i>
+	{{/if}}
+	</span>
+	<div class="title-name" {{bindAttr title="view.notice.title"}}>{{view.notice.title}}</div>
+	<div class="meta-info">{{view.publisher}} 发表于 {{view.time}}</div>
+	{{#if view.showsDeleteButton}}
+		<a class="close" href="#" {{action deleteNotice target="view" href="true"}}>&times;</a>
+	{{/if}}
+</div>
+{{#if view.opened}}
+<div class="extended">
+	<div class="content">
+		{{view.notice.content}}
+	</div>
+</div>
+{{/if}}

@@ -22,22 +22,30 @@
 				<h5>通知</h5>
 				<div class="buttons">
 					{{#if canPostNotice}}
-					<a href="#" {{action newNoticeButtonPressed href=true}} class="btn btn-mini"><i class="icon-plus"></i>发布</a>
+					<a href="#" {{action newNoticeButtonPressed href=true}} class="btn btn-mini">
+						<i class="icon-plus"></i> 发布
+					</a>
 					{{/if}}
-					<a href="#" {{action reloadNoticeButtonPressed href=true}} class="btn btn-mini"><i class="icon-refresh"></i>刷新</a>
+					<a href="#" {{action reloadNoticeButtonPressed href=true}} class="btn btn-mini">
+						<i class="icon-refresh"></i> 刷新
+					</a>
 				</div>
 			</div>
 			<div class="widget-content nopadding">
-				{{#if notices.length}}
-					<div class="review-title-list">
-						{{#each notices}}
-							
-						{{/each}}
-					</div>
+				{{#if loadingNotices}}
+					{{view Theses.LoadingView}}
 				{{else}}
-					{{view Theses.PromptView text="暂无数据，点击刷新来重新获取通知列表"}}
+					{{#if notices.length}}
+						<div class="review-title-list">
+							{{#each notices}}
+								{{view Theses.NoticeRowView notice=this}}
+							{{/each}}
+						</div>
+					{{else}}
+						{{view Theses.PromptView text="暂无数据，点击刷新来重新获取通知列表"}}
+					{{/if}}
+					{{view Theses.PagingView pageBinding="currentNoticePage" hasNextBinding="hasMoreNotices"}}
 				{{/if}}
-				{{view Theses.PagingView pageBinding="currentNoticePage" hasNextBinding="hasMoreNotices"}}
 			</div>
 		</div>
 	</div>

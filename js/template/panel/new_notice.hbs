@@ -1,0 +1,49 @@
+                <form novalidate="" autocomplete="on" class="update-profile"> 
+                        <div class="yield" style="padding-top:20px">
+                            <fieldset class='reset-password'>
+                                <div class="control-group">
+                                    <div class="control-label">
+                                        <label>通知标题：</label>
+                                    </div>
+                                    <div class="controls">
+                                        {{view Ember.TextField valueBinding="title"}}
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <div class="control-label">
+                                        <label>跳转链接：</label>
+                                    </div>
+                                    <div class="controls">
+                                        {{view Ember.TextField valueBinding="url"}}
+                                    </div>
+                                </div>
+                                {{#if showsContentArea}}
+                                <div class="control-group">
+                                    <div class="control-label">
+                                        <label>通知内容：</label>
+                                    </div>
+                                    <div class="controls">
+                                        {{view Ember.TextArea valueBinding="content"}}
+                                    </div>
+                                </div>
+                                {{/if}}
+                                <div class="control-group">
+                                    <div class="control-label">
+                                        <label></label>
+                                    </div>
+                                    <div class="controls">
+                                        <label>
+                                            {{view Ember.Checkbox checkedBinding="sendEmail"}}
+                                            发送Email通知所有用户
+                                        </label>
+                                        
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div> 
+                        <footer> 
+                            <button type="submit" class="blue submit" {{action submit href=true}}>
+                                <span>发布通知</span>
+                            </button> 
+                        </footer> 
+                    </form>

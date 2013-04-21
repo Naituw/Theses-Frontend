@@ -15,10 +15,10 @@
 					{{view Theses.LoadingView}}
 				{{else}}
 					<table class="table table-bordered table-hover table-striped">
-						<tr><th>系ID</th><th>系名称</th></tr>
+						<tr><th style="width:50px;">系ID</th><th>系名称</th></tr>
 						{{#each Theses.majorsManager.departments}}
 							<tr>
-								<td>{{deptid}}</td><td>{{name}}</td>
+								<td style="text-align:center">{{deptid}}</td><td>{{name}}</td>
 							</tr>
 						{{/each}}
 						{{#if canCreateDept}}
@@ -47,10 +47,10 @@
 			</div>
 			<div class="widget-content nopadding">
 				<table  class="table table-bordered table-hover table-striped">
-					<tr><th>专业ID</th><th>专业名</th></tr>
+					<tr><th style="width:50px">专业ID</th><th>专业名</th></tr>
 					{{#if currentDept}}
 						{{#each currentDept.majors}}
-							<tr><td>{{majorid}}</td><td>{{name}}</td></tr>
+							<tr><td style="text-align:center">{{majorid}}</td><td>{{name}}</td></tr>
 						{{/each}}
 					{{else}}
 						<tr><td></td><td>此系不存在</td></tr>

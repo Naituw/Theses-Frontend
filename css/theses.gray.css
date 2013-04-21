@@ -746,12 +746,19 @@ form.update-profile fieldset .control-group .controls select {
 
 form.update-profile fieldset.reset-password {
 }
-form.update-profile fieldset.reset-password label {
+form.update-profile fieldset.reset-password .control-label label {
   float: left;
   line-height: 30px;
   width: 90px;
 }
 form.update-profile fieldset.reset-password input {
+  width: 186px;
+}
+form.update-profile fieldset.reset-password input[type="checkbox"] {
+  width: 20px;
+  margin-top: 0;
+}
+form.update-profile fieldset.reset-password .controls label {
   width: 186px;
 }
 form.update-profile fieldset.reset-password select {
@@ -1317,24 +1324,24 @@ form.update-profile fieldset.reset-password textarea {
 .review-title-list {
   padding: 10px 0;
 }
-.review-title-cell {
+.review-title-cell, .notice-row-view {
   position: relative;
   border-bottom: 1px solid #ddd;
   cursor: pointer;
   padding: 0 10px;
 }
-.review-title-cell:hover {
+.review-title-cell:hover, .notice-row-view:hover {
   background: #f3f3f3;
 }
-.review-title-cell:first-of-type {
+.review-title-cell:first-of-type, .notice-row-view:first-of-type {
   border-top: 1px solid #ddd;
 }
-.review-title-cell .overview {
+.review-title-cell .overview, .notice-row-view .overview {
   height: 50px;
   overflow: hidden;
 }
 
-.review-title-cell .overview .icon {
+.review-title-cell .overview .icon, .notice-row-view .overview .icon {
   position: absolute;
   top: 0;
   left: 10px;
@@ -1357,14 +1364,14 @@ form.update-profile fieldset.reset-password textarea {
   -o-text-overflow: ellipsis;
 }
 
-.review-title-cell .overview .loading-section {
+.review-title-cell .overview .loading-section, .notice-row-view .overview .loading-section {
   position: absolute;
   right: 10px;
   top: 10px;
   width: 80px;
   padding: 0;
 }
-.review-title-cell .overview .loading-section .loading-view {
+.review-title-cell .overview .loading-section .loading-view, .notice-row-view .overview .loading-section {
   height: 30px;
 }
 
@@ -1378,7 +1385,7 @@ form.update-profile fieldset.reset-password textarea {
   width: 80px;
 }
 
-.review-title-cell .extended {
+.review-title-cell .extended, .notice-row-view .extended {
   border-top: 1px dotted #ddd;
   padding: 0 10px;
 }
@@ -1393,6 +1400,42 @@ form.update-profile fieldset.reset-password textarea {
 
 .review-title-cell .extended dt:first-of-type {
   margin-top: 0;
+}
+
+.notice-row-view {
+  position: relative;
+}
+.notice-row-view .title-name {
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 5px;
+  padding-bottom: 2px;
+  font-size: 15px;
+  font-weight: 700;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+}
+.notice-row-view .meta-info {
+  padding-left: 20px;
+  padding-right: 20px;
+  font-size: 12px;
+  color: #999;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+}
+.notice-row-view .close {
+  position: absolute;
+  right: 10px;
+  top: 13px;
+}
+.notice-row-view .extended .content {
+  padding: 20px 10px;
 }
 
 .load-more-container {

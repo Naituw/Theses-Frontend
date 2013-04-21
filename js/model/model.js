@@ -429,6 +429,25 @@ define(["app"],function(app){
         }.property('filename'),
     });
 
+    app.Notice = app.Model.extend({
+        notificationid: 0,
+        deptid: 0,
+        title: null,
+        content: null,
+        url: null,
+        create_at: null,
+
+        prepareData: function(data){
+            if (data.createAt){
+                data.create_at = data.createAt;
+            }
+        },
+    });
+    app.Notice.reopenClass({
+        primaryKey: "notificationid",
+        aliveTime: 1, // Out Date Immediately
+    });
+
     app.addHeartBeat(function(){
         console.log('\n\nNow:' + app.currentTime() + ', Purge:');
         app.User.purgeStore();

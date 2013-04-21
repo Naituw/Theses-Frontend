@@ -313,10 +313,13 @@ define(['app'],function(app){
 
 		// Notifications
 		getNotifications: function(page,callback){
-			this.GET('notifications/list.json',{page:page},callback);
+			this.GET('notifications/list.json',{page:page,count:5},callback);
 		},
 		createNotification: function(params,callback){
 			this.POST('notification/create.json',params,callback);
 		},
+		deleteNotification: function(notificationid,callback){
+			this.POST('notification/delete.json',{notificationid:notificationid},callback);
+		}
 	});
 });
