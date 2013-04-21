@@ -162,7 +162,7 @@ define(['app','text!template/m/users.hbs','views/views'],function(app,tpl){
 	  */
 	  	canManageTeachers: function(){
 	  		var l = app.accountManager.get('currentLevel');
-	  		return l >= 60;
+	  		return l >= app.Levels.admin && l < app.Levels.superAdmin;
 	  	}.property('Theses.accountManager.currentLevel'),
 	  	selectedTeacherIndex: -1,
 	  	setSelectedTeacherIndex: function(index){
