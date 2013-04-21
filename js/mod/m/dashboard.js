@@ -188,8 +188,10 @@ define(['app','text!template/m/dashboard.hbs','text!template/views/notice_row_vi
 		}.property('pickerChanged','loadingMilestones'),
 		submitTimes: function(){
 			var that = this;
-			app.milestoneManager.submitStones(function(){
-				that.set('pickerChanged',false);
+			app.milestoneManager.submitStones(function(data, error){
+				if (!error){
+					that.set('pickerChanged',false);
+				}
 			});
 		},
 	});

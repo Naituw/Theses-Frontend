@@ -4,24 +4,29 @@ define(['app','model/model'],function(app){
         "desc": null,
         "tip": null,
         "time": null,
+        "temp_time": null,
         "viewLevel": 10,
         "operationLevel": 60,
+        timeForSubmit: function(){
+            if (this.get('temp_time')) return this.get('temp_time');
+            return this.get('time');
+        }.property('time','temp_time'),
         displayTime: function(){
-        	if (!this.get('time') || !this.get('formatedTime').length) return '未定';
+        	if (!this.get('timeForSubmit') || !this.get('formatedTime').length) return '未定';
             return this.get('formatedTime') + " 0点";
-        }.property('time'),
+        }.property('timeForSubmit'),
         formatDate: function(d){
             return d.format('yyyy-MM-dd');
         },
         formatedTime: function(){
-            var time = this.get('time');
+            var time = this.get('timeForSubmit');
             if (time) {
                 var d = new Date();
                 d.setTime(time);
                 return this.formatDate(d);
             }
             return ;
-        }.property('time'),
+        }.property('timeForSubmit'),
         currentUserLevel: function(){
         	var a = app.accountManager.get('currentAccount');
         	return a.user.level;
@@ -99,7 +104,7 @@ define(['app','model/model'],function(app){
             for(var i = 0; i < this.milestones.length; i++){
                 var m = this.milestones[i];
                 if (m.get('name') == name){
-                    m.set('time',time);
+                    m.set('temp_time',time);
                 }
             }
         },
@@ -107,6 +112,7 @@ define(['app','model/model'],function(app){
             for(var i = 0; i < this.milestones.length; i++){
                 var m = this.milestones[i];
                 m.set('time',data[m.name]);
+                m.set('temp_time',null);
             }
         },
         submitStones: function(callback){
@@ -115,7 +121,7 @@ define(['app','model/model'],function(app){
             for (var i = 0; i < stones.length; i++) {
                 var s = stones[i];
                 if (s.name){
-                    p[s.name] = s.time;
+                    p[s.name] = s.get('timeForSubmit');
                 }
             }
             var that = this;
@@ -129,7 +135,7 @@ define(['app','model/model'],function(app){
                     }else{
                         that.updateMilestones(data);                        
                     }
-                    if(callback)callback();
+                    if(callback) callback(data,error);
                 });
             };
         },
