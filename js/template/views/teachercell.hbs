@@ -1,5 +1,5 @@
 <div class="span12 teacherinfo">
-	<img class="pull-left avatar-list desktop" 	{{bindAttr src="avatarThumbURL"}} />
+	{{view Theses.MessageAvatarView user=this class="pull-left avatar-list desktop"}}
 	<div class="userinfo">
 		<label class="username">{{username}} {{#if screenname.length}}（ {{screenname}} ）{{/if}}</label>
 		<label class="description">{{genderString}}， {{departmentInfo.name}}</label>

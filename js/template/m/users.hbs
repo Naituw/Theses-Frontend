@@ -47,13 +47,14 @@
 					</form>
 				</div>
 				<table class="table table-bordered table-hover table-striped table-centered user-table">
-					<tr><th>头像</th><th>用户名</th><th>名称</th><th>性别</th><th>用户类型</th></tr>
+					<tr><th style="width:50px">头像</th><th>用户名</th><th>名称</th><th>性别</th><th>用户类型</th></tr>
 					{{#if loadingUsers}}
 					<tr><td colspan="8">{{view Theses.LoadingView}}</td></tr>
 					{{else}}
 						{{#if users.length}}
 							{{#each users}}
-							<tr {{action userClicked target="view" href=true}} class="clickable"><td><img {{bindAttr src="avatarThumbURL"}} class="user-table-avatar"/></td>
+							<tr {{action userClicked target="view" href=true}} class="clickable">
+								<td>{{view Theses.MessageAvatarView user=this class="user-table-avatar"}}</td>
 								<td>{{username}}</td><td>{{screenname}}</td>
 								<td>{{genderString}}</td>
 								<td>{{levelType}}</td>

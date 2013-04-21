@@ -190,7 +190,7 @@ define(['app'],function(app){
 			if (!account) return;
 
 			var params = {
-				deptid: account.user.get('departmentInfo').deptid,
+				deptid: account.user.get('departmentInfo.deptid'),
 				max_level: 40,
 				min_level: 30,
 				page: page,

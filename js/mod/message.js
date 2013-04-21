@@ -39,6 +39,7 @@ define(['app','text!template/message.hbs','text!template/views/conversation_row.
         opened: false,
         active: false,
         open: function(){
+            if (this.get('opened')) return;
             this.set('opened',true);
             this.set('active',false);
             Em.run.next(this,function(){
@@ -46,6 +47,7 @@ define(['app','text!template/message.hbs','text!template/views/conversation_row.
             });
         },
         close: function(){
+            if (!this.get('opened')) return;
             this.set('active',false);
             var that = this;
             Em.run.later(function(){
@@ -120,6 +122,13 @@ define(['app','text!template/message.hbs','text!template/views/conversation_row.
                 });
             }
         },
+        startNewConversationWithUsername: function(username){
+            if (!username) return;
+            this.set('newConversationMode',true);
+            this.set('newConversationTarget',username);
+            this.open();
+            this.newConversationStart();
+        },
 
         // Message Management
         selectedMessages: function(){
@@ -136,6 +145,7 @@ define(['app','text!template/message.hbs','text!template/views/conversation_row.
             var c = this.get('selectedConversation');
             var ms = this.get('selectedMessages');
             if (!ms) return;
+            if (c.last_update == c.create_at) return;
 
             if (ms.length){
                 var m = ms.get('lastObject');

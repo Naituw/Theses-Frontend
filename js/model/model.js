@@ -247,6 +247,11 @@ define(["app"],function(app){
             }
             return result;
         }.property('major_id','departmentInfo'),
+        isCurrentUser: function(){
+            var uid = this.get('userid');
+            var cid = app.get('accountManager.currentAccount.user.userid');
+            return (uid && cid && uid == cid);
+        }.property('userid','Theses.accountManager.currentAccount.user.userid'),
         prepareData: function(data){
             if (data.department && isNaN(data.department)){
                 data.department = app.Department.alloc(data.department);

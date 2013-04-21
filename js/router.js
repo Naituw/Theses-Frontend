@@ -120,7 +120,7 @@ define(["app"],function(app){
 			  			router.get('mainController').connectOutlet('content','titleChosen');
 			  		},
 			  	}),
-
+				/*
 			  	titlesAdmin: app.Route.extend({
 			  		title: '论题管理',
 			  		route: '/titles_admin',
@@ -133,7 +133,7 @@ define(["app"],function(app){
 			  		level: 60,
 			  		maxLevel: 70,
 			  	}),
-
+				*/
 			  	titlesMine: app.Route.extend({
 			  		title: '我的论题',
 			  		route: '/titles_mine',

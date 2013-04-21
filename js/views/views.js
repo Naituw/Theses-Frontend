@@ -176,7 +176,7 @@ define(['app','views/tableview','views/teachercell'],function(app){
 			if (dept) result.pushObject(dept.name);
 			return result.join('，');
 		}.property('user','user.departmentInfo','user.majorInfo'),
-		template: Em.Handlebars.compile('<img {{bindAttr src="view.user.avatarThumbURL"}} class="pull-left"/>\
+		template: Em.Handlebars.compile('{{view Theses.MessageAvatarView userBinding="view.user" class="pull-left"}}\
 							<div class="user-info">\
 								<label>{{view.lineOne}}</label>\
 								<label>{{view.lineTwo}}</label>\
@@ -203,7 +203,7 @@ define(['app','views/tableview','views/teachercell'],function(app){
 			var a = this.clickAction;
 			if (a) a(this.user, this.selection, this.get('controller'));
 		},
-		template: Em.Handlebars.compile('<img {{bindAttr src="view.user.avatarThumbURL"}} class="pull-left"/>\
+		template: Em.Handlebars.compile('{{view Theses.MessageAvatarView userBinding="view.user" class="pull-left"}}\
 							<div class="user-info">\
 								<label>{{view.lineOne}}</label>\
 								<label>{{view.lineTwo}}</label>\
@@ -296,6 +296,24 @@ define(['app','views/tableview','views/teachercell'],function(app){
 					{{#if view.canDelete}}\
 						<button class="close" {{action delete target="view" bubbles=false}}>&times;</button>\
 					{{/if}}{{/if}}'),
+	});
+
+	app.MessageAvatarView = Em.View.extend({
+		user: null,
+		tagName: 'img',
+		attributeBindings: ['src', 'style'],
+		src: null,
+		srcBinding: 'user.avatarThumbURL',
+		style: function(){
+			if (this.get('user.isCurrentUser')) return null;
+			return 'cursor:pointer';
+		}.property('user.isCurrentUser'),
+		click: function(){
+			if (!this.get('user.isCurrentUser')){
+				app.messageController.startNewConversationWithUsername(this.get('user.username'));
+			}
+			return false;
+		},
 	});
 
 	app.DropdownItems = Em.Object.extend({
