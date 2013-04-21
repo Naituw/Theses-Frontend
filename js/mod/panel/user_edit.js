@@ -60,9 +60,9 @@ define(['app','text!template/panel/user_edit.hbs'],function(app, tpl){
 			this.set('selectedGender',c.gender + '');
 			this.set('selectedUserType',c.level);
 			var d = c.get('departmentInfo');
-			if (d) this.set('selectedDepartment',d.deptid + '');
+			if (d) this.set('selectedDepartment',d.deptid);
 			var m = c.get('majorInfo');
-			if (m) this.set('selectedMajor',m.majorid + '');
+			if (m) this.set('selectedMajor',m.majorid);
 		}.observes('content'),
 		needSelectMajor: function(){
 			var t = this.get('selectedUserType');

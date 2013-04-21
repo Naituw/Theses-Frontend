@@ -2,7 +2,9 @@
                     <form novalidate="" autocomplete="on" class="update-profile"> 
                         <div class="yield">
                             <fieldset>
-                                {{view Theses.UsernameField valueBinding="username"}}
+                                {{#unless editmode}}
+                                    {{view Theses.UsernameField valueBinding="username"}}
+                                {{/unless}}
                                 {{view Theses.TextField title="全名" placeholder="Fullname" validateDelegate="validateFullname" valueBinding="fullname"}}
                                 <div class="control-group">
                                     <div class="control-label">
