@@ -18,6 +18,7 @@ define(['app','text!template/panel/panel.hbs','mod/panel/profile','mod/panel/set
 			return $('#panel-overlay');
 		}.property().volatile(),
 		openPanel: function(){
+			app.startModal();
 			var overlay = this.get('overlay');
 			overlay.css({'display':''});
 			Em.run.later(function(){
@@ -32,6 +33,7 @@ define(['app','text!template/panel/panel.hbs','mod/panel/profile','mod/panel/set
 			Em.run.later(function(){
 				overlay.css({'display':'none'});
 			},500);
+			app.endModal();
 		},
 		openOutlet: function(outlet,name,desc, context){
 			this.connectOutlet("content",outlet,context);

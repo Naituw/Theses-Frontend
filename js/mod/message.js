@@ -45,6 +45,7 @@ define(['app','text!template/message.hbs','text!template/views/conversation_row.
             Em.run.next(this,function(){
                 this.set('active',true);
             });
+            app.startModal();
         },
         close: function(){
             if (!this.get('opened')) return;
@@ -54,6 +55,7 @@ define(['app','text!template/message.hbs','text!template/views/conversation_row.
                 that.set('opened',false);
                 that.set('selectedConversationID',0);
             },400);
+            app.endModal();
         },
 
         // Conversations

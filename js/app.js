@@ -77,6 +77,13 @@ define(["jquery",'text!template/alert.hbs',"plugins","handlebars", "ember", "boo
 		Theses.showAlert(title,desc,'warning');
 	}
 
+	Theses.startModal = function(){
+		$('body').addClass('modal-enabled');
+	}
+	Theses.endModal = function(){
+		$('body').removeClass('modal-enabled');
+	}
+
 	Handlebars.registerHelper('icon', function(property, options) {
 	    var value = Ember.Handlebars.get(this, property, options);
 	    return new Handlebars.SafeString('<i class="icon icon-'+value+'"></i>');
