@@ -25,9 +25,9 @@ Theses论文管理系统的前端，基于Ember.js实现。
 * <del>上传文档</del>
 * <del>选题</del>
 * <del>打分</del>
-* 私信交流
-* 邮件通知
-* <cite>论题管理（优先级低）</cite>
+* <del>私信交流</del>
+* <del>邮件通知</del>
+* 论题管理
 * <cite>申请论题 (优先级低)</cite>
 
 
