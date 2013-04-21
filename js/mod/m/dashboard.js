@@ -220,11 +220,8 @@ define(['app','text!template/m/dashboard.hbs','text!template/views/notice_row_vi
 		}.property('notice.deptid'),
 		time: function(){
 			if (!this.notice.create_at) return '未知时间';
-			function convertDateToUTC(date) { 
-    			return new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds()); 
-    		}
-    		var date = convertDateToUTC(new Date(this.notice.create_at));
-			return date.format('yyyy年MM月dd日 hh:mm:ss');
+    		var date = new Date(this.notice.create_at);
+			return date.format('yyyy年MM月dd日');
 		}.property('notice.create_at'),
 
 		showsDeleteButton: function(){
