@@ -97,22 +97,21 @@ define(['app','model/model'],function(app){
         }.property('Theses.majorsManager.departments','Theses.accountManager.currentAccount.user.level'),
         departmentsForUserCreation: function(){
             var a = app.accountManager.get('currentAccount');
+            var result = Em.A();
             if (a){
             	var l = a.user.level;
             	if (l >= app.Levels.superAdmin){
-            		return this.get('departments');
+            		result.pushObjects(this.get('departments'));
             	} else if (l >= app.Levels.admin){
             		var id = a.user.department.deptid;
             		if (id){
-            			var r = Em.A();
-            			r.pushObject(this.departmentWithID(id));
-            			return r;
+            			result.pushObject(this.departmentWithID(id));
             		}
             	}
             }
-            return null;
+            return result;
         }.property('Theses.majorsManager.departments','Theses.accountManager.currentAccount.user.level',
-        	'Theses.accountManager.currentAccount.user.department.deptid'),
+        	'Theses.accountManager.currentAccount.user.departmentInfo.deptid'),
 
 	});
 	app.majorsManager = app.MajorsManager.create();
