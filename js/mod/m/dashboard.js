@@ -154,6 +154,9 @@ define(['app','text!template/m/dashboard.hbs','text!template/views/notice_row_vi
 
 
 		// Milestones
+		showsMilestonesView: function(){
+			return app.accountManager.get('currentAccount.user.level') < app.Levels.superAdmin;
+		}.property('Theses.accountManager.currentAccount.user.level'),
 		loadingMilestones: function(){
 			return app.milestoneManager.get('loading');
 		}.property('Theses.milestoneManager.loading'),

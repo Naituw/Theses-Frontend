@@ -1,18 +1,20 @@
-{{#unless loadingMilestones}}
-<div class="row-fluid">
-	<div class="span12">
-		{{#if currentStone}}
-		<div class="alert alert-success no-margin"> 
-			论文流程已在进行中，当前阶段为：<b>{{currentStone.tip}}</b>
+{{#if showsMilestonesView}}
+	{{#unless loadingMilestones}}
+	<div class="row-fluid">
+		<div class="span12">
+			{{#if currentStone}}
+			<div class="alert alert-success no-margin"> 
+				论文流程已在进行中，当前阶段为：<b>{{currentStone.tip}}</b>
+			</div>
+			{{else}}
+			<div class="alert alert-warning no-margin"> 
+				目前论文流程还未开始。
+			</div>
+			{{/if}}
 		</div>
-		{{else}}
-		<div class="alert alert-warning no-margin"> 
-			目前论文流程还未开始。
-		</div>
-		{{/if}}
 	</div>
-</div>
-{{/unless}}
+	{{/unless}}
+{{/if}}
 
 <div class="row-fluid">
 	<div class="span12">
@@ -51,6 +53,7 @@
 	</div>
 </div>
 
+{{#if showsMilestonesView}}
 <div class="row-fluid">
 	<div class="span12">
 		<div class="widget-box">
@@ -99,3 +102,4 @@
 		</div>
 	</div>
 </div>
+{{/if}}
