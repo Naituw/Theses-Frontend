@@ -30,22 +30,27 @@ $(document).ready(function(){
 		}
 	});
 		
-	$('#sidebar > a').live('click',function(e)
+	$('#phone-dropdown').live('click',function(e)
 	{
 		var ul = $('#sidebar > ul');
 		
+		e.stopPropagation();
 		e.preventDefault();
-		var sidebar = $('#sidebar');
-		if(sidebar.hasClass('open'))
-		{
-			sidebar.removeClass('open');
+		if(ul.is(':visible')) {
 			ul.slideUp(250);
-		} else 
-		{
-			sidebar.addClass('open');
+		} else {
 			ul.slideDown(250);
 		}
 	});
+	$(document).click(function(event) { 
+		var ul = $('#sidebar > ul');
+
+	    if($(event.target).parents().index($('#phone-dropdown')) == -1) {
+	        if(ul.is(':visible')) {
+				ul.slideUp(250);
+			} 
+	    }        
+	})
 
 	var waitForFinalEvent = (function () {
   		var timers = {};
