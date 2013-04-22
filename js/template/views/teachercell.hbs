@@ -5,7 +5,7 @@
 		<label class="description">{{genderString}}， {{departmentInfo.name}}</label>
 	</div>
 	{{#if view.pendingState}}
-		<div class="loading-view"></div>
+		<div class="loading-view loading-background"></div>
 	{{else}}
 		<button {{bindAttr class=":btn :pull-right :teacher-action view.buttonClass"}} {{action buttonClicked target="view"}}>{{view.buttonTitle}}</button>
 	{{/if}}

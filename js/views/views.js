@@ -101,7 +101,7 @@ define(['app','views/tableview','views/teachercell'],function(app){
 	});
 
 	app.LoadingView = Em.View.extend({
-		template: Em.Handlebars.compile('<section class="loading-section"><div class="loading-view"></div></section>'),
+		template: Em.Handlebars.compile('<section class="loading-section"><div class="loading-view loading-background"></div></section>'),
 	});
 	app.PromptView = Em.View.extend({
 		text: '',
