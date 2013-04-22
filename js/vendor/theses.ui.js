@@ -43,6 +43,8 @@ $(document).ready(function(){
 		}
 	});
 	$(document).click(function(event) { 
+		if (!$('#phone-dropdown').is(':visible')) return;
+
 		var ul = $('#sidebar > ul');
 
 	    if($(event.target).parents().index($('#phone-dropdown')) == -1) {
