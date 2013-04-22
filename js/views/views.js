@@ -272,13 +272,17 @@ define(['app','views/tableview','views/teachercell'],function(app){
 			if (api){
 				this.set('pendingDownload',true);
 				var baseURL = api.get('_apiRoot');
+				api.async = false;
 				api.downloadDocument(this.get('doc.docid'),function(data,error){
 					that.set('pendingDownload',false);
 					if (error){
 						app.showError('文档下载失败',error.message);
 					}else {
 						var url = data.url;
-						if (url) window.location.href = url;
+						if (url) {
+							window.open(url,'_blank');
+							window.focus();
+						}
 					}
 				})
 			}

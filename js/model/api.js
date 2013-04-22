@@ -3,6 +3,7 @@ define(['app'],function(app){
 		authenticateWithAccount: null,
 		apiRoot: null,
 		invisible: false,
+		async: true,
 
 		_apiRoot: function(){
 			if (this.apiRoot) return this.apiRoot;
@@ -64,6 +65,7 @@ define(['app'],function(app){
 			};
 
 			var xhr = null;
+			var async = this.get('async');
 
 			if (file) {
 				var data = new FormData();
@@ -102,6 +104,7 @@ define(['app'],function(app){
 					success: successCallback,
 					error: errorCallback,
 					complete: completeCallback,
+					async: async,
 				});
 			}
 
