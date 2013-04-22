@@ -1,7 +1,4 @@
 define(["app"],function(app){
-    app.currentTime = function(){
-        return (new Date).getTime();
-    };
     app.Model = Em.Object.extend({
         update: function(args){
             this.prepareData(args);
@@ -18,7 +15,7 @@ define(["app"],function(app){
         alloc: function(args){
             var o = this.create();
             o.update(args);
-            o._lastAllocTime = app.currentTime();
+            o._lastAllocTime = app.get('currentTime');
 
             var c = this.find(o.get(this.primaryKey));
             if (c) {
@@ -42,7 +39,7 @@ define(["app"],function(app){
             return _s;
         },
         purgeStore: function(){
-            var t = app.currentTime();
+            var t = app.get('currentTime');
             var s = this.getStore();
             var aliveTime = this.aliveTime;
             if (!s) return;
@@ -454,7 +451,7 @@ define(["app"],function(app){
     });
 
     app.addHeartBeat(function(){
-        console.log('\n\nNow:' + app.currentTime() + ', Purge:');
+        console.log('\n\nNow:' + app.get('currentTime') + ', Purge:');
         app.User.purgeStore();
         app.Title.purgeStore();
         app.Major.purgeStore();

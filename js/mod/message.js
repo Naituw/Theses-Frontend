@@ -6,7 +6,7 @@ define(['app','text!template/message.hbs','text!template/views/conversation_row.
         selected: function(){
             var sid = this.get('controller.selectedConversationID');
             if (!sid) return false;
-            console.log(sid);
+
             return this.conversation.conversationid == sid;
         }.property('controller.selectedConversationID'),
         click: function(){

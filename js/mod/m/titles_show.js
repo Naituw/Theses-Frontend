@@ -208,7 +208,8 @@ define(['app','text!template/m/titles_show.hbs'],function(app,tpl){
 				var u = this.students[i];
 				if (u.userid == uid) return true;
 			};
+			if (this.get('teacher.userid') == uid) return true;
 			return false;
-		}.property('Theses.accountManager.currentAccount.user.userid','students.@each'),
+		}.property('Theses.accountManager.currentAccount.user.userid','students.@each','teacher'),
 	});
 });

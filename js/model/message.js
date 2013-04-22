@@ -77,7 +77,7 @@ define(['app','model/model'],function(app){
         dateString: function(){
             if (this.sending) return '发送中';
             if (!this.create_at) return '';
-            return (new Date(this.create_at)).format('hh:mm MM-dd');
+            return (new Date(this.create_at)).format('MM-dd hh:mm');
         }.property('create_at','sending'),
     });
     app.Message.reopenClass({

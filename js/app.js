@@ -27,6 +27,7 @@ define(["jquery",'text!template/alert.hbs',"plugins","handlebars", "ember", "boo
 				this.loadingView.hide();
 			}
 		},
+		currentTime: 0,
 		_heartbeats: Em.A(),
 		addHeartBeat: function(func){
 			this._heartbeats.pushObject(func);
@@ -39,6 +40,12 @@ define(["jquery",'text!template/alert.hbs',"plugins","handlebars", "ember", "boo
 			func();
 		};
 		setTimeout(arguments.callee, 3 * 60 * 1000);
+	})(Theses);
+
+	(function(app){
+		var time = (new Date()).getTime();
+		Theses.set('currentTime',time);
+		setTimeout(arguments.callee, 10 * 1000);
 	})(Theses);
 
 	// Alert View .

@@ -756,6 +756,9 @@ form.update-profile fieldset.reset-password .control-label label {
   line-height: 30px;
   width: 90px;
 }
+form.update-profile fieldset.title-remark .control-label {
+  width: 90px;
+}
 form.update-profile fieldset.reset-password input {
   width: 186px;
 }
