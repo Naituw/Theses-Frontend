@@ -1,6 +1,6 @@
-define(['app','text!template/m/majors.hbs'],function(app,tpl){
+define(['app'],function(app){
 	app.MajorsView = Em.View.extend({
-		template: Em.Handlebars.compile(tpl),
+		template: app.template('m/majors'),
 		didInsertElement: function(){
 			var m = app.majorsManager;
 			if (m.get('needsReload')){

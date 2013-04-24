@@ -1,7 +1,7 @@
-define(['app','text!template/views/teachercell.hbs'],function(app,tpl){
+define(['app'],function(app){
 	app.TeacherCell = Em.View.extend({
 		classNames: ['row-fluid','teacher-cell'],
-		template: Em.Handlebars.compile(tpl),
+		template: app.template('views/teachercell'),
 		teacher: null,
 		pendingState: false,
 		isSenior: function(){

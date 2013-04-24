@@ -1,6 +1,6 @@
-define(['app','text!template/navbar.hbs'],function(app,tpl){
+define(['app'],function(app,tpl){
 	app.NavbarView = Em.View.extend({
-        template: Em.Handlebars.compile(tpl),
+        template: app.template('navbar'),
     });
     app.NavbarController = Em.Controller.extend({
         target: function(){

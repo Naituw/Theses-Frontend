@@ -1,6 +1,6 @@
-define(['app','text!template/panel/profile.hbs'],function(app,tpl){
+define(['app'],function(app){
 	app.PanelProfileView = Em.View.extend({
-		template: Em.Handlebars.compile(tpl),
+		template: app.template('panel/profile'),
         pending: false,
         validation: function(name, gender, email){
             var nameReg = /^[\u4e00-\u9fa5a-z][\u4e00-\u9fa5a-z0-9_]*$/i;
@@ -60,6 +60,9 @@ define(['app','text!template/panel/profile.hbs'],function(app,tpl){
         didInsertElement: function(){
             var gender = app.get('accountManager').get('currentAccount').get('user').get('gender');
             this.$().find('select[name=gender]').val(gender);
+
+            var c = this.get('controller');
+            if (c && c.viewDidLoad) c.viewDidLoad.call(c);
         },
         updateAvatar: function(){
             var input = this.$().find('.upload-avatar');
@@ -81,5 +84,28 @@ define(['app','text!template/panel/profile.hbs'],function(app,tpl){
             if (account) return account.get('user');
             return null;
         }.property('Theses.accountManager.currentAccount.user'),
+        email: '',
+        emailBinding: Em.Binding.oneWay('currentUser.email'),
+
+        viewDidLoad: function(){
+            this.set('email',this.get('currentUser.email'));
+        },
+
+        emailModified: function(){
+            return (this.get('email') != this.get('currentUser.email'));
+        }.property('email','currentUser.email'),
+        showsEmailVerificationInfo: function(){
+            if (!this.get('currentUser.email')) return false;
+            if (this.get('emailModified')) return false;
+            return true;
+        }.property('currentUser.email','emailModified'),
+        showsResendEmailButton: function(){
+            if (this.get('currentUser.email_verified')) return false;
+            var last = this.get('currentUser.last_email_sent');
+            var current = app.get('currentTime');
+            var delta = current - last;
+            var maxDelta = 30 * 60 * 1000; // 30 min
+            return (delta >= maxDelta);
+        }.property('currentUser.email_verified','currentUser.last_email_sent','Theses.currentTime'),
 	});
 });

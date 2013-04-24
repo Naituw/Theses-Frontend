@@ -1,6 +1,6 @@
-define(['app','text!template/panel/new_title.hbs'],function(app,tpl){
+define(['app'],function(app){
 	app.NewTitleView = Em.View.extend({
-		template: Em.Handlebars.compile(tpl),
+		template: app.template('panel/new_title'),
 		didInsertElement: function(){
 			var isMobile = navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|webOS|IEMobile)/);
 			if(!isMobile) {

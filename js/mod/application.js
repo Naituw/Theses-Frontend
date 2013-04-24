@@ -1,6 +1,6 @@
-define(['app','text!template/application.hbs'],function(app,applicationTpl){
+define(['app'],function(app){
 	app.ApplicationView = Em.View.extend({
-		template: Em.Handlebars.compile(applicationTpl),
+		template: app.template('application'),
 	});
 	app.ApplicationController = Ember.Controller.extend({
 		user: 0,

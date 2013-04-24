@@ -1,6 +1,6 @@
-define(['app','text!template/main.hbs','mod/sidebar','mod/navbar','model/account_manager'],function(app,tpl){
+define(['app','mod/sidebar','mod/navbar','model/account_manager'],function(app){
     app.MainView = Em.View.extend({
-        template: Em.Handlebars.compile(tpl),
+        template: app.template('main'),
         didInsertElement: function ()
         {
             $(window).resize();

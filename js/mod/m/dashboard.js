@@ -1,6 +1,6 @@
-define(['app','text!template/m/dashboard.hbs','text!template/views/notice_row_view.hbs'],function(app,tpl,cellTpl){
+define(['app'],function(app){
 	app.DashboardView = Em.View.extend({
-		template: Em.Handlebars.compile(tpl),
+		template: app.template('m/dashboard'),
 		didLoadMilestones: function(){
 			var old = this.$();
 			if (old) {
@@ -199,7 +199,7 @@ define(['app','text!template/m/dashboard.hbs','text!template/views/notice_row_vi
 
 
 	app.NoticeRowView = Em.View.extend({
-		template: Em.Handlebars.compile(cellTpl),
+		template: app.template('views/notice_row_view'),
 		classNames: ['notice-row-view'],
 		opened: false,
 		click: function(e){

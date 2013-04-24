@@ -184,6 +184,11 @@ define(["app"],function(app){
         "screenname": null,
         "userid": 0,
         "username": null,
+        "email_verified": false,
+        "last_email_sent": 0,
+        verifyEmailSended: function(){
+            return (this.get('last_email_sent') > 0);
+        }.property('last_email_sent'),
         displayName: function(){
             var u = this.get('username');
             var s = this.get('screenname');

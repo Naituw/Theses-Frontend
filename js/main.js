@@ -6,6 +6,7 @@ require.config({
 		'handlebars': 'vendor/handlebars-1.0.rc.1',
 		'ember': 'vendor/ember-1.0.0-pre.2',
 		'bootstrap': 'vendor/bootstrap.min',
+		'tpl':'template/templates',
 	},
 	shim: {
 		'handlebars': ['jquery'],

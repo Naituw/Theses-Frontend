@@ -1,6 +1,6 @@
-define(['app','text!template/m/titles_verify.hbs','text!template/views/review_title_cell.hbs'],function(app,tpl,cellTpl){
+define(['app'],function(app){
 	app.ReviewTitleCell = Em.View.extend({
-		template: Em.Handlebars.compile(cellTpl),
+		template: app.template('views/review_title_cell'),
 		classNames: ['review-title-cell'],
 
 		opened: false,
@@ -60,7 +60,7 @@ define(['app','text!template/m/titles_verify.hbs','text!template/views/review_ti
 		}.property('title','Theses.majorsManager.departments.@each'),
 	});
 	app.TitlesVerifyView = Em.View.extend({
-		template: Em.Handlebars.compile(tpl),
+		template: app.template('m/titles_verify'),
 	});
 	app.TitlesVerifyController = Em.Controller.extend({
 		target: function(){

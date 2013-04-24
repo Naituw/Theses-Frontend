@@ -1,6 +1,6 @@
-define(['app','text!template/m/titles_mine.hbs'],function(app,tpl){
+define(['app'],function(app){
 	app.TitlesMineView = Em.View.extend({
-		template: Em.Handlebars.compile(tpl),
+		template: app.template('m/titles_mine'),
 	});
 	app.TitlesMineController = Em.Controller.extend({
 		target: function(){

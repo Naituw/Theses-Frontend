@@ -1,7 +1,6 @@
-define(['app','text!template/message.hbs','text!template/views/conversation_row.hbs',
-    'text!template/views/message_row.hbs'],function(app,tpl,conTpl,mesTpl){
+define(['app'],function(app){
 	app.ConversationRow = Em.View.extend({
-        template: Em.Handlebars.compile(conTpl),
+        template: app.template('views/conversation_row'),
         conversation: null,
         selected: function(){
             var sid = this.get('controller.selectedConversationID');
@@ -14,7 +13,7 @@ define(['app','text!template/message.hbs','text!template/views/conversation_row.
         },
     });
     app.MessageRow = Em.View.extend({
-        template: Em.Handlebars.compile(mesTpl),
+        template: app.template('views/message_row'),
         doubleClick: function(){
             if (!this.content || !this.content.failed) return;
             var c = this.get('controller');
@@ -24,7 +23,7 @@ define(['app','text!template/message.hbs','text!template/views/conversation_row.
         },
     });
     app.MessageView = Em.View.extend({
-		template: Em.Handlebars.compile(tpl),
+		template: app.template('message'),
 	});
 	app.MessageController = Em.Controller.extend({
 		target: function(){

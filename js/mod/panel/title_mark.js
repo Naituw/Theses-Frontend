@@ -1,6 +1,6 @@
-define(['app','text!template/panel/title_mark.hbs'],function(app,tpl){
+define(['app'],function(app){
 	app.TitleMarkView = Em.View.extend({
-		template: Em.Handlebars.compile(tpl),
+		template: app.template('panel/title_mark'),
 		didInsertElement: function(){
 			var controller = this.get('controller');
 			if (controller && controller.viewDidLoad) controller.viewDidLoad();

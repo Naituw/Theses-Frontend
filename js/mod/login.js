@@ -1,6 +1,6 @@
-define(['app','text!template/login.hbs','router'],function(app,tpl){
+define(['app','router'],function(app){
 	app.LoginView = Em.View.extend({
-		template: Em.Handlebars.compile(tpl),
+		template: app.template('login'),
 		didInsertElement: function ()
         {
             this.$().fadeOut(0);

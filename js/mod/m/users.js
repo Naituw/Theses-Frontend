@@ -1,6 +1,6 @@
-define(['app','text!template/m/users.hbs','views/views'],function(app,tpl){
+define(['app','views/views'],function(app){
 	app.UsersView = Em.View.extend({
-		template: Em.Handlebars.compile(tpl),
+		template: app.template('m/users'),
 		didInsertElement: function(){
 			var m = app.majorsManager;
 			if (m.get('needsReload')){

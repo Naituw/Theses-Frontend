@@ -1,6 +1,6 @@
-define(['app','text!template/m/title_chosen.hbs','text!template/views/chosen_title_cell.hbs'],function(app,tpl,cellTpl){
+define(['app'],function(app){
 	app.ChosenTitleCell = Em.View.extend({
-		template: Em.Handlebars.compile(cellTpl),
+		template: app.template('views/chosen_title_cell'),
 		classNames: ['review-title-cell'],
 
 		opened: false,
@@ -79,7 +79,7 @@ define(['app','text!template/m/title_chosen.hbs','text!template/views/chosen_tit
 	});
 
 	app.TitleChosenView = Em.View.extend({
-		template: Em.Handlebars.compile(tpl),
+		template: app.template('m/title_chosen'),
 	});
 	app.TitleChosenController = Em.Controller.extend({
 		target: function(){

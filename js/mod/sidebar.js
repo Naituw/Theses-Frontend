@@ -1,6 +1,6 @@
-define(['app','text!template/sidebar.hbs'],function(app,tpl){
+define(['app'],function(app){
 	app.SidebarView = Em.View.extend({
-		template: Em.Handlebars.compile(tpl),
+		template: app.template('sidebar'),
 	});
 	app.SidebarController = Em.Controller.extend({
 		target: function(){

@@ -1,6 +1,6 @@
-define(['app','text!template/panel/settings.hbs'],function(app,tpl){
+define(['app'],function(app){
 	app.PanelSettingsView = Em.View.extend({
-		template: Em.Handlebars.compile(tpl),
+		template: app.template('panel/settings'),
 		pending: false,
         validation: function(oldpsw, psw, repsw){
         	var pswReg = /^[^\s]{6,20}$/;

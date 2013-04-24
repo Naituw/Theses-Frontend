@@ -4,7 +4,7 @@
  * 2012.11.02
  */
 
-define(["jquery",'text!template/alert.hbs',"plugins","handlebars", "ember", "bootstrap","vendor/theses.ui"],function(v,alertTpl){
+define(["jquery","plugins","handlebars", "ember", "bootstrap","vendor/theses.ui"],function(v){
 	Theses = Ember.Application.create({
 		VERSION: '1.0',
 		rootElement: '#theses-app',
@@ -48,10 +48,6 @@ define(["jquery",'text!template/alert.hbs',"plugins","handlebars", "ember", "boo
 		setTimeout(arguments.callee, 10 * 1000);
 	})(Theses);
 
-	// Alert View .
-	Theses.AlertView = Em.View.extend({
-		template: Em.Handlebars.compile(alertTpl),
-	});
 	Theses.showAlert = function(title,desc,type){
 		var type = type || 'warning';
 
@@ -91,9 +87,21 @@ define(["jquery",'text!template/alert.hbs',"plugins","handlebars", "ember", "boo
 		$('body').removeClass('modal-enabled');
 	}
 
+	Theses.processTemplate = function(name, tpl){
+		Ember.TEMPLATES[name] = Em.Handlebars.compile(tpl);
+	};
+	Theses.template = function(name){
+		return Ember.TEMPLATES[name];
+	};
+
 	Handlebars.registerHelper('icon', function(property, options) {
 	    var value = Ember.Handlebars.get(this, property, options);
 	    return new Handlebars.SafeString('<i class="icon icon-'+value+'"></i>');
+	});
+
+	// Alert View .
+	Theses.AlertView = Em.View.extend({
+		template: Theses.template('alert'),
 	});
 
 	return Theses;

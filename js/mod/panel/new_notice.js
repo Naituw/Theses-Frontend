@@ -1,6 +1,6 @@
-define(['app','text!template/panel/new_notice.hbs'],function(app,tpl){
+define(['app'],function(app){
 	app.NewNoticeView = Em.View.extend({
-		template: Em.Handlebars.compile(tpl),
+		template: app.template('panel/new_notice'),
 		didInsertElement: function(){
 			var controller = this.get('controller');
 			if (controller && controller.viewDidLoad) controller.viewDidLoad();

@@ -1,6 +1,6 @@
-define(['app','text!template/m/titles_admin.hbs'],function(app,tpl){
+define(['app'],function(app){
 	app.TitlesAdminView = Em.View.extend({
-		template: Em.Handlebars.compile(tpl),
+		template: app.template('titles_admin'),
 	});
 	app.TitlesAdminController = Em.Controller.extend({
 		

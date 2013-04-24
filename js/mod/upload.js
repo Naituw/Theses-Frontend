@@ -1,4 +1,4 @@
-define(['app','text!template/upload.hbs'],function(app,tpl){
+define(['app'],function(app){
 	app.UploadItemView = Em.View.extend({
 		classNames: ['upload-item'],
 		task: null,
@@ -23,7 +23,7 @@ define(['app','text!template/upload.hbs'],function(app,tpl){
 	});
 
 	app.UploadPanelView = Em.View.extend({
-        template: Em.Handlebars.compile(tpl),
+        template: app.template('upload'),
     });
 
     app.UploadPanelController = Em.Controller.extend({

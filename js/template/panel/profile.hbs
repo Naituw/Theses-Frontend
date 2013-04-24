@@ -42,9 +42,31 @@
                                         <label>邮箱：</label>  
                                     </div>
                                     <div class="controls">
-                                        <input type="text" placeholder="请输入电子邮箱…" name='email' {{bindAttr value='currentUser.email'}}>
+                                        {{view Theses.NameTextField placeholder="请输入电子邮箱…" name="email" valueBinding="email"}}
                                     </div>
                                 </div>
+                                {{#if showsEmailVerificationInfo}}
+                                <div class="control-group">
+                                    <div class="control-label">
+                                        <label></label>
+                                    </div>
+                                    <div class="controls email-verification-info">
+                                        {{#if currentUser.email_verified}}
+                                            <span class="text-success">邮箱已通过验证</span>
+                                        {{else}}
+                                            {{#if currentUser.verifyEmailSended}}
+                                                <span class="text-info">验证邮件已发送</span>
+                                                {{#if showsResendEmailButton}}
+                                                    <button class="btn btn-mini">重新发送</button>
+                                                {{/if}}
+                                            {{else}}
+                                                <span class="text-error">尚未验证此邮箱</span>
+                                                <button class="btn btn-mini btn-primary">发送验证邮件</button>
+                                            {{/if}}
+                                        {{/if}}
+                                    </div>
+                                </div>
+                                {{/if}}
                             </fieldset>
                         </div> 
                         <footer> 

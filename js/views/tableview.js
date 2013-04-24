@@ -1,5 +1,6 @@
-define(['app','text!template/views/tableview.hbs'],function(app,tpl){
+define(['app'],function(app){
 	app.TableView = Em.View.extend({
+		template: app.template('views/tableview'),
 		tagName: 'table',
 		classNames: ['table', 'table-bordered', 'table-hover', 'table-striped'],
 		itemViewClass: app.TableViewRow,

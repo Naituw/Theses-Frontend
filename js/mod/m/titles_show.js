@@ -1,6 +1,6 @@
-define(['app','text!template/m/titles_show.hbs'],function(app,tpl){
+define(['app'],function(app){
 	app.TitlesShowView = Em.View.extend({
-		template: Em.Handlebars.compile(tpl),
+		template: app.template('m/titles_show'),
 		uploadButtonPressed: function(){
 			var that = this;
 			var input = this.$().find('#upload-document-input');

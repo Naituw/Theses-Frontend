@@ -43,6 +43,11 @@ define(['app','views/tableview','views/teachercell'],function(app){
 		validateDelegate: null,
 	});
 
+
+	app.NameTextField = Ember.TextField.extend({
+		attributeBindings: ['name'],
+	});
+
 	app.TextField = Ember.View.extend(app.Focusable, app.AsyncValidation, {
 		classNames: ['control-group','theses-text-field'],
 		inputClassNames: ['span12'],

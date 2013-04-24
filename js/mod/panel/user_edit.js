@@ -1,6 +1,6 @@
-define(['app','text!template/panel/user_edit.hbs'],function(app, tpl){
+define(['app'],function(app){
 	app.UserEditView = Em.View.extend({
-		template: Em.Handlebars.compile(tpl),
+		template: app.template('panel/user_edit'),
 		foreachTextField: function(func){
 			this.$().find('.theses-text-field').each(func);
 		},

@@ -1,5 +1,6 @@
-define(['app','text!template/panel/apply_title.hbs'],function(app,tpl){
+define(['app'],function(app){
 	app.ApplyTitleView = Em.View.extend({
+		template: app.template('panel/apply_title'),
 	});
 	app.ApplyTitleController = Em.Controller.extend({
 	});
