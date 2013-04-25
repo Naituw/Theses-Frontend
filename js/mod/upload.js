@@ -11,12 +11,7 @@ define(['app'],function(app){
 			var p = this.get('progress');
 			return 'width:' + p + '%;';
 		}.property('progress'),
-		template: Em.Handlebars.compile('<h4>{{desc}}</h4>\
-			<a class="upload-cancel" {{action remove target="view"}}><i class="icon-remove"></i></a>\
-			<span>{{view.progress}}%</span>\
-			<div class="progress progress-striped active">\
-	  			<div class="bar" {{bindAttr style="view.progressBarStyle"}}></div>\
-			</div>'),
+		template: app.template('v/upload_item_view'),
 		remove: function(){
 			this.get('controller').cancelTask(this.task);
 		},

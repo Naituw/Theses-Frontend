@@ -1,0 +1,9 @@
+<div class="search-fields paging page-controls">
+	<a {{bindAttr class=":btn view.hasPrevious::disabled"}} {{action prevPage href=true target="view"}}>
+		上一页
+	</a>
+	第 {{view.page}} 页
+	<a {{bindAttr class=":btn view.hasNext::disabled"}} {{action nextPage href=true target="view"}}>
+		下一页
+	</a>
+</div>

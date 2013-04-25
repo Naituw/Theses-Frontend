@@ -73,7 +73,7 @@ define(['app','views/tableview','views/teachercell'],function(app){
 			}
 			return false;
 		}.property('code'),
-		template: Em.Handlebars.compile('{{#if view.title}}<label class="control-label">{{view.title}}</label>{{/if}}<div class="controls">{{view Ember.TextField placeholderBinding="view.placeholder" valueBinding="view.value" typeBinding="view.type" classNameBindings="view.inputClassNames"}} {{#if view.hasMessage}}<span class="help-inline">{{view.message}}</span>{{/if}}</div>'),
+		template: app.template('v/textfield'),
 	});
 
 	app.Select = Em.Select.extend({
@@ -106,11 +106,11 @@ define(['app','views/tableview','views/teachercell'],function(app){
 	});
 
 	app.LoadingView = Em.View.extend({
-		template: Em.Handlebars.compile('<section class="loading-section"><div class="loading-view loading-background"></div></section>'),
+		template: app.template('v/loadingview'),
 	});
 	app.PromptView = Em.View.extend({
 		text: '',
-		template: Em.Handlebars.compile('<section class="prompt-section">{{view.text}}</section>'),
+		template: app.template('v/promptview'),
 	});
 
 	app.PagingView = Em.View.extend({
@@ -119,11 +119,7 @@ define(['app','views/tableview','views/teachercell'],function(app){
 		hasPrevious: function(){
 			return this.get('page') > 1;
 		}.property('page'),
-		template: Em.Handlebars.compile('<div class="search-fields paging page-controls"> \
-			<a {{bindAttr class=":btn view.hasPrevious::disabled"}} {{action prevPage href=true target="view"}}>上一页</a> \
-					第 {{view.page}} 页 \
-					<a {{bindAttr class=":btn view.hasNext::disabled"}} {{action nextPage href=true target="view"}}>下一页</a> \
-				</div>'),
+		template: app.template('v/pagingview'),
 		prevPage: function(){
 			if (this.get('hasPrevious')){
 				this.set('page',this.get('page') - 1);
@@ -138,16 +134,13 @@ define(['app','views/tableview','views/teachercell'],function(app){
 
 	app.WrongTimeView = Em.View.extend({
 		name: "",
-		template: Em.Handlebars.compile('<div class="wrong-time-wrapper"><p class="wrong-time-description">\
-			<strong>现在不是{{view.name}}时间</strong><br>请前往<a href="/#/dashboard">管理中心</a>查看时间安排\
-			</p></div>'),
+		template: app.template('v/wrongtime_view'),
 	});
 
 	app.TitleCell = Em.View.extend({
 		classNames: ['row-fluid','title-cell'],
 		title: null,
-		template: Em.Handlebars.compile('<div class="span12">\
-			{{#with view.title}}<h4>{{title}}</h4><span {{bindAttr class="view.stateClass"}}>{{stateName}}</span>{{/with}}</div>'),
+		template: app.template('v/titlecell'),
 		click: function(){
 			app.router.transitionTo('titlesShow',this.title);
 		},
@@ -181,11 +174,7 @@ define(['app','views/tableview','views/teachercell'],function(app){
 			if (dept) result.pushObject(dept.name);
 			return result.join('，');
 		}.property('user','user.departmentInfo','user.majorInfo'),
-		template: Em.Handlebars.compile('{{view Theses.MessageAvatarView userBinding="view.user" class="pull-left"}}\
-							<div class="user-info">\
-								<label>{{view.lineOne}}</label>\
-								<label>{{view.lineTwo}}</label>\
-							</div>'),
+		template: app.template('v/usercell'),
 	});
 	app.UserSelectionCell = app.UserCell.extend({
 		selection: null,
@@ -208,14 +197,7 @@ define(['app','views/tableview','views/teachercell'],function(app){
 			var a = this.clickAction;
 			if (a) a(this.user, this.selection, this.get('controller'));
 		},
-		template: Em.Handlebars.compile('{{view Theses.MessageAvatarView userBinding="view.user" class="pull-left"}}\
-							<div class="user-info">\
-								<label>{{view.lineOne}}</label>\
-								<label>{{view.lineTwo}}</label>\
-								{{#if view.selection.articleScore}}<label {{bindAttr class="view.articleScoreClass"}}>论文得分：{{view.selection.articleScore}}</label>{{/if}}\
-								{{#if view.selection.oralScore}}<label {{bindAttr class="view.oralScoreClass"}}>答辩得分：{{view.selection.oralScore}}</label>{{/if}}\
-								{{#if view.hasComment}}<label class="text-info">导师评价：{{view.selection.comment}}</label>{{/if}}\
-							</div>'),
+		template: app.template('v/userselection_cell'),
 	});
 
 	app.DocumentCell = Em.View.extend({
@@ -293,18 +275,7 @@ define(['app','views/tableview','views/teachercell'],function(app){
 			}
 		},
 
-		template: Em.Handlebars.compile('\
-			{{#if view.pendingDelete}}{{view Theses.LoadingView}}{{else}}\
-					<div class="filetype pull-left">\
-						<div {{bindAttr class="view.fileType"}}></div>\
-					</div>\
-					<div class="document-info">\
-						<h4>{{view.doc.displayName}}</h4>\
-						<span>{{view.lineTwo}}</span>\
-					</div>\
-					{{#if view.canDelete}}\
-						<button class="close" {{action delete target="view" bubbles=false}}>&times;</button>\
-					{{/if}}{{/if}}'),
+		template: app.template('v/document_cell'),
 	});
 
 	app.MessageAvatarView = Em.View.extend({
@@ -331,16 +302,7 @@ define(['app','views/tableview','views/teachercell'],function(app){
 		callback: function(){},
 	});
 	app.DropdownButton = Em.View.extend({
-		template: Em.Handlebars.compile('<div class="btn-group"> \
-			<button class="btn dropdown-toggle" data-toggle="dropdown">\
-				{{view.title}} \
-				<span class="caret"></span>\
-			</button> \
-			<ul class="dropdown-menu"> \
-				{{#each view.items}}\
-					<li><a>{{title}}</a></li>\
-				{{/each}}\
-			</ul> </div>'),
+		template: app.template('v/dropdown_button'),
 		title: null,
 		items: Em.A(),
 

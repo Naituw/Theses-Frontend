@@ -33,6 +33,18 @@ var RequiredTemplateNames = [
 	'views/review_title_cell',
 	'views/tableview',
 	'views/teachercell',
+
+	'v/document_cell',
+	'v/dropdown_button',
+	'v/loadingview',
+	'v/pagingview',
+	'v/promptview',
+	'v/textfield',
+	'v/titlecell',
+	'v/upload_item_view',
+	'v/usercell',
+	'v/userselection_cell',
+	'v/wrongtime_view',
 ];
 
 var RequiredFilesForTemplate = ['app'];

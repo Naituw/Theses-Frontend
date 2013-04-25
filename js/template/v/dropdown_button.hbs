@@ -1,0 +1,11 @@
+<div class="btn-group">
+	<button class="btn dropdown-toggle" data-toggle="dropdown">
+		{{view.title}} 
+		<span class="caret"></span>
+	</button> 
+	<ul class="dropdown-menu"> 
+		{{#each view.items}}
+			<li><a>{{title}}</a></li>
+		{{/each}}
+	</ul> 
+</div>

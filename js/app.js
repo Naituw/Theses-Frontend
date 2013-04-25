@@ -88,6 +88,10 @@ define(["jquery","plugins","handlebars", "ember", "bootstrap","vendor/theses.ui"
 	}
 
 	Theses.processTemplate = function(name, tpl){
+		if (!Em.Handlebars.compile) {
+			console.warning('Current using handlebars.runtime, Should not use this function');
+			return;
+		}
 		Ember.TEMPLATES[name] = Em.Handlebars.compile(tpl);
 	};
 	Theses.template = function(name){

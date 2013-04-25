@@ -1,0 +1,13 @@
+{{#if view.title}}
+	<label class="control-label">
+		{{view.title}}
+	</label>
+{{/if}}
+<div class="controls">
+	{{view Ember.TextField placeholderBinding="view.placeholder" valueBinding="view.value" typeBinding="view.type" classNameBindings="view.inputClassNames"}} 
+	{{#if view.hasMessage}}
+		<span class="help-inline">
+			{{view.message}}
+		</span>
+	{{/if}}
+</div>

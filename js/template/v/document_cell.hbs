@@ -1,0 +1,14 @@
+{{#if view.pendingDelete}}
+	{{view Theses.LoadingView}}
+{{else}}
+	<div class="filetype pull-left">
+		<div {{bindAttr class="view.fileType"}}></div>
+	</div>
+	<div class="document-info">
+		<h4>{{view.doc.displayName}}</h4>
+		<span>{{view.lineTwo}}</span>
+	</div>
+	{{#if view.canDelete}}
+		<button class="close" {{action delete target="view" bubbles=false}}>&times;</button>
+	{{/if}}
+{{/if}}

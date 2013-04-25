@@ -1,0 +1,20 @@
+{{view Theses.MessageAvatarView userBinding="view.user" class="pull-left"}}
+<div class="user-info">
+	<label>{{view.lineOne}}</label>
+	<label>{{view.lineTwo}}</label>
+	{{#if view.selection.articleScore}}
+		<label {{bindAttr class="view.articleScoreClass"}}>
+			论文得分：{{view.selection.articleScore}}
+		</label>
+	{{/if}}
+	{{#if view.selection.oralScore}}
+		<label {{bindAttr class="view.oralScoreClass"}}>
+			答辩得分：{{view.selection.oralScore}}
+		</label>
+	{{/if}}
+	{{#if view.hasComment}}
+		<label class="text-info">
+			导师评价：{{view.selection.comment}}
+		</label>
+	{{/if}}
+</div>
