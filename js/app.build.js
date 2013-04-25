@@ -9,7 +9,7 @@
 		'handlebars': 'vendor/handlebars.runtime',
 		'ember': 'vendor/ember-1.0.0-pre.2.min',
 		'bootstrap': 'vendor/bootstrap.min',
-        'tpl':'template/tpl',
+        'tpl':'template/templates_precompiled',
     },
     
     modules: [

@@ -21,7 +21,7 @@ for (var i = 0; i < dirs.length; i++) {
 	hbs.push(tplPath + '/' + dir + '/*.hbs');
 };
 
-var targetFile = tplPath + '/tpl.js';
+var targetFile = tplPath + '/templates_precompiled.js';
 
 // 如果 tpl.js 文件存在，则先删除
 if(fs.existsSync(targetFile)) fs.unlinkSync(targetFile);
