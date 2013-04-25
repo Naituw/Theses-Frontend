@@ -1,4 +1,44 @@
 define(['app','views/tableview','views/teachercell'],function(app){
+
+	// Alert View .
+	app.AlertView = Em.View.extend({
+		template: Theses.template('alert'),
+	});
+
+	app.showAlert = function(title,desc,type){
+		var type = type || 'warning';
+
+		var alertView = Theses.AlertView.create({
+			title: title,
+			description: desc,
+		});
+
+		alertView.appendTo('#app-alerts');
+
+		Em.run.next(function(){
+			var innerView = alertView.$('section');
+
+			innerView.addClass('alert-'+type).animate({top:'0',opacity:1},400,function(){
+				Em.run.later(function(){
+					innerView.animate({top:'-120px',opacity:0},400,function(){
+						alertView.remove();
+					});
+				},2000);
+			});
+		});
+	}
+	app.showError = function(title,desc){
+		Theses.showAlert(title,desc,'error');
+	}
+	app.showSuccess = function(title,desc){
+		Theses.showAlert(title,desc,'success');
+	}
+	app.showWarning = function(title,desc){
+		Theses.showAlert(title,desc,'warning');
+	}
+
+
+
 	app.Focusable = Em.Mixin.create({
 		focused: false,
 		focusIn: function(e){

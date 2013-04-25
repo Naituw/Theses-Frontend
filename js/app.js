@@ -48,37 +48,6 @@ define(["jquery","plugins","handlebars", "ember", "bootstrap","vendor/theses.ui"
 		setTimeout(arguments.callee, 10 * 1000);
 	})(Theses);
 
-	Theses.showAlert = function(title,desc,type){
-		var type = type || 'warning';
-
-		var alertView = Theses.AlertView.create({
-			title: title,
-			description: desc,
-		});
-
-		alertView.appendTo('#app-alerts');
-
-		Em.run.next(function(){
-			var innerView = alertView.$('section');
-
-			innerView.addClass('alert-'+type).animate({top:'0',opacity:1},400,function(){
-				Em.run.later(function(){
-					innerView.animate({top:'-120px',opacity:0},400,function(){
-						alertView.remove();
-					});
-				},2000);
-			});
-		});
-	}
-	Theses.showError = function(title,desc){
-		Theses.showAlert(title,desc,'error');
-	}
-	Theses.showSuccess = function(title,desc){
-		Theses.showAlert(title,desc,'success');
-	}
-	Theses.showWarning = function(title,desc){
-		Theses.showAlert(title,desc,'warning');
-	}
 
 	Theses.startModal = function(){
 		$('body').addClass('modal-enabled');
@@ -106,11 +75,6 @@ define(["jquery","plugins","handlebars", "ember", "bootstrap","vendor/theses.ui"
 	Handlebars.registerHelper('icon', function(property, options) {
 	    var value = Ember.Handlebars.get(this, property, options);
 	    return new Handlebars.SafeString('<i class="icon icon-'+value+'"></i>');
-	});
-
-	// Alert View .
-	Theses.AlertView = Em.View.extend({
-		template: Theses.template('alert'),
 	});
 
 	return Theses;

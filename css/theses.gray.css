@@ -1292,6 +1292,12 @@ form.update-profile fieldset.reset-password textarea {
   text-overflow: ellipsis;
   -o-text-overflow: ellipsis;
 }
+.document-cell .document-info span img {
+  width: 18px;
+  height: 18px;
+  margin-right: 10px;
+  border-radius: 3px;
+}
 .document-cell .close {
   position: absolute;
   right: 15px;
