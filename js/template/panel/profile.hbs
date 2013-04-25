@@ -57,11 +57,11 @@
                                             {{#if currentUser.verifyEmailSended}}
                                                 <span class="text-info">验证邮件已发送</span>
                                                 {{#if showsResendEmailButton}}
-                                                    <button class="btn btn-mini">重新发送</button>
+                                                    <button class="btn btn-mini" {{action reverify}}>重新发送</button>
                                                 {{/if}}
                                             {{else}}
                                                 <span class="text-error">尚未验证此邮箱</span>
-                                                <button class="btn btn-mini btn-primary">发送验证邮件</button>
+                                                <button class="btn btn-mini btn-primary" {{action reverify}}>发送验证邮件</button>
                                             {{/if}}
                                         {{/if}}
                                     </div>

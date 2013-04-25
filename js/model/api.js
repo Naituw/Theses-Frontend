@@ -28,7 +28,7 @@ define(['app'],function(app){
 			var successCallback = function(data, textStatus, jqXHR){
 				if (callback) {
 					if (data) {
-						if (data.code != 200) callback(null, data);
+						if (data.code != 200) callback(data.object, data);
 						else callback(data.object, null);
 					}
 					else {
@@ -39,8 +39,12 @@ define(['app'],function(app){
 
 			var errorCallback = function(jqXHR,textStatus,errorThrown){
 				var data = jqXHR.responseText;
+				var object = null;
 				try{
-					if (data) data = JSON.parse(data);
+					if (data) {
+						data = JSON.parse(data);
+						object = data.object;
+					}
     			}catch(e){
         			data = {code:500,message:"服务器内部错误"};
     			}
@@ -53,7 +57,7 @@ define(['app'],function(app){
     			if (!data.message) data.message = "未知错误";
 				data.errorThrown = errorThrown;
 				data.aborted = (textStatus == "abort");
-				if (callback) callback(null, data);
+				if (callback) callback(object, data);
 			};
 
 			var completeCallback = function(jqXHR, textStatus){
@@ -323,6 +327,11 @@ define(['app'],function(app){
 		},
 		deleteNotification: function(notificationid,callback){
 			this.POST('notification/delete.json',{notificationid:notificationid},callback);
-		}
+		},
+
+		// Email Verify
+		verifyEmail: function(callback){
+			this.POST('account/verify_email.json',{},callback);
+		},
 	});
 });

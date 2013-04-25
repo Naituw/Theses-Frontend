@@ -79,6 +79,9 @@ define(['app'],function(app){
         },
 	});
 	app.PanelProfileController = Em.Controller.extend({
+        target: function(){
+            return this;
+        }.property(),
         currentUser: function(){
             var account = app.get('accountManager').get('currentAccount');
             if (account) return account.get('user');
@@ -107,5 +110,24 @@ define(['app'],function(app){
             var maxDelta = 30 * 60 * 1000; // 30 min
             return (delta >= maxDelta);
         }.property('currentUser.email_verified','currentUser.last_email_sent','Theses.currentTime'),
+
+        pendingReverify: false,
+        reverify: function(){
+            var api = app.currentAPI();
+            var that = this;
+            if (this.get('pendingReverify')) return;
+            if (!api) return;
+
+            that.set('pendingReverify',true);
+            api.verifyEmail(function(data,error){
+                that.set('pendingReverify',false);
+                if (error){
+                    app.showError('重发验证邮件失败',error.message);
+                }
+                if (data && data.userid){
+                    app.accountManager.updateCurrentAccountWithData(data);
+                }
+            });
+        },
 	});
 });
