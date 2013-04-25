@@ -57,9 +57,18 @@ for (var i = 0; i < RequiredTemplateNames.length; i++) {
 define(RequiredFilesForTemplate, function(){
 	var app = arguments[0];
 
+	var before = new Date();
+	console.log('template process begin : ' + before);
+	console.log('template count: ' + (arguments.length - 1));
+
 	for (var i = 1; i < arguments.length; i++) {
 		var name = RequiredTemplateNames[i - 1];
 		var value = arguments[i];
 		app.processTemplate(name,value);
 	};
+
+	var end = new Date();
+	console.log('template process finish : ' + end);
+
+	console.log('template process time: ' + (end.getTime() - before.getTime()) + ' ms');
 });

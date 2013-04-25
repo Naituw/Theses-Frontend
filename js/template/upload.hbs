@@ -1,7 +1,7 @@
 <div id="upload-panel" class="desktop">
 	<div id='upload-list' class="clearfix">
 		<a id='upload-list-switch' {{action togglePanel}}>
-			<i {{bindAttr class='opened:icon-chevron-down:icon-chevron-up'}} class=""></i>
+			<i {{bindAttr class="opened:icon-chevron-down:icon-chevron-up"}} class=""></i>
 		</a>
 		{{#each Theses.uploadManager.tasks}}
 			{{view Theses.UploadItemView task=this}}

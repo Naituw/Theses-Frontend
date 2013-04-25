@@ -95,7 +95,12 @@ define(["jquery","plugins","handlebars", "ember", "bootstrap","vendor/theses.ui"
 		Ember.TEMPLATES[name] = Em.Handlebars.compile(tpl);
 	};
 	Theses.template = function(name){
-		return Ember.TEMPLATES[name];
+		var result = Ember.TEMPLATES[name];
+		if (!result) result = Ember.TEMPLATES[name + '.hbs'];
+		var lastName = name.split('/').slice(-1)[0];
+		if (!result) result = Ember.TEMPLATES[lastName];
+		if (!result) result = Ember.TEMPLATES[lastName + '.hbs'];
+		return result;
 	};
 
 	Handlebars.registerHelper('icon', function(property, options) {

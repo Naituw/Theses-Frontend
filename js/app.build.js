@@ -6,9 +6,10 @@
     paths: {
 	    "jquery": "vendor/jquery-1.7.2.min",
         'plugins': 'vendor/jquery.plugins',
-		'handlebars': 'vendor/handlebars-1.0.rc.1',
-		'ember': 'vendor/ember-1.0.0-pre.2',
+		'handlebars': 'vendor/handlebars.runtime',
+		'ember': 'vendor/ember-1.0.0-pre.2.min',
 		'bootstrap': 'vendor/bootstrap.min',
+        'tpl':'template/tpl',
     },
     
     modules: [
