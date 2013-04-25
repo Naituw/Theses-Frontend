@@ -1,4 +1,5 @@
 Building Steps:
 
 1.install node
-2.run 'node r.js -o ../js/app.build.js'
+2.install ember-precompile (https://github.com/gabrielgrant/node-ember-precompile)
+3.run 'node build.js'

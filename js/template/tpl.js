@@ -1,5 +1,4 @@
-define(['app'],function(app){
-Ember.TEMPLATES["alert.hbs"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data
+define(['app'],function(app){Ember.TEMPLATES["alert.hbs"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data
 /**/) {
 helpers = helpers || Ember.Handlebars.helpers;
   var buffer = '', stack1, stack2, stack3, foundHelper, tmp1, self=this, escapeExpression=this.escapeExpression;
