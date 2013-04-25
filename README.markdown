@@ -6,8 +6,9 @@ Theses论文管理系统的前端，基于Ember.js实现。
 
 项目的js文件使用AMD进行依赖管理，由于js文件众多，在正式部署时需要进行编译，编译的步骤为：
 
-1. 安装Nodejs
-2. 使用r.js编译工具[进行编译](http://requirejs.org/docs/optimization.html#wholeproject)
+1.安装 node
+2.安装 ember-precompile (https://github.com/gabrielgrant/node-ember-precompile)
+3.运行 'node building/build.js'
 
 在开发调试时，可以免去编译步骤以提高开发效率
 
