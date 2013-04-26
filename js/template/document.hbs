@@ -1,0 +1,12 @@
+{{#if opened}}
+<div {{bindAttr class=":overlay active:active:unactive"}} {{action overlayPressed target="view"}}>
+    <div class="cover">
+    	{{#if loadingTemplate}}
+    		<div class='document-loading'>
+    			<i class="loading-background"/>
+    			<span>正在加载模板...</span>
+    		</div>
+    	{{/if}}
+    </div>
+</div>
+{{/if}}

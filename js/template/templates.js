@@ -7,6 +7,7 @@ var RequiredTemplateNames = [
 	'overlay',
 	'sidebar',
 	'upload',
+	'document',
 
 	'm/dashboard',
 	'm/majors',

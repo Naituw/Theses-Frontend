@@ -936,6 +936,11 @@ form.update-profile fieldset.reset-password textarea {
 .widget-title [class^="icon-"],.widget-title [class*=" icon-"] {
   margin-top: -1px;
 }
+.widget-title .dropdown-menu [class^="icon-"],.widget-title .dropdown-menu [class*=" icon-"] {
+  margin-top: 1px;
+  margin-left: -8px;
+  margin-right: 6px;
+}
 .widget-title .buttons {
   position: absolute;
   top: 0;
@@ -1462,4 +1467,13 @@ form.update-profile fieldset.reset-password textarea {
 
 .email-verification-info button {
   float: right;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.dropdown-menu.bottom-up {
+  top: auto;
+  bottom: 100%;
 }

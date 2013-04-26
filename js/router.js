@@ -72,6 +72,7 @@ define(["app"],function(app){
 			    	router.get('mainController').connectOutlet('panel','panel');
 			    	router.get('mainController').connectOutlet('upload','uploadPanel');
 			    	router.get('mainController').connectOutlet('message','message');
+			    	router.get('mainController').connectOutlet('document','document');
 			    },
 			    index: app.Route.extend({
 			    	route: '/',

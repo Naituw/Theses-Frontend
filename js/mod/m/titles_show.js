@@ -19,6 +19,12 @@ define(['app'],function(app){
                 }
             });
 		},
+		newTypeTwoDocument: function(){
+			app.documentController.startComposeWithType(2);
+		},
+		newTypeThreeDocument: function(){
+			app.documentController.startComposeWithType(3);
+		},
 	});
 	app.TitlesShowController = Em.ObjectController.extend({
 		target: function(){
@@ -211,5 +217,7 @@ define(['app'],function(app){
 			if (this.get('teacher.userid') == uid) return true;
 			return false;
 		}.property('Theses.accountManager.currentAccount.user.userid','students.@each','teacher'),
+
+
 	});
 });

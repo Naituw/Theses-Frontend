@@ -1,0 +1,22 @@
+.document-loading {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-left: -66px;
+	margin-top: -56px;
+	width: 112px;
+	height: 92px;
+	padding: 10px;
+	background: white;
+	border-radius: 5px;
+	text-align: center;
+
+	box-shadow: 0 2px 5px black;
+	font-weight: 700;
+}
+i.loading-background {
+	width: 32px;
+	height: 32px;
+	display: block;
+	margin: 15px auto 5px;
+}

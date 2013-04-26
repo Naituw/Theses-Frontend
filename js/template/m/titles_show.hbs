@@ -103,16 +103,31 @@
 				<span class="icon"><i class="icon-file"></i></span>
 				<h5>文档列表</h5>
 				<div class="buttons">
+					{{#if canUploadDocument}}
+						<input id="upload-document-input" class="hidden-input" type="file" name="upload">
+						<div class="dropdown desktop inline-block">
+  							<a class="dropdown-toggle btn btn-mini" id="add-new-document" role="button" data-toggle="dropdown" data-target="#" href="/page.html">
+						    	<i class="icon-plus"></i> 添加文档
+						    <b class="caret"></b>
+						  </a>
+						  <ul class="dropdown-menu pull-right bottom-up" role="menu" aria-labelledby="add-new-document">
+							<li>
+								<a tabindex="-1" href="#" {{action uploadButtonPressed target="view"}}>
+									<i class="icon-upload"></i>从本地上传
+								</a>
+								<a tabindex="-1" href="#" {{action newTypeTwoDocument target="view"}}>
+									<i class="icon-book"></i>论文开题报告
+								</a>
+								<a tabindex="-1" href="#" {{action newTypeThreeDocument target="view"}}>
+									<i class="icon-book"></i>过程检查情况记录表
+								</a>
+							</li>
+						  </ul>
+						</div>
+					{{/if}}
 					<a href="#" class="btn btn-mini" {{action refreshDocuments href=true}}>
 						<i class="icon-refresh"></i> 刷新
 					</a>
-					{{#if canUploadDocument}}
-						<input id="upload-document-input" class="hidden-input" type="file" name="upload">
-
-						<a href="#" class="desktop btn btn-mini" {{action uploadButtonPressed target="view"}}>
-							<i class="icon-upload"></i> 上传新文档
-						</a>
-					{{/if}}
 				</div>
 			</div>
 			<div class="widget-content nopadding">
