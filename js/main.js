@@ -7,6 +7,7 @@ require.config({
 		'ember': 'vendor/ember-1.0.0-pre.2',
 		'bootstrap': 'vendor/bootstrap.min',
 		'tpl':'template/templates',
+		'router': 'router_v2',
 	},
 	shim: {
 		'handlebars': ['jquery'],
