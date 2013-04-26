@@ -34,6 +34,8 @@ define(["jquery","plugins","handlebars", "ember", "bootstrap","vendor/theses.ui"
 		},
 	});
 
+	Theses.deferReadiness();
+
 	(function(app){
 		for (var i = Theses._heartbeats.length - 1; i >= 0; i--) {
 			var func = Theses._heartbeats[i];

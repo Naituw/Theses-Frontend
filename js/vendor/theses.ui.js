@@ -1,8 +1,9 @@
 $(document).ready(function(){
 	// === Sidebar navigation === //
 	
-	$('.submenu > a').live('click',function(e)
+	$('.submenu').on('click','a',function(e)
 	{
+		if ($(this).parent() != $('.submenu')) return;
 		e.preventDefault();
 		var submenu = $(this).siblings('ul');
 		var li = $(this).parents('li');
@@ -30,7 +31,7 @@ $(document).ready(function(){
 		}
 	});
 		
-	$('#phone-dropdown').live('click',function(e)
+	$('#phone-dropdown').click(function(e)
 	{
 		var ul = $('#sidebar > ul');
 		
