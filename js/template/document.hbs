@@ -1,12 +1,66 @@
 {{#if opened}}
-<div {{bindAttr class=":overlay active:active:unactive"}} {{action overlayPressed target="view"}}>
+<div {{bindAttr class=":overlay active:active:unactive"}}>
     <div class="cover">
     	{{#if loadingTemplate}}
     		<div class='document-loading'>
-    			<i class="loading-background"/>
+    			<i class="loading-background"></i>
     			<span>正在加载模板...</span>
+    			<button class="btn" {{action cancelLoading}}>取消</button>
     		</div>
     	{{/if}}
+
+    	<div class="document-container">
+    		<div class="document-page">
+    			<header>
+    				<button class="btn pull-left">取消</button>
+    				<button class="btn pull-left">下载模板</button>
+    				<h4>本科生论文（设计）开题报告</h4>
+    				<button class="btn btn-primary pull-right">确认并上传</button>
+    			</header>
+    			<hr/>
+    			<section class="document-page-container">
+    				<table class="table table-bordered">
+    					<tr>
+    						<td class="text-center">课题</td><td colspan="5" class="input-cell"><input type="text"/></td>
+    					</tr>
+    					<tr>
+    						<td class="text-center">系</td><td class="input-cell"><input type="text"/></td>
+    						<td class="text-center">专业</td><td class="input-cell"><input type="text"/></td>
+    						<td class="text-center">学科</td><td class="input-cell"><input type="text"/></td>
+    					</tr>
+    					<tr>
+    						<td class="text-center">学生</td><td class="input-cell"><input type="text"/></td>
+    						<td class="text-center">指导教师</td><td class="input-cell"  colspan="3"><input type="text"/></td>
+    					</tr>
+    					<tr>
+    						<td colspan="6">
+    							<h5>课题来源及意义</h5>
+    							<textarea></textarea>
+    							<h5>国内外发展状况</h5>
+    							<textarea></textarea>
+    							<h5>研究目标、内容</h5>
+    							<textarea></textarea>
+    							<h5>方法、手段</h5>
+    							<textarea></textarea>
+    							<h5>进度安排</h5>
+    							<textarea></textarea>
+    							<h5>实验方案的可行性分析</h5>
+    							<textarea></textarea>
+    							<h5>实验条件</h5>
+    							<textarea></textarea>
+    							<h5>具体参考文献</h5>
+    							<textarea></textarea>
+    							<script type="text/javascript">
+    								$(function(){
+    									$('.document-page textarea').autogrow();
+    								});
+    							</script>
+    						</td>
+    					</tr>
+    				</table>
+    			</section>
+    		</div>
+    	</div>
     </div>
 </div>
 {{/if}}

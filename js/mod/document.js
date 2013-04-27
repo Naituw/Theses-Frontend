@@ -2,11 +2,6 @@ define(['app'],function(app){
 
 	app.DocumentView = Em.View.extend({
 		template: app.template('document'),
-		overlayPressed: function(e){
-			if (e.target != this.$().find('.cover')[0]) return;
-			var c = this.get('controller');
-			if (c && c.overlayPressed) c.overlayPressed.call(c,e);
-		},
 	});
 	app.DocumentController = Em.Controller.extend({
 		target: function(){
@@ -43,10 +38,10 @@ define(['app'],function(app){
             app.endModal();
 		},
 
-		overlayPressed: function(e){
+		cancelLoading: function(){
 			if (!this.get('opened') || !this.get('loadingTemplate')) return;
 			this.finishCompose();
-		},
+		}
 	});
 
 });

@@ -19,6 +19,19 @@ body {
 
 }
 
+.btn {
+  border: 1px solid #bbb;
+}
+.btn:active {
+  border: 1px solid #aaa;
+}
+.btn-primary {
+  border: 1px solid #666;
+}
+.btn-primary:active {
+  border: 1px solid #333;
+}
+
 .no-margin {
   margin: 0;
 }
@@ -943,7 +956,7 @@ form.update-profile fieldset.reset-password textarea {
 }
 .widget-title .buttons {
   position: absolute;
-  top: 0;
+  top: 1px;
   right: 0;
 }
 

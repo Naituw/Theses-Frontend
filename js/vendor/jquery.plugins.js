@@ -1091,3 +1091,66 @@ p(j,g[6]);g[7]=p(z,g[7])}"SHA-224"===c?C=[g[0],g[1],g[2],g[3],g[4],g[5],g[6]]:"S
 window.jsSHA=function(a,b,c){var f=r,d=r,e=0,k=[0],l=0,j=r,l="undefined"!==typeof c?c:8;8===l||16===l||n("charSize must be 8 or 16");"HEX"===b?(0!==a.length%2&&n("srcString of HEX type must be in byte increments"),j=w(a),e=j.binLen,k=j.value):"ASCII"===b||"TEXT"===b?(j=t(a,l),e=j.binLen,k=j.value):"B64"===b?(j=A(a),e=j.binLen,k=j.value):n("inputFormat must be HEX, TEXT, ASCII, or B64");this.getHash=function(a,b,c){var g=r,l=k.slice(),j="";switch(b){case "HEX":g=D;break;case "B64":g=E;break;default:n("format must be HEX or B64")}"SHA-224"===
 a?(r===f&&(f=$(l,e,a)),j=g(f,F(c))):"SHA-256"===a?(r===d&&(d=$(l,e,a)),j=g(d,F(c))):n("Chosen SHA variant is not supported");return j};this.getHMAC=function(a,b,c,d,f){var j,h,m,s,p,x=[],y=[],q=r;switch(d){case "HEX":j=D;break;case "B64":j=E;break;default:n("outputFormat must be HEX or B64")}"SHA-224"===c?(m=64,p=224):"SHA-256"===c?(m=64,p=256):n("Chosen SHA variant is not supported");"HEX"===b?(q=w(a),s=q.binLen,h=q.value):"ASCII"===b||"TEXT"===b?(q=t(a,l),s=q.binLen,h=q.value):"B64"===b?(q=A(a),
 s=q.binLen,h=q.value):n("inputFormat must be HEX, TEXT, ASCII, or B64");a=8*m;b=m/4-1;m<s/8?(h=$(h,s,c),h[b]&=4294967040):m>s/8&&(h[b]&=4294967040);for(m=0;m<=b;m+=1)x[m]=h[m]^909522486,y[m]=h[m]^1549556828;c=$(y.concat($(x.concat(k),a+e,c)),a+p,c);return j(c,F(f))}};})();
+
+
+(function($)
+{
+    /**
+     * Auto-growing textareas; technique ripped from Facebook
+     *
+     * http://github.com/jaz303/jquery-grab-bag/tree/master/javascripts/jquery.autogrow-textarea.js
+     */
+    $.fn.autogrow = function(options)
+    {
+        return this.filter('textarea').each(function()
+        {
+            var self         = this;
+            var $self        = $(self);
+            var minHeight    = $self.height();
+            var noFlickerPad = $self.hasClass('autogrow-short') ? 0 : parseInt($self.css('lineHeight')) || 0;
+
+            var shadow = $('<div></div>').css({
+                position:    'absolute',
+                top:         -10000,
+                left:        -10000,
+                width:       $self.width(),
+                fontSize:    $self.css('fontSize'),
+                fontFamily:  $self.css('fontFamily'),
+                fontWeight:  $self.css('fontWeight'),
+                lineHeight:  $self.css('lineHeight'),
+                resize:      'none',
+          'word-wrap': 'break-word'
+            }).appendTo(document.body);
+
+            var update = function(event)
+            {
+                var times = function(string, number)
+                {
+                    for (var i=0, r=''; i<number; i++) r += string;
+                    return r;
+                };
+
+                var val = self.value.replace(/</g, '&lt;')
+                                    .replace(/>/g, '&gt;')
+                                    .replace(/&/g, '&amp;')
+                                    .replace(/\n$/, '<br/>&nbsp;')
+                                    .replace(/\n/g, '<br/>')
+                                    .replace(/ {2,}/g, function(space){ return times('&nbsp;', space.length - 1) + ' ' });
+
+        // Did enter get pressed?  Resize in this keydown event so that the flicker doesn't occur.
+        if (event && event.data && event.data.event === 'keydown' && event.keyCode === 13) {
+          val += '<br />';
+        }
+
+                shadow.css('width', $self.width());
+                shadow.html(val + (noFlickerPad === 0 ? '...' : '')); // Append '...' to resize pre-emptively.
+                $self.height(Math.max(shadow.height() + noFlickerPad, minHeight));
+            }
+
+            $self.change(update).keyup(update).keydown({event:'keydown'},update);
+            $(window).resize(update);
+
+            update();
+        });
+    };
+})(jQuery);

@@ -2,10 +2,10 @@
 	position: absolute;
 	left: 50%;
 	top: 50%;
-	margin-left: -66px;
-	margin-top: -56px;
-	width: 112px;
-	height: 92px;
+	margin-left: -76px;
+	margin-top: -66px;
+	width: 132px;
+	height: 112px;
 	padding: 10px;
 	background: white;
 	border-radius: 5px;
@@ -18,5 +18,129 @@ i.loading-background {
 	width: 32px;
 	height: 32px;
 	display: block;
-	margin: 15px auto 5px;
+	margin: 10px auto 0px;
+}
+.document-loading span {
+	padding-bottom: 10px;
+}
+.document-loading button {
+	margin-top: 12px;
+}
+
+.document-container {
+	position: absolute;
+	width: 658px;
+	height: auto;
+	margin: 22px auto;
+	left: 50%;
+	margin-left: -349px;
+	padding: 20px 20px;
+	background: white;
+	box-shadow: 0 0 20px black;
+	-webkit-transition: all 0.4s ease;
+}
+
+.document-container.inactive {
+	top: 100%;
+	-webkit-transition: all 0.4s ease;
+}
+
+.document-container.pending {
+	bottom: 100%;
+	-webkit-transition: all 0.4s ease;
+}
+
+.document-page {
+	width: 100%;
+	height: auto;
+}
+
+.document-page header {
+	height: 30px;
+	width: 100%;
+	position: relative;
+	float: left;
+}
+.document-page header h4 {
+	position: absolute;
+	width: auto;
+	height: 100%;
+	left: 160px;
+	right: 160px;
+	line-height: 30px;
+	text-align: center;
+	padding: 0;
+	margin: 0;
+	z-index: 0;
+}
+.document-page header button {
+	z-index: 10;
+}
+.document-page header button.pull-left {
+	margin-right: 5px;
+}
+
+.document-page hr {
+	float: left;
+	display: block;
+	width: 100%;
+	height: 1px;
+	background: #ccc;
+	border: none;
+	padding: 0;
+	margin: 0;
+	margin-top: 20px;
+}
+
+.document-page-container {
+	width: 100%;
+	height: auto;
+	float: left;
+	margin-top: 20px;
+}
+
+.document-page table, .document-page table tr, .document-page table td {
+	border-color: #333 !important;
+	border-radius: 0 !important;
+}
+.document-page table input {
+	width: 100%;
+	height: 100%;
+	padding: 0;
+	margin: 0;
+}
+
+.document-page table textarea,
+.document-page table input,
+.document-page table textarea:hover, 
+.document-page table input:hover, 
+.document-page table textarea:active, 
+.document-page table input:active, 
+.document-page table textarea:focus, 
+.document-page table input:focus {
+    outline:0px !important;
+    -webkit-appearance:none;
+    border: 0 none;
+	
+	box-sizing: border-box;
+    -webkit-box-sizing:border-box;
+    -moz-box-sizing: border-box;
+    box-shadow: none;
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+}
+
+.document-page table textarea {
+	resize: none;
+	width: 100%;
+	padding: 0 10px;
+	margin: 0;
+}
+
+td.text-center {
+	text-align: center;
+	min-width: 60px;
+}
+td.input-cell {
+	padding: 0 10px;
 }
