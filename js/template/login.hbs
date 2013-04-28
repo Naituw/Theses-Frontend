@@ -12,8 +12,8 @@
 					<input type="password" id="inputPassword" placeholder="密码">
 				</div>
 			</div>
-			<button id="login-submit-button" {{action tryLogin href=true}}>
-				登陆
+			<button id="login-submit-button" {{action tryLogin href=true}} {{bindAttr class="pending:disabled"}}>
+				{{signinButtonTitle}}
 			</button>
 			<div class="login-options-container">
 				<label class="checkbox">

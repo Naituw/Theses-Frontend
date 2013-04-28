@@ -8,29 +8,14 @@ define(['app','router'],function(app){
         },
 	});
 	app.LoginStateManager = Em.StateManager.extend({
-		_isWaiting: false,
-		setWaiting: function(waiting){
-			if (this._isWaiting != waiting){
-				this._isWaiting = waiting;
-				if (waiting) {
-					$('#login-activity').show();
-					$('#login-submit-button').addClass('disabled');
-				}else {
-					$('#login-activity').hide();
-					$('#login-submit-button').removeClass('disabled');
-				}
-			}
-		},
-		isWaiting: function(){
-			return this._isWaiting;
-		}.property(),
+		isWaiting: false,
 		showError: function(text) {
 			$('#login-alert .desc').html(text);
 		    $('#login-alert').stop().css('opacity',1).show().fadeOut(3000);
 		},
 		home: Em.State.extend({
 		    enter: function(manager){
-		    	manager.setWaiting(false);
+		    	manager.set('isWaiting',false);
 		    },
 		}),
 		waiting: Em.State.extend({
@@ -50,7 +35,7 @@ define(['app','router'],function(app){
 						manager.transitionTo('home');
 					},1);
 				}else {
-					manager.setWaiting(true);
+					manager.set('isWaiting',true);
 					app.accountManager.signin(username,password,shouldStore,function(data,error){
 						manager.transitionTo('home');
 						if (error){
@@ -78,6 +63,13 @@ define(['app','router'],function(app){
 			if(this.get('loginStateManager').get('isWaiting')) return;
 			this.get('loginStateManager').transitionTo('waiting');
 		},
+		pending: function(){
+			return this.get('loginStateManager.isWaiting');
+		}.property('loginStateManager.isWaiting'),
+		signinButtonTitle: function(){
+			if (this.get('loginStateManager.isWaiting')) return '验证中...';
+			else return '登陆';
+		}.property('loginStateManager.isWaiting'),
 		loginStateManager: app.LoginStateManager.create(),
 	});
 });
