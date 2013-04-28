@@ -212,7 +212,7 @@ define(['app'],function(app){
 			var uid = app.get('accountManager.currentAccount.user.userid');
 			for (var i = this.students.length - 1; i >= 0; i--) {
 				var u = this.students[i];
-				if (u.userid == uid) return true;
+				if (u.get('user.userid') == uid) return true;
 			};
 			if (this.get('teacher.userid') == uid) return true;
 			return false;
