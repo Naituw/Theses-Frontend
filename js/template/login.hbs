@@ -1,44 +1,26 @@
 <section id="login">
 	<header id="login-header">
-		Theses 论文管理系统
+		alpha 论文管理系统
 	</header>
 	<div id="login-main">
-
-		<form class="form-horizontal">
-			<div class="control-group">
-				<label class="control-label" for="inputUsername">用户名</label>
-				<div class="controls">
-					<input type="text" id="inputUsername" placeholder="Username">
+		<form>
+			<div class="login-forms-container">
+				<div class="form-row form-row-username">
+					<input type="text" id="inputUsername" placeholder="用户名">
+				</div>
+				<div class="form-row form-row-password">
+					<input type="password" id="inputPassword" placeholder="密码">
 				</div>
 			</div>
-			<div class="control-group">
-				<label class="control-label" for="inputPassword">密码</label>
-				<div class="controls">
-					<input type="password" id="inputPassword" placeholder="Password">
-				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label" id="login-activity"><img src='data:image/gif;base64,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'></label>
-				<div class="controls">
-					<label class="checkbox">
-						<input id="login-remember-me" type="checkbox"> 下次自动登陆
-					</label>
-					<button id="login-submit-button" class="btn btn-primary" {{action tryLogin href=true}}>
-						<i class="icon-ok icon-white"></i>   登陆
-					</button>
-					<a id="login-forget-button" class="btn" href="mailto:theses.nfsysu@gmail.com">忘记密码?</a>
-				</div>
+			<button id="login-submit-button" {{action tryLogin href=true}}>
+				登陆
+			</button>
+			<div class="login-options-container">
+				<label class="checkbox">
+					<input id="login-remember-me" type="checkbox"> 下次自动登陆
+				</label>
+				<a id="login-forget-button" href="mailto:theses.nfsysu@gmail.com">忘记密码?</a>
 			</div>
 		</form>
 	</div>
 </section>
-<footer id="footer">
-		<span>2013 &copy; 
-			<a href="http://weibo.com/naituw" target="_blank">Wutian</a> & 
-			<a href="http://weibo.com/jiayoushuishou" target="_blank">Bochao</a> @ 
-			<a href="http://www.nfsysu.cn" target="_blank">NFSYSU</a>
-		</span>
-		<span>
-			<a href="http://dzx.nfsysu.cn" target="_blank">Department of Electronics Communication & Software Engineering</a>
-		</span>
-</footer>
