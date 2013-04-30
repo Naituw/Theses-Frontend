@@ -5,6 +5,12 @@
 	outline:none !important;
 	-moz-outline: none !important;
 }
+
+html {
+	overflow: -moz-scrollbars-vertical; 
+	overflow-y: scroll;
+}
+
 /* Main */
 body {
 	overflow-x: hidden;
