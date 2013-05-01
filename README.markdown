@@ -28,10 +28,11 @@ Theses论文管理系统的前端，基于Ember.js实现。
 * <del>打分</del>
 * <del>私信交流</del>
 * <del>邮件通知</del>
-* 邮件验证
-* 在线填表
-* 论题管理
-* <cite>申请论题 (优先级低)</cite>
+* <del>邮件验证</del>
+* <del>在线填表</del>
+
+* <del><cite>论题管理 (不做)/cite></del>
+* <del><cite>申请论题 (不做)</cite></del>
 
 
 ##License
