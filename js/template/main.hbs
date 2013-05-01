@@ -6,29 +6,6 @@
     </div>
 </div>
 
-{{#with Theses.confirmationManager}}
-<div id="confirm-overlay" {{bindAttr class=":overlay hasRequest:active:hide"}}>
-    <div class="cover">
-        <div id="confirmation-container" class="yield">
-            {{#if currentRequest}}
-                <div class="confirm-window-wrapper">
-                 <div class="confirm-window">
-                     <div class="confirm-wrapper">
-                         <h4 class="confirm-title">{{currentRequest.title}}</h4>
-                         <p class="confirm-description">{{currentRequest.description}}</p>
-                         <section class="confirm-buttons">
-                             <button class="btn" {{action cancelCurrentRequest target="Theses.confirmationManager"}}>取消</button>
-                             <button class="btn btn-primary pull-right" {{action confirmCurrentRequest target="Theses.confirmationManager"}}>确定</button>
-                         </section>
-                     </div>
-                 </div>
-             </div>
-            {{/if}}
-        </div>
-    </div>
-</div>
-{{/with}}
-
 <header id="main-header">
     <div id="header">
         <h1><a href="#">Theses 论文管理</a></h1>	
@@ -59,3 +36,25 @@
     </div>
 </section>
 
+{{#with Theses.confirmationManager}}
+<div id="confirm-overlay" {{bindAttr class=":overlay hasRequest:active:hide"}}>
+    <div class="cover">
+        <div id="confirmation-container" class="yield">
+            {{#if currentRequest}}
+                <div class="confirm-window-wrapper">
+                 <div class="confirm-window">
+                     <div class="confirm-wrapper">
+                         <h4 class="confirm-title">{{currentRequest.title}}</h4>
+                         <p class="confirm-description">{{currentRequest.description}}</p>
+                         <section class="confirm-buttons">
+                             <button class="btn" {{action cancelCurrentRequest target="Theses.confirmationManager"}}>取消</button>
+                             <button class="btn btn-primary pull-right" {{action confirmCurrentRequest target="Theses.confirmationManager"}}>确定</button>
+                         </section>
+                     </div>
+                 </div>
+             </div>
+            {{/if}}
+        </div>
+    </div>
+</div>
+{{/with}}

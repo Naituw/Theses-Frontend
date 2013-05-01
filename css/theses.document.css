@@ -18,13 +18,24 @@ i.loading-background {
 	width: 32px;
 	height: 32px;
 	display: block;
-	margin: 10px auto 0px;
+	margin: 20px auto 0px;
 }
 .document-loading span {
 	padding-bottom: 10px;
+	line-height: 40px;
 }
 .document-loading button {
 	margin-top: 12px;
+	display: none;
+}
+.document-loading-template i.loading-background {
+	margin-top: 10px;
+}
+.document-loading-template span {
+	line-height: 20px;
+}
+.document-loading-template button {
+	display: inline-block;
 }
 
 .document-container {
