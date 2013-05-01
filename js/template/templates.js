@@ -56,6 +56,8 @@ for (var i = 0; i < RequiredTemplateNames.length; i++) {
 };
 
 define(RequiredFilesForTemplate, function(){
+	Em.ENV.RAISE_ON_DEPRECATION = true;
+
 	var app = arguments[0];
 
 	var before = new Date();

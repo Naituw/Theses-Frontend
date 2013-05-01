@@ -9,6 +9,9 @@ define(['app'],function(app){
 		}.property(),
 		init: function(){
 			app.documentController = this;
+			// Em.run.later(this, function(){
+			// 	this.startComposeWithType(3);
+			// },400);
 		},
 
 		opened: false,
@@ -26,13 +29,18 @@ define(['app'],function(app){
 			return 'inactive';
 		}.property('loadingTemplate','pendingSend','canceled','templateLoaded'),
 
-		showsLoadingView: function(){
-			return this.get('loadingTemplate') || this.get('pendingSend');
-		}.property('loadingTemplate','pendingSend'),
 		loadingViewText: function(){
 			if (this.get('loadingTemplate')) return '正在加载模板...';
 			else if (this.get('pendingSend')) return '正在发送...';
 			else return '加载中';
+		}.property('loadingTemplate','pendingSend'),
+		loadingViewClass: function(){
+			if (!this.get('loadingTemplate') && !this.get('pendingSend')) return 'hidden';
+			var c = 'document-loading';
+			if (this.get('loadingTemplate')){
+				c += ' document-loading-template';
+			}
+			return c;
 		}.property('loadingTemplate','pendingSend'),
 
 		// type: 2.开题报告 3.检查情况记录表
@@ -49,8 +57,9 @@ define(['app'],function(app){
             this.set('canceled', false);
             this.set('templateLoaded', false);
             Em.run.next(this,function(){
+            	var container = $('.document-page-container');
+            	container.html(' ');
                 this.set('active',true);
-
                 this.set('loadingTemplate',true);
                 Em.run.later(this, function(){
                 	var that = this;
@@ -61,7 +70,11 @@ define(['app'],function(app){
                 			app.showError('加载模板失败');
                 			that.finishCompose();
                 		} else {
-                			$('.document-page-container').html(content);
+                			container.html(content);
+                			var manifast = JSON.parse($('#document-' + type + '-manifast').html());
+                			if (manifast && manifast.title){
+                				$('.document-page header h4').html(manifast.title);
+                			}
                 			Em.run.later(this,function(){
                 				that.set('templateLoaded', true);
                 			},100);

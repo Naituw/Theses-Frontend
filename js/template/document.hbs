@@ -1,20 +1,18 @@
 {{#if opened}}
 <div {{bindAttr class=":overlay active:active:unactive"}}>
     <div class="cover">
-    	{{#if showsLoadingView}}
-    		<div {{bindAttr class=":document-loading loadingTemplate:document-loading-template"}}>
-    			<i class="loading-background"></i>
-    			<span>{{loadingViewText}}</span>
-    			<button class="btn" {{action cancelLoading}}>取消</button>
-    		</div>
-    	{{/if}}
+    	<div {{bindAttr class="loadingViewClass"}}>
+    		<i class="loading-background"></i>
+    		<span>{{loadingViewText}}</span>
+    		<button class="btn" {{action cancelLoading}}>取消</button>
+    	</div>
 
     	<div {{bindAttr class=":document-container pageViewClass"}}>
     		<div class="document-page">
     			<header>
     				<button class="btn pull-left" {{action cancelComposing}}>取消</button>
     				<button class="btn pull-left">下载模板</button>
-    				<h4>本科生论文（设计）开题报告</h4>
+    				<h4>报告</h4>
     				<button class="btn btn-primary pull-right" {{action post}}>确认并上传</button>
     			</header>
     			<hr/>
