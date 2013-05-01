@@ -31,7 +31,7 @@ Theses论文管理系统的前端，基于Ember.js实现。
 * <del>邮件验证</del>
 * <del>在线填表</del>
 
-* <del><cite>论题管理 (不做)/cite></del>
+* <del><cite>论题管理 (不做)</cite></del>
 * <del><cite>申请论题 (不做)</cite></del>
 
 
