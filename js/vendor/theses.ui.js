@@ -121,4 +121,5 @@ $(document).ready(function(){
 		items: 4
 	});
 
+	FastClick.attach(document.body);
 });
