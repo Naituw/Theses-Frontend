@@ -16,6 +16,10 @@ a:hover {
 .desktop {
 }
 
+.inline-block {
+  display: inline-block;
+}
+
 /* Header */
 #main-header {
 	height: 43px;

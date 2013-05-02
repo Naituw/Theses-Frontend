@@ -1482,10 +1482,6 @@ form.update-profile fieldset.reset-password textarea {
   float: right;
 }
 
-.inline-block {
-  display: inline-block;
-}
-
 .dropdown-menu.bottom-up {
   top: auto;
   bottom: 100%;
