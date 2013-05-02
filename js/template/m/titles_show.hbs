@@ -135,6 +135,10 @@
 					{{view Theses.LoadingView}}
 				{{else}}
 					{{#if documents.length}}
+						<form id="document-download-form" method="post" target="_blank" rel="external">
+							<input type="hidden" name="Auth">
+							<input type="hidden" name="docid">
+						</form>
 						{{#each documents}}
 							{{view Theses.DocumentCell doc=this}}
 						{{/each}}

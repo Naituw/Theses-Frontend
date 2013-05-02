@@ -290,28 +290,12 @@ define(['app','views/tableview','views/teachercell'],function(app){
 				}
 			});
 		},
-		pendingDownload: false,
 		click: function(e){
 			if (e.target.className == 'close') return;
-			if (this.get('pendingDownload')) return;
-			var that = this;
-			var api = app.currentAPI();
-			if (api){
-				this.set('pendingDownload',true);
-				var baseURL = api.get('_apiRoot');
-				api.async = false;
-				api.downloadDocument(this.get('doc.docid'),function(data,error){
-					that.set('pendingDownload',false);
-					if (error){
-						app.showError('文档下载失败',error.message);
-					}else {
-						var url = data.url;
-						if (url) {
-							window.open(url,'_blank');
-							window.focus();
-						}
-					}
-				})
+
+			var c = this.get('controller');
+			if (c && c.downloadDocument) {
+				c.downloadDocument(this.get('doc.docid'));
 			}
 		},
 

@@ -179,6 +179,25 @@ define(['app'],function(app){
 				});
 			}
 		},
+		downloadDocument: function(docid){
+			var $form = $('#document-download-form');
+			if (!$form.length || !docid) return;
+			var form = $form[0];
+			
+			var authToken = app.get('accountManager.currentAccount.authToken');
+			if (!authToken) return;
+			form.Auth.value = authToken;
+			form.docid.value = docid;
+			var url = app.currentAPI().get('_apiRoot') + 'documents/download';
+			form.action = url;
+			form.submit();
+
+			Em.run.later(this, function(){
+				form.Auth.value = '';
+				form.docid.value = '';
+				form.action = '';
+			}, 200);
+		},
 
 		refreshDocuments: function(){
 			this.set('currentDocPage',1);
