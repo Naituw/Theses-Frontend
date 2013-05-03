@@ -5,7 +5,7 @@
 			{{view Theses.LoadingView}}
 		{{else}}
 			<div class="btn-group">
-				<button {{bindAttr class=":btn controller.pendingSelection:disabled"}} style="width:100%" {{action chooseButtonClicked target="view"}} title="选择">选择</button>
+				<button class="btn" style="width:100%" {{action chooseButtonClicked target="view"}} title="选择">选择</button>
 			</div>
 		{{/if}}
 	
