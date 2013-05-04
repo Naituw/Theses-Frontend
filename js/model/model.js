@@ -290,7 +290,7 @@ define(["app"],function(app){
                     var raw = data.students[i];
                     s.pushObject(app.User.alloc(raw));
                 };
-                data.students.s;
+                data.students = s;
             }
         },
         departmentInfo : function(){
