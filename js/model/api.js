@@ -268,6 +268,16 @@ define(['app'],function(app){
 		downloadDocument: function(docid,callback){
 			this.GET('documents/get_url.json',{docid:docid},callback);
 		},
+		createDocument: function(type, contents, callback){
+			if (!contents.substring) {
+				contents = JSON.stringify(contents);
+			}
+			var params = {
+				type: type,
+				contents: contents,
+			};
+			this.POST('documents/create.json',params, callback);
+		},
 		createTitle: function(params,callback){
 			this.POST('theses/create_title.json',params,callback);
 		},

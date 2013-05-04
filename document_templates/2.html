@@ -1,34 +1,34 @@
 <table class="table table-bordered">
 	<tr>
-		<td class="text-center">课题</td><td colspan="5" class="input-cell"><input type="text"/></td>
+		<td class="text-center">课题</td><td colspan="5" class="input-cell"><input type="text" data-parameter="title"/></td>
 	</tr>
 	<tr>
-		<td class="text-center">系</td><td class="input-cell"><input type="text"/></td>
-		<td class="text-center">专业</td><td class="input-cell"><input type="text"/></td>
-		<td class="text-center">学科</td><td class="input-cell"><input type="text"/></td>
+		<td class="text-center">系</td><td class="input-cell"><input type="text" data-parameter="department"/></td>
+		<td class="text-center">专业</td><td class="input-cell"><input type="text" data-parameter="major"/></td>
+		<td class="text-center">学科</td><td class="input-cell"><input type="text" data-parameter="course"/></td>
 	</tr>
 	<tr>
-		<td class="text-center">学生</td><td class="input-cell"><input type="text"/></td>
-		<td class="text-center">指导教师</td><td class="input-cell"  colspan="3"><input type="text"/></td>
+		<td class="text-center">学生</td><td class="input-cell"><input type="text" data-parameter="student"/></td>
+		<td class="text-center">指导教师</td><td class="input-cell"  colspan="3"><input type="text" data-parameter="teacher"/></td>
 	</tr>
 	<tr>
 		<td colspan="6">
 			<h5>课题来源及意义</h5>
-			<textarea></textarea>
+			<textarea data-parameter="source"></textarea>
 			<h5>国内外发展状况</h5>
-			<textarea></textarea>
+			<textarea data-parameter="situation"></textarea>
 			<h5>研究目标、内容</h5>
-			<textarea></textarea>
+			<textarea data-parameter="target"></textarea>
 			<h5>方法、手段</h5>
-			<textarea></textarea>
+			<textarea data-parameter="method"></textarea>
 			<h5>进度安排</h5>
-			<textarea></textarea>
+			<textarea data-parameter="arrange"></textarea>
 			<h5>实验方案的可行性分析</h5>
-			<textarea></textarea>
+			<textarea data-parameter="feasibility"></textarea>
 			<h5>实验条件</h5>
-			<textarea></textarea>
+			<textarea data-parameter="requirements"></textarea>
 			<h5>具体参考文献</h5>
-			<textarea></textarea>
+			<textarea data-parameter="reference"></textarea>
 			<script type="text/javascript">
 				$(function(){
 					$('.document-page textarea').autogrow();

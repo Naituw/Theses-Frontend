@@ -20,10 +20,10 @@ define(['app'],function(app){
             });
 		},
 		newTypeTwoDocument: function(){
-			app.documentController.startComposeWithType(2);
+			app.documentController.startComposeWithType(2, this.get('controller'));
 		},
 		newTypeThreeDocument: function(){
-			app.documentController.startComposeWithType(3);
+			app.documentController.startComposeWithType(3, this.get('controller'));
 		},
 	});
 	app.TitlesShowController = Em.ObjectController.extend({
@@ -210,6 +210,9 @@ define(['app'],function(app){
 			this.documents.removeObject(doc);
 		},
 		documentUploaded: function(doc){
+			this.documents.insertAt(0,doc);
+		},
+		didCreateDocument: function(doc){
 			this.documents.insertAt(0,doc);
 		},
 

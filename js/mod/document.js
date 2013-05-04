@@ -9,9 +9,6 @@ define(['app'],function(app){
 		}.property(),
 		init: function(){
 			app.documentController = this;
-			// Em.run.later(this, function(){
-			// 	this.startComposeWithType(3);
-			// },400);
 		},
 
 		opened: false,
@@ -21,6 +18,7 @@ define(['app'],function(app){
 		templateLoaded: false,
 		pendingSend: false,
 		canceled: false,
+		delegate: null,
 		pageViewClass: function(){
 			if (this.get('canceled')) return 'inactive';
 			if (this.get('loadingTemplate')) return 'inactive';
@@ -45,7 +43,7 @@ define(['app'],function(app){
 
 		// type: 2.开题报告 3.检查情况记录表
 		currentComposeType: 0,
-		startComposeWithType: function(type){
+		startComposeWithType: function(type, delegate){
 			if (type != 2 && type != 3) return;
 			if (this.get('opened')) return;
 
@@ -56,6 +54,11 @@ define(['app'],function(app){
             this.set('pendingSend',false);
             this.set('canceled', false);
             this.set('templateLoaded', false);
+            if (delegate) {
+            	this.set('delegate',delegate);
+            } else {
+            	this.set('delegate',null);
+            }
             Em.run.next(this,function(){
             	var container = $('.document-page-container');
             	container.html(' ');
@@ -129,14 +132,49 @@ define(['app'],function(app){
 			});
 		},
 
+		downloadTemplate: function(){
+			var type = this.get('currentComposeType');
+			if (!type) return;
+
+			var baseURL = location.protocol + "//" + location.hostname + (location.port && ":" + location.port) + "/";
+			var url = baseURL + 'document_templates/' + type + '.doc';
+
+			window.open(url,'_blank');
+		},
 		post: function(){
-			this.set('pendingSend',true);
+			if (this.get('pendingSend')) return;
+
 			var that = this;
-			Em.run.later(this, function(){
-				that.finishCompose();
-				app.showSuccess('论文上传成功');
-			},1200);
+
+			var contents = {};
+			$('.document-page [data-parameter]').each(function(index) {
+				var key = $(this).attr('data-parameter');
+				var value = $(this).val();
+				if (key && value) {
+					contents[key] = value;
+				}
+			});
+
+			var api = app.currentAPI();
+			if (!api) return;
+
+			var type = this.get('currentComposeType');
+			if (!type) return;
+
+			this.set('pendingSend',true);
+
+			api.createDocument(this.get('currentComposeType'), contents, function(data, error){
+				if (error){
+					that.set('pendingSend', false);
+					app.showError('文档创建失败',error.message);
+				} else {
+					if (this.delegate && this.delegate.didCreateDocument){
+						this.delegate.didCreateDocument(app.Document.alloc(data));
+					}
+					that.finishCompose();
+					app.showSuccess('论文上传成功');
+				}
+			});
 		},
 	});
-
 });
