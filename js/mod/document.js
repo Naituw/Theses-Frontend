@@ -149,8 +149,8 @@ define(['app'],function(app){
 			var contents = {};
 			$('.document-page [data-parameter]').each(function(index) {
 				var key = $(this).attr('data-parameter');
-				var value = $(this).val();
-				if (key && value) {
+				var value = $(this).val() || " ";
+				if (key) {
 					contents[key] = value;
 				}
 			});

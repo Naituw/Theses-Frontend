@@ -62,20 +62,37 @@ function program1(depth0,data) {
   tmp1.contexts = [];
   tmp1.data = data;
   stack1 = stack2.call(depth0, tmp1);
-  data.buffer.push(escapeExpression(stack1) + ">\n    <div class=\"cover\">\n    	");
+  data.buffer.push(escapeExpression(stack1) + ">\n    <div class=\"cover\">\n    	<div ");
+  stack1 = {};
+  stack2 = "loadingViewClass";
+  stack1['class'] = stack2;
+  stack2 = helpers.bindAttr;
+  tmp1 = {};
+  tmp1.hash = stack1;
+  tmp1.contexts = [];
+  tmp1.data = data;
+  stack1 = stack2.call(depth0, tmp1);
+  data.buffer.push(escapeExpression(stack1) + ">\n    		<i class=\"loading-background\"></i>\n    		<span>");
   stack1 = depth0;
-  stack2 = "showsLoadingView";
-  stack3 = helpers['if'];
-  tmp1 = self.program(2, program2, data);
+  stack2 = "loadingViewText";
+  stack3 = helpers._triageMustache;
+  tmp1 = {};
   tmp1.hash = {};
   tmp1.contexts = [];
   tmp1.contexts.push(stack1);
-  tmp1.fn = tmp1;
-  tmp1.inverse = self.noop;
   tmp1.data = data;
   stack1 = stack3.call(depth0, stack2, tmp1);
-  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n\n    	<div ");
+  data.buffer.push(escapeExpression(stack1) + "</span>\n    		<button class=\"btn\" ");
+  stack1 = depth0;
+  stack2 = "cancelLoading";
+  stack3 = helpers.action;
+  tmp1 = {};
+  tmp1.hash = {};
+  tmp1.contexts = [];
+  tmp1.contexts.push(stack1);
+  tmp1.data = data;
+  stack1 = stack3.call(depth0, stack2, tmp1);
+  data.buffer.push(escapeExpression(stack1) + ">取消</button>\n    	</div>\n\n    	<div ");
   stack1 = {};
   stack2 = ":document-container pageViewClass";
   stack1['class'] = stack2;
@@ -95,7 +112,17 @@ function program1(depth0,data) {
   tmp1.contexts.push(stack1);
   tmp1.data = data;
   stack1 = stack3.call(depth0, stack2, tmp1);
-  data.buffer.push(escapeExpression(stack1) + ">取消</button>\n    				<button class=\"btn pull-left\">下载模板</button>\n    				<h4>本科生论文（设计）开题报告</h4>\n    				<button class=\"btn btn-primary pull-right\" ");
+  data.buffer.push(escapeExpression(stack1) + ">取消</button>\n    				<button class=\"btn pull-left\" ");
+  stack1 = depth0;
+  stack2 = "downloadTemplate";
+  stack3 = helpers.action;
+  tmp1 = {};
+  tmp1.hash = {};
+  tmp1.contexts = [];
+  tmp1.contexts.push(stack1);
+  tmp1.data = data;
+  stack1 = stack3.call(depth0, stack2, tmp1);
+  data.buffer.push(escapeExpression(stack1) + ">下载模板</button>\n    				<h4>报告</h4>\n    				<button class=\"btn btn-primary pull-right\" ");
   stack1 = depth0;
   stack2 = "post";
   stack3 = helpers.action;
@@ -106,41 +133,6 @@ function program1(depth0,data) {
   tmp1.data = data;
   stack1 = stack3.call(depth0, stack2, tmp1);
   data.buffer.push(escapeExpression(stack1) + ">确认并上传</button>\n    			</header>\n    			<hr/>\n    			<section class=\"document-page-container\">\n    				\n    			</section>\n    		</div>\n    	</div>\n    </div>\n</div>\n");
-  return buffer;}
-function program2(depth0,data) {
-  
-  var buffer = '', stack1, stack2, stack3;
-  data.buffer.push("\n    		<div ");
-  stack1 = {};
-  stack2 = ":document-loading loadingTemplate:document-loading-template";
-  stack1['class'] = stack2;
-  stack2 = helpers.bindAttr;
-  tmp1 = {};
-  tmp1.hash = stack1;
-  tmp1.contexts = [];
-  tmp1.data = data;
-  stack1 = stack2.call(depth0, tmp1);
-  data.buffer.push(escapeExpression(stack1) + ">\n    			<i class=\"loading-background\"></i>\n    			<span>");
-  stack1 = depth0;
-  stack2 = "loadingViewText";
-  stack3 = helpers._triageMustache;
-  tmp1 = {};
-  tmp1.hash = {};
-  tmp1.contexts = [];
-  tmp1.contexts.push(stack1);
-  tmp1.data = data;
-  stack1 = stack3.call(depth0, stack2, tmp1);
-  data.buffer.push(escapeExpression(stack1) + "</span>\n    			<button class=\"btn\" ");
-  stack1 = depth0;
-  stack2 = "cancelLoading";
-  stack3 = helpers.action;
-  tmp1 = {};
-  tmp1.hash = {};
-  tmp1.contexts = [];
-  tmp1.contexts.push(stack1);
-  tmp1.data = data;
-  stack1 = stack3.call(depth0, stack2, tmp1);
-  data.buffer.push(escapeExpression(stack1) + ">取消</button>\n    		</div>\n    	");
   return buffer;}
 
   stack1 = depth0;
@@ -1464,7 +1456,7 @@ function program24(depth0,data) {
   var buffer = '', stack1, stack2, stack3;
   data.buffer.push("\n						<tr ");
   stack1 = {};
-  stack2 = "isCurrent:success isNext:error";
+  stack2 = "isCurrent:success";
   stack1['class'] = stack2;
   stack2 = helpers.bindAttr;
   tmp1 = {};
@@ -2763,7 +2755,7 @@ function program23(depth0,data) {
 function program24(depth0,data) {
   
   var buffer = '', stack1, stack2, stack3;
-  data.buffer.push("\n						");
+  data.buffer.push("\n						<form id=\"document-download-form\" method=\"post\" target=\"_blank\" rel=\"external\">\n							<input type=\"hidden\" name=\"Auth\">\n							<input type=\"hidden\" name=\"docid\">\n						</form>\n						");
   stack1 = depth0;
   stack2 = "documents";
   stack3 = helpers.each;
@@ -5019,17 +5011,7 @@ function program1(depth0,data) {
 function program3(depth0,data) {
   
   var buffer = '', stack1, stack2, stack3, stack4;
-  data.buffer.push("\n			<div class=\"btn-group\">\n				<button ");
-  stack1 = {};
-  stack2 = ":btn controller.pendingSelection:disabled";
-  stack1['class'] = stack2;
-  stack2 = helpers.bindAttr;
-  tmp1 = {};
-  tmp1.hash = stack1;
-  tmp1.contexts = [];
-  tmp1.data = data;
-  stack1 = stack2.call(depth0, tmp1);
-  data.buffer.push(escapeExpression(stack1) + " style=\"width:100%\" ");
+  data.buffer.push("\n			<div class=\"btn-group\">\n				<button class=\"btn\" style=\"width:100%\" ");
   stack1 = depth0;
   stack2 = "chooseButtonClicked";
   stack3 = {};
@@ -5731,7 +5713,7 @@ function program9(depth0,data) {
 function program11(depth0,data) {
   
   var buffer = '', stack1, stack2, stack3;
-  data.buffer.push("\n  		<dt>Students / 选题学生</dt>\n  		");
+  data.buffer.push("\n  			<dt>Students / 选题学生</dt>\n  			");
   stack1 = depth0;
   stack2 = "view.title.students";
   stack3 = helpers.each;
@@ -5749,7 +5731,7 @@ function program11(depth0,data) {
 function program12(depth0,data) {
   
   var buffer = '', stack1, stack2, stack3;
-  data.buffer.push("\n  			<dd>");
+  data.buffer.push("\n  				<dd>");
   stack1 = depth0;
   stack2 = "displayName";
   stack3 = helpers._triageMustache;
@@ -5759,7 +5741,7 @@ function program12(depth0,data) {
   tmp1.contexts.push(stack1);
   tmp1.data = data;
   stack1 = stack3.call(depth0, stack2, tmp1);
-  data.buffer.push(escapeExpression(stack1) + "</dd>\n  		");
+  data.buffer.push(escapeExpression(stack1) + "</dd>\n  			");
   return buffer;}
 
   data.buffer.push("<div class=\"overview\">\n	<span class=\"icon\"><i ");
