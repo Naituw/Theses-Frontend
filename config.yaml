@@ -5,3 +5,6 @@ handle:
 - compress: if ( out_header["Content-type"] ~ "application/javascript" ) compress
 - compress: if ( out_header["Content-type"] ~ "text/css" ) compress
 - compress: if ( out_header["Content-type"] ~ "text/javascript" ) compress
+
+- expire: if( path ~ "css" ) time 86400
+- expire: if( path ~ "js" ) time 86400
