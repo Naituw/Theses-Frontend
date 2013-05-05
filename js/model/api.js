@@ -268,11 +268,12 @@ define(['app'],function(app){
 		downloadDocument: function(docid,callback){
 			this.GET('documents/get_url.json',{docid:docid},callback);
 		},
-		createDocument: function(type, contents, callback){
+		createDocument: function(titleid, type, contents, callback){
 			if (!contents.substring) {
 				contents = JSON.stringify(contents);
 			}
 			var params = {
+				titleid: titleid,
 				type: type,
 				contents: contents,
 			};

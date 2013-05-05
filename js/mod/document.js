@@ -144,6 +144,12 @@ define(['app'],function(app){
 		post: function(){
 			if (this.get('pendingSend')) return;
 
+			var delegate = this.get('delegate');
+			if (!delegate) return;
+
+			var titleid = delegate.get('content.titleid');
+			if (!titleid) return;
+
 			var that = this;
 
 			var contents = {};
@@ -163,7 +169,7 @@ define(['app'],function(app){
 
 			this.set('pendingSend',true);
 
-			api.createDocument(this.get('currentComposeType'), contents, function(data, error){
+			api.createDocument(titleid, this.get('currentComposeType'), contents, function(data, error){
 				if (error){
 					that.set('pendingSend', false);
 					app.showError('文档创建失败',error.message);
