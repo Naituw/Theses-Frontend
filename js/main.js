@@ -17,7 +17,6 @@ require.config({
 		'app': ['ember','bootstrap','plugins'],
 	},
 	waitSeconds: 0,
-	urlArgs: "bust=" + (new Date()).getTime(),
 });
 
 require(['boot']);
