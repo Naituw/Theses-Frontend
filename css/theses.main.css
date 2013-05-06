@@ -1676,6 +1676,7 @@ form {
 	float: left;
 	color: #ccc;
 	text-shadow: 0 1px 0px black;
+	width: 120px;
 }
 
 #login-forget-button {
