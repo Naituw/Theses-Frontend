@@ -174,8 +174,9 @@ define(['app'],function(app){
 					that.set('pendingSend', false);
 					app.showError('文档创建失败',error.message);
 				} else {
-					if (this.delegate && this.delegate.didCreateDocument){
-						this.delegate.didCreateDocument(app.Document.alloc(data));
+					var delegate = that.get('delegate');
+					if (delegate && delegate.didCreateDocument){
+						delegate.didCreateDocument(app.Document.alloc(data));
 					}
 					that.finishCompose();
 					app.showSuccess('论文上传成功');

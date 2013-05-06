@@ -146,7 +146,7 @@ define(['app'],function(app){
             var c = this.get('selectedConversation');
             var ms = this.get('selectedMessages');
             if (!ms) return;
-            if (c.last_update == c.create_at) return;
+            //if (c.last_update == c.create_at) return;
 
             if (ms.length){
                 var m = ms.get('lastObject');

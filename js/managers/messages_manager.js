@@ -29,7 +29,8 @@ define(['app','model/message','managers/unread_manager'],function(app){
 		conversationWithUsername: function(username){
 			for (var i = this.conversations.length - 1; i >= 0; i--) {
 				var c = this.conversations[i];
-				if (username == c.with_user.username){
+				var u = c.with_user;
+				if (u && username == u.username){
 					return c;
 				}
 			};
