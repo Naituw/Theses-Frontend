@@ -29,7 +29,9 @@ define(['app','model/model'],function(app){
         newFlag: function(){
         	var lastView = this.get('lastViewTime');
         	var lastUpdate = this.get('last_update');
-        	if (!lastView || !lastUpdate) return false;
+            //if (!lastView) return false;
+            if (!lastView) lastView = 0;
+        	if (!lastUpdate) return false;
         	return (lastUpdate > lastView);
         }.property('lastViewTime','last_update'),
         localStorageKey: function(){
